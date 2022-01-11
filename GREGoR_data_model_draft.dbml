@@ -1,0 +1,181 @@
+// NOTE: THIS IS A DRAFT/PROPOSAL DATA MODEL
+
+// See dbdiagram.io for rendering and dcoumentation
+
+// This data model is a draft to facilitate discussion of
+// biosample fields, as drafted here:
+// https://docs.google.com/spreadsheets/d/1tZ5zrR9h4LR9nkOl-L9wzoVufpEhmeGQ6lz_XsuWkBg/edit
+
+// note: this does not include the field definitions, types, or 
+// enumarations
+
+// Creating tables
+
+// Enumerations for Subject table
+
+Table Subject {
+  subject_id varchar [pk, not null]
+  project_id varchar [not null]
+  submitter_id varchar [not null]
+  prior_testing varchar
+  pmid_id int
+  dbgap_submission bool
+  dbgap_study_id varchar
+  dbgap_subject_id varchar
+  multiple_datasets bool
+  family_id varchar
+  paternal_id varchar
+  maternal_id varchar
+  twin_id varchar
+  proband_relationship varchar // to enum
+  sex varchar // to enum
+  ancestry varchar // to enum
+  ancestry_detail varchar
+  age_at_last_observation int
+  phenotype_group varchar // to enum
+  disease_id varchar
+  disease_description varchar
+  affected_status varchar // to enum
+  congenital_status varchar // to enum
+  age_of_onset int
+  hpo_present varchar
+  hpo_absent varchar
+  phenotype_description varchar
+  solve_state varchar // to enum
+}
+
+// Enumerations for Sample Table
+
+Table BioSample {
+  bio_sample_id varchar [pk, not null]
+  subject_id varchar [not null]
+  sample_source varchar // to enum
+  tissue_affected_status bool
+  age_at_collection int
+  sample_collection_timestamp datetime
+  subject_drugs_intake bool
+}
+
+Table Experiments {
+  experiment_id varchar [pk, not null]
+  assay_type varchar // to enum
+  bio_sample_id varchar
+}
+
+Table experiment_details_exome_genome {
+  experiment_id varchar
+  seq_library_prep_kit_method varchar
+  read_length varchar
+  exome_capture_platform varchar
+  exome_capture_region_bed_file varchar
+  date_data_generation datetime
+  sequencer_id varchar
+  sequencing_platform varchar
+  target_insert_size varchar
+  number_of_independent_libraries varchar
+}
+
+Table experiment_details_rna_seq {
+  experiment_id varchar
+  seq_library_prep_kit_method varchar
+  read_length varchar
+}
+
+table experiment_details_mass_spec {
+  experiment_id varchar
+  proteomics_quantitation_method varchar
+  proteomics_analystical_fraction varchar
+  timepoint varchar
+  
+}
+
+table raw_data_files_exome_genome {
+  experiment_id varchar
+  filename varchar
+  md5sum varchar
+  file_size varchar
+  reference_genome_build varchar
+  alignment_method varchar
+}
+
+table processed_data_files_exome_genome {
+  raw_data_source_filename varchar
+  filename varchar
+  md5sum varchar
+  file_size varchar
+  caller varchar
+}
+
+table raw_data_files_rna_seq {
+  experiment_id varchar
+  filename varchar
+  md5sum varchar
+  file_size varchar
+  reference_genome_build varchar
+  alignment_method varchar
+}
+
+table processed_data_files_rna_seq {
+  raw_data_source_filename varchar
+  filename varchar
+  md5sum varchar
+  file_size varchar
+  caller varchar
+}
+
+table raw_data_files_mass_spec {
+  experiment_id varchar
+  filename varchar
+  md5sum varchar
+  file_size varchar
+  machine varchar
+  software varchar
+}
+
+table processed_data_files_mass_spec {
+  raw_data_source_filename varchar
+  filename varchar
+  md5sum varchar
+  file_size varchar
+}
+// Enumerations for Family tables
+
+Table Family {
+  family_id varchar [not null]
+  solve_state varchar [not null] // to enum
+  consanguinity varchar [not null] // to enum
+  consanguinity_detail varchar
+  pedigree_image varchar
+  pedigree_detail varchar
+  family_history varchar // to bool
+  family_onset varchar
+}
+
+Table phenotype {
+  subject_id varchar
+}
+// references between tables
+Ref: Subject.subject_id > BioSample.subject_id
+Ref: Subject.family_id > Family.family_id
+
+Ref: "Experiments"."bio_sample_id" < "BioSample"."bio_sample_id"
+
+Ref: "experiment_details_mass_spec"."experiment_id" < "Experiments"."experiment_id"
+
+Ref: "experiment_details_exome_genome"."experiment_id" < "Experiments"."experiment_id"
+
+Ref: "experiment_details_rna_seq"."experiment_id" < "Experiments"."experiment_id"
+
+Ref: "raw_data_files_exome_genome"."experiment_id" < "experiment_details_exome_genome"."experiment_id"
+
+Ref: "raw_data_files_rna_seq"."experiment_id" < "experiment_details_rna_seq"."experiment_id"
+
+Ref: "raw_data_files_mass_spec"."experiment_id" < "experiment_details_mass_spec"."experiment_id"
+
+Ref: "processed_data_files_mass_spec"."raw_data_source_filename" < "raw_data_files_mass_spec"."filename"
+
+Ref: "processed_data_files_rna_seq"."raw_data_source_filename" < "raw_data_files_rna_seq"."filename"
+
+Ref: "processed_data_files_exome_genome"."raw_data_source_filename" < "raw_data_files_exome_genome"."filename"
+
+Ref: "phenotype"."subject_id" < "Subject"."subject_id"
