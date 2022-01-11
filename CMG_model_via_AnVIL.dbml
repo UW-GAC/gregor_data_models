@@ -1,0 +1,127 @@
+// See dbdiagram.io for rendering and dcoumentation
+
+// This data model is a the example provided by AnVIL at
+// https://docs.google.com/spreadsheets/d/1-cBRCHQfzDTlpJj5PMrIT_xJglsIupwMzWm97XFhouM/edit
+
+// note: this does not include the field definitions or 
+// enumarations from that sheet at this time
+
+// Creating tables
+
+// Enumerations for Subject table
+
+Table Subject {
+  subject_id varchar [pk, not null]
+  project_id varchar [not null]
+  submitter_id varchar [not null]
+  prior_testing varchar
+  pmid_id int
+  dbgap_submission bool
+  dbgap_study_id varchar
+  dbgap_subject_id varchar
+  multiple_datasets bool
+  family_id varchar
+  paternal_id varchar
+  maternal_id varchar
+  twin_id varchar
+  proband_relationship varchar // to enum
+  sex varchar // to enum
+  ancestry varchar // to enum
+  ancestry_detail varchar
+  age_at_last_observation int
+  phenotype_group varchar // to enum
+  disease_id varchar
+  disease_description varchar
+  affected_status varchar // to enum
+  congenital_status varchar // to enum
+  age_of_onset int
+  hpo_present varchar
+  hpo_absent varchar
+  phenotype_description varchar
+  solve_state varchar // to enum
+}
+
+// Enumerations for Sample Table
+
+Table Sample {
+  sample_id varchar [pk, not null]
+  subject_id varchar [not null]
+  dbgap_sample_id varchar [not null]
+  sequencing_center varchar // to enum
+  sample_source varchar // to enum
+  tissue_affected_status bool
+}
+
+// Enumerations for Discovery Table
+
+Table Discovery {
+  discovery_id varchar [pk, not null]
+  subject_id varchar [not null]
+  sample_id varchar [not null]
+  gene varchar
+  gene_class varchar // to enum
+  inheritance_description varchar // to enum
+  zygosity varchar // to enum
+  variant_genome_build varchar
+  chrom varchar // to numeric
+  pos varchar // to numeric
+  ref varchar // to numeric
+  alt varchar
+  hgvsc varchar
+  hgvsp varchar
+  transcript varchar
+  sv_name varchar
+  sv_type varchar // to enum
+  signifcance varchar // to enum
+}
+
+// Enumerations for Sequencing Table
+
+Table Sequencing {
+  sequencing_id varchar [pk, not null]
+  sample_id varchar [not null]
+  submitter_id varchar [not null]
+  md5sum varchar [not null]
+  file_size varchar [not null]
+  file_name varchar [not null]
+  data_type varchar [not null]
+  seq_filename varchar
+  analyte_type varchar // to enum
+  sequencing_assay varchar // to enum
+  library_prep_kit_method varchar
+  exome_capture_platform varchar
+  capture_region_bed_file varchar
+  reference_genome_build varchar
+  alignment_method varchar
+  data_processing_pipeline varchar
+  functional_equivalence_standard varchar
+  date_data_generation varchar // to datetime
+  sequencer_id varchar
+  tissue_source varchar
+  sequencing_platform varchar
+  target_insert_size varchar // to int
+  target_depth varchar // to int
+  sequencing_strategy varchar
+  read_length varchar // to int
+  number_of_independent_libraries varchar // to int
+  sex varchar // to enum
+}
+
+// Enumerations for Family tables
+
+Table Family {
+  family_id varchar [not null]
+  solve_state varchar [not null] // to enum
+  consanguinity varchar [not null] // to enum
+  consanguinity_detail varchar
+  pedigree_image varchar
+  pedigree_detail varchar
+  family_history varchar // to bool
+  family_onset varchar
+}
+// references between tables
+Ref: Subject.subject_id > Sample.subject_id
+Ref: Subject.subject_id > Discovery.subject_id
+Ref: Sample.sample_id > Discovery.sample_id
+Ref: Subject.family_id > Family.family_id
+Ref: Sample.sample_id > Sequencing.sample_id
