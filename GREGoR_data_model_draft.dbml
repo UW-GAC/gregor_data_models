@@ -5,6 +5,9 @@
 // This data model is a draft to facilitate discussion of
 // biosample fields, as drafted here:
 // https://docs.google.com/spreadsheets/d/1tZ5zrR9h4LR9nkOl-L9wzoVufpEhmeGQ6lz_XsuWkBg/edit
+//
+// other tables are included here:
+// https://docs.google.com/spreadsheets/d/1uEH0UVv-7wsiQ4sY4FykJRmSae17swXxcDIsKHtUx-0/edit#
 
 // note: this does not include the field definitions, types, or 
 // enumarations
