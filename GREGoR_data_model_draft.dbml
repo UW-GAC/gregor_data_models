@@ -143,6 +143,7 @@ table processed_data_files_mass_spec {
   md5sum varchar
   file_size varchar
 }
+
 // Enumerations for Family tables
 
 Table Family {
@@ -156,9 +157,61 @@ Table Family {
   family_onset varchar
 }
 
-Table phenotype {
-  subject_id varchar
+// Enumerations for Phenotype tables
+
+enum pheno_presence {
+  present
+  absent
+  unknown
 }
+
+enum pheno_ontology {
+  HPO
+  MONDO
+  OMIM
+  ORPHANET
+  SNOMED
+}
+
+enum pheno_onsent {
+  Unknown
+  Congenital onset [note: 'HP:0003577']
+  Embryonal onset 
+  Fetal onset
+  Neonatal onset 
+  Infantile onset
+  Childhood onset
+  Juvenile onset
+  Adult onset 
+  Young adult onset
+  Middle age onset 
+  Late onset
+}
+
+Table phenotype {
+  subject_id varchar [pk, ref: - Subject.subject_id, not null,
+    note: 'subject/participant identifier within project'
+  ]
+  term_id varchar [
+    note: 'identifier for HPO term or other ontology term'
+  ] // to expand description
+  presence pheno_presence [not null,
+    note: 'defines if this term is present or absent in this subject'
+  ]
+  ontology pheno_ontology [
+    note: 'ontology source of the term_id'
+  ]
+  additional_details varchar [
+    note: 'additional information relevant to the term but not capturable in the identifier ontology'
+  ] // to expand description
+  onsent_age_range pheno_onset [not null,
+    note: 'age of onsent bucket range (if affected with non-congenital feature)'
+  ]
+  additional_modifiers varchar [
+   note: 'additional clinical modifiers from HPO (e.g. rapid progression)'
+  ] // potentially add delimited list of valid HPO IDs that are subordinate to HP:0012823
+}
+
 // references between tables
 Ref: Subject.subject_id > BioSample.subject_id
 Ref: Subject.family_id > Family.family_id
