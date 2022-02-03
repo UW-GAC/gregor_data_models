@@ -18,35 +18,138 @@
 
 // Enumerations for Subject table
 
+// to enum gregor_center
+// to enum data_use_limitations
+// to enum proband_relationship
+
+enum subject_sex {
+  Female
+  Male
+  Unknown
+}
+
+enum subject_race {
+  American Indian or Alaska Native
+  Asian
+  Black or African American
+  Native Hawaiian or Other Pacific Islander
+  Middle Eastern or North African(*??)
+  White
+  Unknown
+}
+
+enum subject_ethnicity {
+  Hispanic or Latino
+  Not Hispanic or Latino
+  Unknown
+}
+
+// to enum phenotype_group
+
+enum subject_affected {
+  Affected
+  Unaffected
+  Possibly affected
+  Unknown
+}
+
+enum subject_solve {
+  Unsolved
+  Tier 2
+  Tier 1
+}
+
 Table Subject {
-  subject_id varchar [pk, not null]
-  project_id varchar [not null]
-  submitter_id varchar [not null]
-  prior_testing varchar
-  pmid_id int
-  dbgap_submission bool
-  dbgap_study_id varchar
-  dbgap_subject_id varchar
-  multiple_datasets bool
-  family_id varchar
-  paternal_id varchar
-  maternal_id varchar
-  twin_id varchar
-  proband_relationship varchar // to enum
-  sex varchar // to enum
-  ancestry varchar // to enum
-  ancestry_detail varchar
-  age_at_last_observation int
-  phenotype_group varchar // to enum
-  disease_id varchar
-  disease_description varchar
-  affected_status varchar // to enum
-  congenital_status varchar // to enum
-  age_of_onset int
-  hpo_present varchar
-  hpo_absent varchar
-  phenotype_description varchar
-  solve_state varchar // to enum
+  subject_id varchar [pk, not null,
+    note: 'subject/participant identifier'
+  ]
+  project_id varchar [not null,
+    note: 'information field about cohort'
+  ] // to expand description
+  submitter_id varchar [not null,
+    note: 'a project-specific identifier for a node'
+  ] // to expand description
+  gregor_center varchar [
+    note: 'GREGoR Center to which the participant is originally associated'
+  ] // to enum
+  data_use_limitations varchar [
+    note: 'consent group pertaining to this participant's data'
+  ] // to enum
+  recontactable bool [
+    note: 'is the originating GREGoR Center likely able to recontact this participant'
+  ]
+  prior_testing varchar [
+    note: 'text description of any genetic testing for individual conducted prior to enrollment'
+  ]
+  pmid_id int [
+    note: 'case specific PubMed ID if applicable'
+  ]
+  dbgap_submission bool [
+    note: 'flag if sample has been submitted to dbGaP'
+  ]
+  dbgap_study_id varchar [
+    note: 'phs ID/accession for study'
+  ]
+  dbgap_subject_id varchar [
+    note: 'subject identifier used in dbGaP (if previously submitted)'
+  ]
+  multiple_datasets bool [
+    note: 'flag if an individual has data represented in multiple data types'
+  ] // to expand description
+  family_id varchar [
+    note: 'identifier for family'
+  ]
+  paternal_id varchar [
+    note: 'subject_id for father'
+  ]
+  maternal_id varchar [
+    note: 'subject_id for mother'
+  ]
+  twin_id varchar [
+    note: 'subject_id for twins, triplets, etc'
+  ]
+  proband_relationship varchar [
+    note: 'text description of individual relationship to proband in family, especially useful to capture relationships when connecting distant relatives and connecting relatives not studied'
+  ] // to enum
+  proband_relationship_other varchar [
+    note: 'other proband relationship not captured in enumeration above'
+  ]
+  sex subject_sex [
+    note: 'Biological sex assigned at birth (aligned with All of Us). If individual has a known DSD / not expected sex chromosome karyotype, this can be noted in the phenotype information section.'
+  ]
+  sex_detail varchar [
+    note: 'optional free-text field to describe known discrepancies between 'sex' value (female=>XX, male=>XY) and actual sex chromosome karyotype'
+  ]
+  race subject_race [
+    note: 'self/submitter-reported race (OMB categories)'
+  ]
+  ethnicity subject_ethnicity [
+    note: 'self/submitter-reported ethnicity (OMB categories)'
+  ]
+  ancestry_detail varchar [
+    note: 'additional specific ancestry description free text beyond what is captured by OMB race/ethnicity categories'
+  ]
+  age_at_last_observation int [
+    note: 'age at last observation'
+  ] // to expand description
+  phenotype_group varchar [
+    note: 'optional submitter-defined field for individuals that could be grouped together in a single analysis based on overlap in phenotypic features'
+  ] // to enum
+  disease_id varchar [
+    note: 'concept code for disease (e.g. OMIM, Orphanet)'
+  ]
+  disease_description varchar [
+    note: 'disease name or free text description of disease (especially if concept code not available)'
+  ]
+  affected_status subject_affected [
+    note: 'indicate affected status of individual (overall with respect to primary phenotype in the family)'
+  ]
+  phenotype_description varchar [
+    note: phenotypic one-line summary for why this individual is of interest'
+  ] // to expand description
+  solve_state subject_solve [
+    note: 'solved state of an individual'
+  ]
 }
 
 // Enumerations for Sample Table
