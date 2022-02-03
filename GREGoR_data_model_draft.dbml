@@ -249,15 +249,44 @@ table processed_data_files_mass_spec {
 
 // Enumerations for Family tables
 
+enum family_solve {
+  Unsolved
+  Tier 2
+  Tier 1
+}
+
+enum family_consanguinity {
+  None suspected
+  Suspected
+  Present
+  Unknown
+}
+
 Table Family {
-  family_id varchar [not null]
-  solve_state varchar [not null] // to enum
-  consanguinity varchar [not null] // to enum
-  consanguinity_detail varchar
-  pedigree_image varchar
-  pedigree_detail varchar
-  family_history varchar // to bool
-  family_onset varchar
+  family_id varchar [pk, ref: < Subject.family_id, not null,
+    note: 'identifier for family (needs to be Unique across centers, can consider prefix for each center if needed)'
+  ]
+  solve_state family_solve [not null,
+    note: 'solved state of a family'
+  ]
+  consanguinity family_consanguinity [not null,
+    note: 'indicate if consanguinity is present or suspected within a family'
+  ]
+  consanguinity_detail varchar [
+    note: 'free text description of any additional consanguinity details'
+  ]
+  pedigree_file varchar [
+    note: 'name of file (can contain a PED file or image)'
+  ]
+  pedigree_detail varchar [
+    note: 'free text description of other family structure/pedigree image caption or additional phenotypic information from family members who are not participating in the study'
+  ]
+  family_history varchar [
+    note: 'flag if there is a known family history for the phenotype'
+  ] // to bool and expand description
+  family_onset varchar [
+    note: 'information regarding typical age of onset for affected individuals in family if relevant for phenotype' 
+  ]
 }
 
 // Enumerations for Phenotype tables
@@ -317,7 +346,7 @@ Table phenotype {
 
 // references between tables
 Ref: Subject.subject_id > BioSample.subject_id
-Ref: Subject.family_id > Family.family_id
+Ref: Subject.family_id > Family.family_id // moved up to family table
 
 Ref: "Experiments"."bio_sample_id" < "BioSample"."bio_sample_id"
 
@@ -339,4 +368,4 @@ Ref: "processed_data_files_rna_seq"."raw_data_source_filename" < "raw_data_files
 
 Ref: "processed_data_files_exome_genome"."raw_data_source_filename" < "raw_data_files_exome_genome"."filename"
 
-Ref: "phenotype"."subject_id" < "Subject"."subject_id"
+Ref: "phenotype"."subject_id" < "Subject"."subject_id" // moved up to phenotype table
