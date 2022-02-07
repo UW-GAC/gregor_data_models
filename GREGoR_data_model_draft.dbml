@@ -154,14 +154,53 @@ Table Subject {
 
 // Enumerations for Sample Table
 
+// to enum biosample_site
+// to enum biosample_source
+
+enum biosample_tissue {
+  Yes
+  No
+  NA
+}
+
 Table BioSample {
-  bio_sample_id varchar [pk, not null]
-  subject_id varchar [not null]
-  sample_source varchar // to enum
-  tissue_affected_status bool
-  age_at_collection int
-  sample_collection_timestamp datetime
-  subject_drugs_intake bool
+  bio_sample_id varchar [pk, not null,
+    note: 'identifier for sample'
+  ]
+  subject_id varchar [ref: > Subject.subject_id, not null, 
+    note: 'subject/participant identifier within project'
+  ]
+  dbgap_sample_id varchar [
+    note: 'sample identifier used in dbGaP (if previously submitted)'
+  ]
+  sample_submission_site varchar [
+    note: 'site that is responsible for this sample'
+  ] // to enum
+  sample_source varchar [
+    note: 'tissue type of sample (for unknown can use tissue - UBERON:0000479)'
+  ] // to enum
+  tissue_affected_status biosample_tissue [
+    note: 'If applicable to disease (suspected mosaic), is the tissue from an affected source or an unaffected source? (use NA when disorder affects the individual and not suspected to be mosaic)
+  ]
+  tissue_description varchar [
+    note: 'free text description of tissue source'
+  ]
+  age_at_collection int [
+    note: 'age in years at sample collection'
+  ]
+  sample_collection_timestamp datetime [
+  ] // to add note
+  subject_drugs_intake varchar [
+  ] // to add note; may also be bool
+  fasting_status bool [
+  ] // to add note
+  passage_number int [
+  ] // to add note; may be a non-integer number?
+  delayed_freeze bool [
+  ] // to add note
+  sample_details varchar [
+    note: 'free text to capture information not in structured fields'
+  ]
 }
 
 Table Experiments {
@@ -321,7 +360,7 @@ enum pheno_onsent {
 }
 
 Table phenotype {
-  subject_id varchar [pk, ref: - Subject.subject_id, not null,
+  subject_id varchar [pk, ref: > Subject.subject_id, not null,
     note: 'subject/participant identifier within project'
   ]
   term_id varchar [
@@ -345,7 +384,7 @@ Table phenotype {
 }
 
 // references between tables
-Ref: Subject.subject_id > BioSample.subject_id
+Ref: Subject.subject_id > BioSample.subject_id // moved up to biosample table
 Ref: Subject.family_id > Family.family_id // moved up to family table
 
 Ref: "Experiments"."bio_sample_id" < "BioSample"."bio_sample_id"
