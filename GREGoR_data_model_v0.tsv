@@ -1,0 +1,62 @@
+entity	table	column	type	pk	ref	note
+Table	participant	participant_id	string	TRUE	NA	Subject/Participant Identifier (primary key)
+Table	participant	project_id	string	NA	NA	Information field about cohort. Suggested use case is for the identification of a set of subjects from a specific data provider in order to identify this subset within searches (and for manuscript referencing)
+Table	participant	gregor_center	enumeration	NA	NA	GREGoR Center to which the participant is originally associated
+Table	participant	data_use_limitations	enumeration	NA	NA	Consent group pertaining to this participants data
+Table	participant	recontactable	boolean	NA	NA	Is the originating GREGoR Center likely able to recontact this participant
+Table	participant	prior_testing	string	NA	NA	Text description of any genetic testing for individual conducted prior to enrollment
+Table	participant	pmid_id	integer	NA	NA	Case specific PubMed ID if applicable
+Table	participant	family_id	string	NA	> family.family_id	Identifier for family
+Table	participant	paternal_id	string	NA	NA	subject_id for father
+Table	participant	maternal_id	string	NA	NA	subject_id for mother
+Table	participant	twin_id	string	NA	NA	subject_id for twins, triplets, etc
+Table	participant	proband_relationship	enumeration	NA	NA	Text description of individual relationship to proband in family, especially useful to capture relationships when connecting distant relatives and connecting relatives not studied
+Table	participant	proband_relationship_other	string	NA	NA	Other proband relationship not captured in enumeration above
+Table	participant	sex	enumeration	NA	NA	Biological sex assigned at birth (aligned with All of Us). If individual has a known DSD / not expected sex chromosome karyotype, this can be noted in the phenotype information section.
+Table	participant	sex_detail	string	NA	NA	Optional free-text field to describe known discrepancies between sex value (female=>XX, male=>XY) and actual sex chromosome karyotype
+Table	participant	race	enumeration	NA	NA	Self/submitter-reported race (OMB categories)
+Table	participant	ethnicity	enumeration	NA	NA	Self/submitter-reported ethnicity (OMB categories)
+Table	participant	ancestry_detail	string	NA	NA	Additional specific ancestry description free text beyond what is captured by OMB race/ethnicity categories
+Table	participant	age_at_last_observation	integer	NA	NA	Age at last observation. For conditions with later age of onset, this field lets users know if individuals marked as unaffected were younger or older than the age when the phenotype is expected to appear.
+Table	participant	affected_status	enumeration	NA	NA	Indicate affected status of individual (overall with respect to primary phenotype in the family)
+Table	participant	phenotype_description	string	NA	NA	human-readable ""Phenotypic one-line summary"" for why this individual is of interest. Could be the same as the term_details value in the Phenotype table.
+Table	participant	solve_state	enumeration	NA	NA	Solved state of an individual
+Table	participant	consortium_activity_id	TBD	NA	NA	A (list of?) identifier(s?) provided by the GREGoR DCC for tracking purposes
+Table	family	family_id	string	TRUE	NA	Identifier for family (primary key)
+Table	family	solve_state	enumeration	NA	NA	Solved state of a family
+Table	family	consanguinity	enumeration	NA	NA	Indicate if consanguinity is present or suspected within a family
+Table	family	consanguinity_detail	string	NA	NA	Free text description of any additional consanguinity details
+Table	family	pedigree_file	string	NA	NA	name of file (renamed from pedigree_image because it can contain a PED file or image)
+Table	family	pedigree_detail	string	NA	NA	Free text description of other family structure/pedigree image caption or additional phenotypic information from family members who are not participating in the study.
+Table	family	family_history	boolean	NA	NA	Flag if there is a known family history for the phenotype (useful if only proband sequenced but extended family history suggestion mode of inheritance was reported).
+Table	family	family_onset	string	NA	NA	Information regarding typical age of onset for affected individuals in family if relevant for phenotype
+Table	family	consortium_activity_id	TBD	NA	NA	An identifier provided by the GREGoR DCC for tracking purposes
+Table	phenotype	subject_id	string	TRUE	> participant.participant_id	Subject/Participant Identifier (primary key)
+Table	phenotype	term_id	string	NA	NA	NA
+Table	phenotype	presence	enumeration	NA	NA	NA
+Table	phenotype	ontology	NA	NA	NA	NA
+Table	phenotype	additional_details	string	NA	NA	NA
+Table	phenotype	onset_age_range	enumeration	NA	NA	NA
+Table	phenotype	additional_modifiers	NA	NA	NA	NA
+Table	biosample	biosample_id	string	TRUE	NA	identifier for sample (primary key)
+Table	biosample	subject_id	string	NA	> participant.participant_id	NA
+Table	biosample	sample_type	string	NA	NA	NA
+Table	biosample	sample_source	enumeration	NA	NA	Tissue type of sample (for unknown can use tissue - UBERON:0000479)
+Table	biosample	tissue_affected_status	boolean	NA	NA	If applicable to disease (suspected mosaic), is the tissue from an affected source or an unaffected source? (use NA when disorder affects the individual and not suspected to be mosaic)
+Table	biosample	age_at_collection	float	NA	NA	age in years at sample collection
+Table	biosample	dbgap_sample_id	string	NA	NA	Sample identifier used in dbGaP (if previously submitted)
+Table	biosample	sample_submission_site	enumeration	NA	NA	Site that is responsible for this sample
+Table	biosample	tissue_description	string	NA	NA	NA
+Table	biosample	sample_collection_timestamp	date	NA	NA	NA
+Table	biosample	subject_drugs_intake	NA	NA	NA	NA
+Table	biosample	fasting_status	boolean	NA	NA	NA
+Table	biosample	passage_number	number	NA	NA	NA
+Table	biosample	delayed_freeze	boolean	NA	NA	NA
+Table	biosample	sample_details	string	NA	NA	Free text to capture information not in structured fields
+Table	experiment	experiment_id	string	TRUE	NA	identifier for experiment (primary key)
+Table	experiment	assay_type	string	NA	NA	NA
+Table	experiment	biosample_id	string	NA	> biosample.biosample_id	NA
+Table	experiment	experiment_sample_id	string	NA	NA	identifier used in the data file (e.g. VCF header)
+Table	experiment	experiment_lab	string	NA	NA	idenitifer for lab where experiment was performed
+Table	experiment_set	experiment_set_id	string	TRUE	NA	identifier for experiment set (primary key)
+Table	experiment_set	experiment_id	string	NA	> experiment.experiment_id	NA
