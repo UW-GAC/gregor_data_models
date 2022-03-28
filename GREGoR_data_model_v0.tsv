@@ -60,3 +60,30 @@ Table	experiment	experiment_sample_id	string	NA	NA	identifier used in the data f
 Table	experiment	experiment_lab	string	NA	NA	idenitifer for lab where experiment was performed
 Table	experiment_set	experiment_set_id	string	TRUE	NA	identifier for experiment set (primary key)
 Table	experiment_set	experiment_id	string	NA	> experiment.experiment_id	NA
+Table	experiment_details_exome_genome	experiment_id	string	TRUE	- experiment.experiment_id	identifier for experiment (primary key)
+Table	experiment_details_exome_genome	seq_library_prep_kit_method	string	NA	NA	NA
+Table	experiment_details_exome_genome	read_length	integer	NA	NA	NA
+Table	experiment_details_exome_genome	targeted_regions_method	string	NA	NA	NA
+Table	experiment_details_exome_genome	targeted_region_bed_file	string	NA	NA	NA
+Table	experiment_details_exome_genome	date_data_generation	date	NA	NA	NA
+Table	experiment_details_exome_genome	target_insert_size	integer	NA	NA	NA
+Table	experiment_details_exome_genome	sequencer_id	string	NA	NA	NA
+Table	experiment_details_exome_genome	flowcell	string	NA	NA	NA
+Table	experiment_details_exome_genome	flowcell_type	string	NA	NA	NA
+Table	experiment_details_exome_genome	sequencing_platform	string	NA	NA	NA
+Table	experiment_details_exome_genome	library_ids	string	NA	NA	NA
+Table	experiment_details_exome_genome	analyte_extraction_method	string	NA	NA	NA
+Table	experiment_details_exome_genome	sequencing_assay	enumeration	NA	NA	NA
+Table	aligned_sequence_reads_exome_genome	experiment_id	string	NA	> experiment.experiment_id	identifier for experiment
+Table	aligned_sequence_reads_exome_genome	filename	string	NA	NA	NA
+Table	aligned_sequence_reads_exome_genome	md5sum	string	TRUE	NA	md5 checksum for file (primary key)
+Table	aligned_sequence_reads_exome_genome	file_size_bytes	string	NA	NA	NA
+Table	aligned_sequence_reads_exome_genome	reference_genome_build	string	NA	NA	NA
+Table	aligned_sequence_reads_exome_genome	alignment_method_version	string	NA	NA	NA
+Table	aligned_sequence_reads_exome_genome	mean_coverage_targeted_regions	integer	NA	NA	NA
+Table	aligned_sequence_reads_exome_genome	basecalling_software	string	NA	NA	NA
+Table	called_variants_file	experiment_set_id	string	NA	> experiment_set.experiment_set_id	identifier for experiment set
+Table	called_variants_file	filename	string	NA	NA	NA
+Table	called_variants_file	md5sum	string	TRUE	NA	md5 checksum for file (primary key)
+Table	called_variants_file	file_size_bytes	string	NA	NA	NA
+Table	called_variants_file	caller	string	NA	NA	NA
