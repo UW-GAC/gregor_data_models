@@ -1,89 +1,99 @@
-entity	table	column	type	pk	ref	note
-Table	participant	participant_id	string	TRUE	NA	Subject/Participant Identifier (primary key)
-Table	participant	project_id	string	NA	NA	Information field about cohort. Suggested use case is for the identification of a set of subjects from a specific data provider in order to identify this subset within searches (and for manuscript referencing)
-Table	participant	gregor_center	enumeration	NA	NA	GREGoR Center to which the participant is originally associated
-Table	participant	data_use_limitations	enumeration	NA	NA	Consent group pertaining to this participants data
-Table	participant	recontactable	boolean	NA	NA	Is the originating GREGoR Center likely able to recontact this participant
-Table	participant	prior_testing	string	NA	NA	Text description of any genetic testing for individual conducted prior to enrollment
-Table	participant	pmid_id	integer	NA	NA	Case specific PubMed ID if applicable
-Table	participant	family_id	string	NA	> family.family_id	Identifier for family
-Table	participant	paternal_id	string	NA	NA	subject_id for father
-Table	participant	maternal_id	string	NA	NA	subject_id for mother
-Table	participant	twin_id	string	NA	NA	subject_id for twins, triplets, etc
-Table	participant	proband_relationship	enumeration	NA	NA	Text description of individual relationship to proband in family, especially useful to capture relationships when connecting distant relatives and connecting relatives not studied
-Table	participant	proband_relationship_other	string	NA	NA	Other proband relationship not captured in enumeration above
-Table	participant	sex	enumeration	NA	NA	Biological sex assigned at birth (aligned with All of Us). If individual has a known DSD / not expected sex chromosome karyotype, this can be noted in the phenotype information section.
-Table	participant	sex_detail	string	NA	NA	Optional free-text field to describe known discrepancies between sex value (female=>XX, male=>XY) and actual sex chromosome karyotype
-Table	participant	race	enumeration	NA	NA	Self/submitter-reported race (OMB categories)
-Table	participant	ethnicity	enumeration	NA	NA	Self/submitter-reported ethnicity (OMB categories)
-Table	participant	ancestry_detail	string	NA	NA	Additional specific ancestry description free text beyond what is captured by OMB race/ethnicity categories
-Table	participant	age_at_last_observation	integer	NA	NA	Age at last observation. For conditions with later age of onset, this field lets users know if individuals marked as unaffected were younger or older than the age when the phenotype is expected to appear.
-Table	participant	affected_status	enumeration	NA	NA	Indicate affected status of individual (overall with respect to primary phenotype in the family)
-Table	participant	phenotype_description	string	NA	NA	human-readable ""Phenotypic one-line summary"" for why this individual is of interest. Could be the same as the term_details value in the Phenotype table.
-Table	participant	solve_state	enumeration	NA	NA	Solved state of an individual
-Table	participant	consortium_activity_id	TBD	NA	NA	A (list of?) identifier(s?) provided by the GREGoR DCC for tracking purposes
-Table	family	family_id	string	TRUE	NA	Identifier for family (primary key)
-Table	family	solve_state	enumeration	NA	NA	Solved state of a family
-Table	family	consanguinity	enumeration	NA	NA	Indicate if consanguinity is present or suspected within a family
-Table	family	consanguinity_detail	string	NA	NA	Free text description of any additional consanguinity details
-Table	family	pedigree_file	string	NA	NA	name of file (renamed from pedigree_image because it can contain a PED file or image)
-Table	family	pedigree_detail	string	NA	NA	Free text description of other family structure/pedigree image caption or additional phenotypic information from family members who are not participating in the study.
-Table	family	family_history	boolean	NA	NA	Flag if there is a known family history for the phenotype (useful if only proband sequenced but extended family history suggestion mode of inheritance was reported).
-Table	family	family_onset	string	NA	NA	Information regarding typical age of onset for affected individuals in family if relevant for phenotype
-Table	family	consortium_activity_id	TBD	NA	NA	An identifier provided by the GREGoR DCC for tracking purposes
-Table	phenotype	subject_id	string	TRUE	> participant.participant_id	Subject/Participant Identifier (primary key)
-Table	phenotype	term_id	string	NA	NA	NA
-Table	phenotype	presence	enumeration	NA	NA	NA
-Table	phenotype	ontology	NA	NA	NA	NA
-Table	phenotype	additional_details	string	NA	NA	NA
-Table	phenotype	onset_age_range	enumeration	NA	NA	NA
-Table	phenotype	additional_modifiers	NA	NA	NA	NA
-Table	biosample	biosample_id	string	TRUE	NA	identifier for sample (primary key)
-Table	biosample	subject_id	string	NA	> participant.participant_id	NA
-Table	biosample	sample_type	string	NA	NA	NA
-Table	biosample	sample_source	enumeration	NA	NA	Tissue type of sample (for unknown can use tissue - UBERON:0000479)
-Table	biosample	tissue_affected_status	boolean	NA	NA	If applicable to disease (suspected mosaic), is the tissue from an affected source or an unaffected source? (use NA when disorder affects the individual and not suspected to be mosaic)
-Table	biosample	age_at_collection	float	NA	NA	age in years at sample collection
-Table	biosample	dbgap_sample_id	string	NA	NA	Sample identifier used in dbGaP (if previously submitted)
-Table	biosample	sample_submission_site	enumeration	NA	NA	Site that is responsible for this sample
-Table	biosample	tissue_description	string	NA	NA	Free text description of tissue source
-Table	biosample	sample_collection_timestamp	date	NA	NA	NA
-Table	biosample	subject_drugs_intake	NA	NA	NA	NA
-Table	biosample	fasting_status	boolean	NA	NA	NA
-Table	biosample	passage_number	integer	NA	NA	NA
-Table	biosample	delayed_freeze	boolean	NA	NA	NA
-Table	biosample	sample_details	string	NA	NA	Free text to capture information not in structured fields
-Table	experiment	experiment_id	string	TRUE	NA	identifier for experiment (primary key)
-Table	experiment	assay_type	string	NA	NA	NA
-Table	experiment	biosample_id	string	NA	> biosample.biosample_id	NA
-Table	experiment	experiment_sample_id	string	NA	NA	identifier used in the data file (e.g. VCF header)
-Table	experiment	experiment_lab	string	NA	NA	idenitifer for lab where experiment was performed
-Table	experiment_set	experiment_set_id	string	TRUE	NA	identifier for experiment set (primary key)
-Table	experiment_set	experiment_id	string	NA	> experiment.experiment_id	NA
-Table	experiment_details_exome_genome	experiment_id	string	TRUE	- experiment.experiment_id	identifier for experiment (primary key)
-Table	experiment_details_exome_genome	seq_library_prep_kit_method	string	NA	NA	NA
-Table	experiment_details_exome_genome	read_length	integer	NA	NA	NA
-Table	experiment_details_exome_genome	targeted_regions_method	string	NA	NA	NA
-Table	experiment_details_exome_genome	targeted_region_bed_file	string	NA	NA	NA
-Table	experiment_details_exome_genome	date_data_generation	date	NA	NA	NA
-Table	experiment_details_exome_genome	target_insert_size	integer	NA	NA	NA
-Table	experiment_details_exome_genome	sequencer_id	string	NA	NA	NA
-Table	experiment_details_exome_genome	flowcell	string	NA	NA	NA
-Table	experiment_details_exome_genome	flowcell_type	string	NA	NA	NA
-Table	experiment_details_exome_genome	sequencing_platform	string	NA	NA	NA
-Table	experiment_details_exome_genome	library_ids	string	NA	NA	NA
-Table	experiment_details_exome_genome	analyte_extraction_method	string	NA	NA	NA
-Table	experiment_details_exome_genome	sequencing_assay	enumeration	NA	NA	NA
-Table	aligned_sequence_reads_exome_genome	experiment_id	string	NA	> experiment.experiment_id	identifier for experiment
-Table	aligned_sequence_reads_exome_genome	filename	string	NA	NA	NA
-Table	aligned_sequence_reads_exome_genome	md5sum	string	TRUE	NA	md5 checksum for file (primary key)
-Table	aligned_sequence_reads_exome_genome	file_size_bytes	integer	NA	NA	NA
-Table	aligned_sequence_reads_exome_genome	reference_genome_build	string	NA	NA	NA
-Table	aligned_sequence_reads_exome_genome	alignment_method_version	string	NA	NA	NA
-Table	aligned_sequence_reads_exome_genome	mean_coverage_targeted_regions	integer	NA	NA	NA
-Table	aligned_sequence_reads_exome_genome	basecalling_software	string	NA	NA	NA
-Table	called_variants_file	experiment_set_id	string	NA	> experiment_set.experiment_set_id	identifier for experiment set
-Table	called_variants_file	filename	string	NA	NA	NA
-Table	called_variants_file	md5sum	string	TRUE	NA	md5 checksum for file (primary key)
-Table	called_variants_file	file_size_bytes	string	NA	NA	NA
-Table	called_variants_file	caller	string	NA	NA	NA
+entity	table	column	type	required	pk	ref	note
+Table	participant	participant_id	string	TRUE	TRUE	NA	Subject/Participant Identifier (primary key)
+Table	participant	internal_project_id	string	NA	NA	NA	Information field about cohort. Suggested use case is for the identification of a set of subjects from a specific data provider in order to identify this subset within searches (and for manuscript referencing)
+Table	participant	gregor_center	enumeration	TRUE	NA	NA	GREGoR Center to which the participant is originally associated
+Table	participant	consent_code	enumeration	TRUE	NA	NA	Consent group pertaining to this participant's data
+Table	participant	recontactable	enumeration	NA	NA	NA	Is the originating GREGoR Center likely able to recontact this participant
+Table	participant	prior_testing	string	NA	NA	NA	Text description of any genetic testing for individual conducted prior to enrollment
+Table	participant	pmid_id	delimited_list_of_integers	NA	NA	NA	Case specific PubMed ID if applicable
+Table	participant	family_id	string	TRUE	NA	> family.family_id	Identifier for family
+Table	participant	paternal_id	string	TRUE	NA	NA	subject_id for father; 0 if not available
+Table	participant	maternal_id	string	TRUE	NA	NA	subject_id for mother; 0 if not available
+Table	participant	twin_id	string	NA	NA	NA	subject_id for twins, triplets, etc; 0 if not available
+Table	participant	proband_relationship	enumeration	TRUE	NA	NA	Text description of individual relationship to proband in family, especially useful to capture relationships when connecting distant relatives and connecting relatives not studied
+Table	participant	proband_relationship_detail	string	NA	NA	NA	Other proband relationship not captured in enumeration above
+Table	participant	sex	enumeration	TRUE	NA	NA	Biological sex assigned at birth (aligned with All of Us). If individual has a known DSD / not expected sex chromosome karyotype, this can be noted in the phenotype information section.
+Table	participant	sex_detail	string	NA	NA	NA	Optional free-text field to describe known discrepancies between 'sex' value (female=>XX, male=>XY) and actual sex chromosome karyotype
+Table	participant	reported_race	enumeration	NA	NA	NA	Self/submitter-reported race (OMB categories)
+Table	participant	reported_ethnicity	enumeration	NA	NA	NA	Self/submitter-reported ethnicity (OMB categories)
+Table	participant	ancestry_detail	string	NA	NA	NA	Additional specific ancestry description free text beyond what is captured by OMB race/ethnicity categories
+Table	participant	age_at_last_observation	float	NA	NA	NA	Age at last observation, aka age in years at the last time the center can vouch for the accuracy phenotype data. For conditions with later age of onset, this field lets users know if individuals marked as unaffected were younger or older than the age when the phenotype is expected to appear.
+Table	participant	affected_status	enumeration	NA	NA	NA	Indicate affected status of individual (overall with respect to primary phenotype in the family)
+Table	participant	phenotype_description	string	NA	NA	NA	human-readable ""Phenotypic one-line summary"" for why this individual is of interest. Could be the same as the term_details value in the Phenotype table. Strongly encourage/required for proband.
+Table	participant	age_at_enrollment	float	NA	NA	NA	age in years at which consent was originally obtained
+Table	family	family_id	string	TRUE	TRUE	NA	Identifier for family (primary key)
+Table	family	consanguinity	enumeration	TRUE	NA	NA	Indicate if consanguinity is present or suspected within a family
+Table	family	consanguinity_detail	string	NA	NA	NA	Free text description of any additional consanguinity details
+Table	family	pedigree_file	string	NA	NA	NA	name of file (renamed from pedigree_image because it can contain a PED file or image)
+Table	family	pedigree_file_detail	string	NA	NA	NA	Free text description of other family structure/pedigree file caption or legend.
+Table	family	family_history_detail	NA	NA	NA	NA	Details about family history that do not fit into structured fields. Family relationship terms should be relative to the proband.
+Table	phenotype	participant_id	string	TRUE	TRUE	> participant.participant_id	Subject/Participant Identifier (primary key)
+Table	phenotype	term_id	string	TRUE	NA	NA	NA
+Table	phenotype	presence	enumeration	TRUE	NA	NA	NA
+Table	phenotype	ontology	NA	TRUE	NA	NA	NA
+Table	phenotype	additional_details	string	NA	NA	NA	modifier of a term where the additional details are not supported/available as a term in HPO
+Table	phenotype	onset_age_range	enumeration	NA	NA	NA	NA
+Table	phenotype	additional_modifiers	NA	NA	NA	NA	NA
+Table	biosample	biosample_id	string	TRUE	TRUE	NA	identifier for sample (primary key)
+Table	biosample	participant_id	string	TRUE	NA	> participant.participant_id	NA
+Table	biosample	sample_type	enumeration	TRUE	NA	NA	analyte derived from the sample_source
+Table	biosample	analyte_extraction_method	string	NA	NA	NA	NA
+Table	biosample	sample_source	enumeration	TRUE	NA	NA	Tissue type of sample (for unknown can use tissue - UBERON:0000479)
+Table	biosample	tissue_affected_status	boolean	NA	NA	NA	If applicable to disease (suspected mosaic), is the tissue from an affected source or an unaffected source? (use NA when disorder affects the individual and not suspected to be mosaic)
+Table	biosample	age_at_collection	float	NA	NA	NA	age in years at sample collection
+Table	biosample	dbgap_sample_id	string	NA	NA	NA	Sample identifier used in dbGaP (if previously submitted)
+Table	biosample	sample_submission_site	enumeration	NA	NA	NA	Site that is responsible for this sample
+Table	biosample	tissue_description	string	NA	NA	NA	Free text description of tissue source
+Table	biosample	sample_details	string	NA	NA	NA	Free text to capture information not in structured fields
+Table	biosample	sample_collection_timestamp	date	NA	NA	NA	<GSS draft description and values>
+Table	biosample	participant_drugs_intake	NA	NA	NA	NA	The list of drugs patient is on, at the time of sample collection. This information is helpful during analysis of metabolomics and immune asssays. Free Text
+Table	biosample	fasting_status	boolean	NA	NA	NA	If the patient was fasting, when the sample was collected
+Table	biosample	passage_number	integer	NA	NA	NA	<GSS draft description and values>
+Table	biosample	delayed_freeze	boolean	NA	NA	NA	<GSS draft description and values>
+Table	experiment	experiment_id	string	TRUE	TRUE	NA	identifier for experiment (primary key)
+Table	experiment	biosample_id	string	TRUE	NA	> biosample.biosample_id	NA
+Table	experiment	assay_type	enumeration	TRUE	NA	NA	Type of assay
+Table	experiment	experiment_sample_id	string	NA	NA	NA	identifier used in the data file (e.g. VCF header / LIMS ID)
+Table	experiment	experiment_lab	string	TRUE	NA	NA	idenitifer for lab where experiment was performed
+Table	experiment_set	experiment_set_id	string	TRUE	TRUE	NA	identifier for a set of experiments (primary key)
+Table	experiment_set	experiment_id	string	TRUE	NA	> experiment.experiment_id	NA
+Table	experiment_details_short_read	experiment_id	string	TRUE	TRUE	- experiment.experiment_id	identifier for experiment (primary key)
+Table	experiment_details_short_read	seq_library_prep_kit_method	string	NA	NA	NA	Library prep kit used
+Table	experiment_details_short_read	read_length	integer	NA	NA	NA	sequenced read length (bp)
+Table	experiment_details_short_read	experiment_type	enumeration	TRUE	NA	NA	NA
+Table	experiment_details_short_read	targeted_regions_method	string	NA	NA	NA	<description>
+Table	experiment_details_short_read	targeted_region_bed_filename	string	NA	NA	NA	name of bed file uploaded to workspace
+Table	experiment_details_short_read	targeted_region_bed_file_uri	string	NA	NA	NA	google cloud location of bed file (added in QC)
+Table	experiment_details_short_read	date_data_generation	date	NA	NA	NA	Date of data generation (First sequencing date)
+Table	experiment_details_short_read	target_insert_size	integer	NA	NA	NA	targeted insert size for DNA fragments
+Table	experiment_details_short_read	sequencing_platform	string	NA	NA	NA	sequencing platform used for the experiment
+Table	aligned_short_reads	experiment_id	string	TRUE	NA	> experiment.experiment_id	identifier for experiment
+Table	aligned_short_reads	filename	string	TRUE	NA	NA	name of file with aligned reads
+Table	aligned_short_reads	file_uri	string	NA	NA	NA	google cloud location of the file (added in QC)
+Table	aligned_short_reads	md5sum	string	TRUE	TRUE	NA	md5 checksum for file (primary key)
+Table	aligned_short_reads	file_size_bytes	integer	TRUE	NA	NA	to be discussed with AnVIL; may not be necessary
+Table	aligned_short_reads	reference_genome_build	string	TRUE	NA	NA	NA
+Table	aligned_short_reads	alignment_software	string	TRUE	NA	NA	Software including version number
+Table	aligned_short_reads	mean_coverage	numeric	NA	NA	NA	Mean coverage of either the genome or the targeted regions
+Table	called_variants_short_read	experiment_set_id	string	TRUE	NA	> experiment_set.experiment_set_id	identifier for experiment set
+Table	called_variants_short_read	filename	string	TRUE	NA	NA	name of the file with variant calls
+Table	called_variants_short_read	file_uri	string	NA	NA	NA	google cloud location of the file (added in QC)
+Table	called_variants_short_read	md5sum	string	TRUE	TRUE	NA	md5 checksum for file (primary key)
+Table	called_variants_short_read	file_size_bytes	string	TRUE	NA	NA	to be discussed with AnVIL; may not be necessary
+Table	called_variants_short_read	caller_software	character_separated_list_of_strings	TRUE	NA	NA	variant calling software used including version number
+Table	called_variants_short_read	variants_called	character_separated_list_of_strings	TRUE	NA	NA	types of variants called
+Table	called_variants_short_read	analysis_pipeline	string	NA	NA	NA	brief description of the analysis pipeline used for producing the file; eventually a link to something like a WDL file
+Table	experiment_details_long_read	experiment_id	string	TRUE	TRUE	- experiment.experiment_id	identifier for experiment (primary key)
+Table	experiment_details_long_read	seq_library_prep_kit_method	string	NA	NA	NA	Library prep kit used
+Table	experiment_details_long_read	read_length	integer	NA	NA	NA	sequenced read length (bp)
+Table	experiment_details_long_read	targeted_regions_method	string	NA	NA	NA	NA
+Table	experiment_details_long_read	targeted_region_bed_file	string	NA	NA	NA	NA
+Table	experiment_details_long_read	date_data_generation	date	NA	NA	NA	NA
+Table	experiment_details_long_read	target_insert_size	integer	NA	NA	NA	targeted insert size for DNA fragments
+Table	experiment_details_long_read	sequencer_id	string	NA	NA	NA	machine identifier for sequencer
+Table	experiment_details_long_read	flowcell	string	NA	NA	NA	flowcell identifier
+Table	experiment_details_long_read	flowcell_type	string	NA	NA	NA	NA
+Table	experiment_details_long_read	sequencing_platform	string	NA	NA	NA	NA
+Table	experiment_details_long_read	library_ids	string	NA	NA	NA	NA
+Table	experiment_details_long_read	analyte_extraction_method	string	NA	NA	NA	NA
+Table	experiment_details_long_read	sequencing_assay	enumeration	NA	NA	NA	NA

@@ -8,16 +8,19 @@ names(tables) <- table_names
 
 tsv_format <- function(t) {
     tables[[t]] %>%
-        mutate(entity="Table", table=t,
-               pk=ifelse(grepl("(primary key)", Description, fixed=TRUE), TRUE, NA)) %>%
-        select(entity, table, 
-               column=Column, type=`Data Type`,
+        filter(!is.na(Column), !grepl(" ", Column, fixed=TRUE)) %>%
+        mutate(entity="Table", 
+               table=sub(" (prototype)", "", t, fixed=TRUE),
+               type=gsub(" ", "_", `Data Type`, fixed=TRUE),
+               pk=ifelse(grepl("(primary key)", Description, fixed=TRUE), TRUE, NA),
+               required=ifelse(tolower(Required) == "yes", TRUE, NA)) %>%
+        select(entity, table,
+               column=Column, type, required,
                pk, ref=`Cross-table References`,
                note=Description)
 }
 
 out <- lapply(table_names, tsv_format) %>%
-    bind_rows() %>%
-    mutate(note=gsub("'", "", note)) # remove single quotes
+    bind_rows()
 
 readr::write_tsv(out, file="GREGoR_data_model_v0.tsv")
