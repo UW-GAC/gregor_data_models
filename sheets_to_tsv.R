@@ -3,6 +3,7 @@ library(dplyr)
 
 url <- "https://docs.google.com/spreadsheets/d/16UKkv3E11ArkSyaTscJrpFNBPdFWfcGr87lNOo6yZyM"
 table_names <- sheet_names(url)[-1:-2] # first two sheets are metadata
+table_names <- setdiff(table_names, "experiment (for future)")
 tables <- lapply(table_names, function(x) read_sheet(url, sheet=x, skip=1))
 names(tables) <- table_names
 
