@@ -403,6 +403,9 @@ enum	primary_biosample	UBERON:0002385
 enum	primary_biosample	UBERON:0000178					
 enum	primary_biosample	UBERON:0002371					
 enum	primary_biosample	UBERON:0006956					
+enum	primary_biosample	UBERON:0001359					
+enum	primary_biosample	UBERON:0001088					
+enum	primary_biosample	UBERON:0019306					
 enum	tissue_affected_status	Yes					
 enum	tissue_affected_status	No					
 enum	experiment_type	targeted					
