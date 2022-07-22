@@ -32,7 +32,8 @@ tsv_format <- function(t) {
         select(entity, table,
                column=Column, type, required,
                pk, ref=References,
-               note=Description)
+               note=Description) %>%
+        mutate(note=gsub('"', "'", note)) # replace double with single quotes
 }
 
 out <- lapply(table_names, tsv_format) %>%
@@ -56,4 +57,4 @@ enum_tsv <- lapply(table_names, enum_format) %>%
 
 out <- bind_rows(out, enum_tsv, meta_tsv)
 
-readr::write_tsv(out, file="GREGoR_data_model.tsv", na="", escape="backslash")
+readr::write_tsv(out, file="GREGoR_data_model.tsv", na="", escape="none")
