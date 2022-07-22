@@ -19,7 +19,7 @@ Table	participant	reported_ethnicity	reported_ethnicity				Self/submitter-report
 Table	participant	ancestry_detail	string				Additional specific ancestry description free text beyond what is captured by OMB race/ethnicity categories
 Table	participant	age_at_last_observation	float				Age at last observation, aka age in years at the last time the center can vouch for the accuracy phenotype data. For conditions with later age of onset, this field lets users know if individuals marked as unaffected were younger or older than the age when the phenotype is expected to appear.
 Table	participant	affected_status	affected_status				Indicate affected status of individual (overall with respect to primary phenotype in the family). Note: Affected participants must have entry in phenotype table.
-Table	participant	phenotype_description	string				human-readable ""Phenotypic one-line summary"" for why this individual is of interest. Could be the same as the term_details value in the Phenotype table. Strongly encourage/required for proband.
+Table	participant	phenotype_description	string				human-readable "Phenotypic one-line summary" for why this individual is of interest. Could be the same as the term_details value in the Phenotype table. Strongly encourage/required for proband.
 Table	participant	age_at_enrollment	float				age in years at which consent was originally obtained
 Table	family	family_id	string	TRUE	TRUE		Identifier for family (primary key)
 Table	family	consanguinity	consanguinity	TRUE			Indicate if consanguinity is present or suspected within a family

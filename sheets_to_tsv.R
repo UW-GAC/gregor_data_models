@@ -56,4 +56,4 @@ enum_tsv <- lapply(table_names, enum_format) %>%
 
 out <- bind_rows(out, enum_tsv, meta_tsv)
 
-readr::write_tsv(out, file="GREGoR_data_model_v0.tsv", na="")
+readr::write_tsv(out, file="GREGoR_data_model.tsv", na="", escape="none")

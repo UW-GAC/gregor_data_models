@@ -1,6 +1,6 @@
 #remotes::install_github("UW-GAC/AnvilDataModels")
 
-prefix <-  "GREGoR_data_model_v0"
+prefix <-  "GREGoR_data_model"
 AnvilDataModels::tsv_to_dbml(paste0(prefix, ".tsv"), 
                              paste0(prefix, ".dbml"))
 
