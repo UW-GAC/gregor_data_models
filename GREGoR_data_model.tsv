@@ -63,8 +63,8 @@ Table	experiment_dna_short_read	target_insert_size	integer				insert size the pr
 Table	experiment_dna_short_read	sequencing_platform	string				sequencing platform used for the experiment
 Table	aligned_dna_short_read	aligned_dna_short_read_id	string	TRUE	TRUE		identifier for aligned_short_read (primary key)
 Table	aligned_dna_short_read	experiment_dna_short_read_id	string	TRUE		> experiment_dna_short_read.experiment_dna_short_read_id	identifier for experiment
-Table	aligned_dna_short_read	aligned_short_read_dna_file	string	TRUE			name and path of file with aligned reads
-Table	aligned_dna_short_read	aligned_short_read_dna_index_file	string	TRUE			name and path of index file corresponding to aligned reads file
+Table	aligned_dna_short_read	aligned_dna_short_read_file	string	TRUE			name and path of file with aligned reads
+Table	aligned_dna_short_read	aligned_dna_short_read_index_file	string	TRUE			name and path of index file corresponding to aligned reads file
 Table	aligned_dna_short_read	md5sum	string	TRUE			md5 checksum for file
 Table	aligned_dna_short_read	reference_assembly	reference_assembly	TRUE			
 Table	aligned_dna_short_read	alignment_software	string	TRUE			Software including version number
@@ -72,7 +72,7 @@ Table	aligned_dna_short_read	mean_coverage	float				Mean coverage of either the 
 Table	aligned_dna_short_read	analysis_details	string				brief description of the analysis pipeline used for producing the file; perhaps a DOI or link to something like a WDL file or github repository
 Table	aligned_dna_short_read_set	aligned_dna_short_read_set_id	string	TRUE	TRUE		identifier for a set of experiments (primary key)
 Table	aligned_dna_short_read_set	aligned_dna_short_read_id	string	TRUE		> aligned_dna_short_read.aligned_dna_short_read_id	
-Table	called_variants_dna_short_read	called_variants_dna_short_read_id	string	TRUE	TRUE	from:md5sum	unique key for table (anvil requirement)
+Table	called_variants_dna_short_read	called_variants_dna_short_read_id	string		TRUE	from:md5sum	unique key for table (anvil requirement)
 Table	called_variants_dna_short_read	aligned_dna_short_read_set_id	string	TRUE		> aligned_dna_short_read_set.aligned_dna_short_read_set_id	identifier for experiment set
 Table	called_variants_dna_short_read	called_variants_dna_file	string	TRUE			name and path of the file with variant calls
 Table	called_variants_dna_short_read	md5sum	string	TRUE			md5 checksum for file
