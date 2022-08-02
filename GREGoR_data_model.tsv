@@ -5,7 +5,7 @@ Table	participant	gregor_center	gregor_center	TRUE			GREGoR Center to which the 
 Table	participant	consent_code	consent_code	TRUE			Consent group pertaining to this participant's data
 Table	participant	recontactable	recontactable				Is the originating GREGoR Center likely able to recontact this participant
 Table	participant	prior_testing	string				Text description of any genetic testing for individual conducted prior to enrollment
-Table	participant	pmid_id	integer				Case specific PubMed ID if applicable
+Table	participant	pmid_id	string				Case specific PubMed ID if applicable
 Table	participant	family_id	string	TRUE		> family.family_id	Identifier for family
 Table	participant	paternal_id	string	TRUE			subject_id for father; 0 if not available
 Table	participant	maternal_id	string	TRUE			subject_id for mother; 0 if not available
