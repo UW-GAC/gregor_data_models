@@ -5,6 +5,9 @@ library(stringr)
 library(jsonlite)
 
 url <- "https://docs.google.com/spreadsheets/d/16UKkv3E11ArkSyaTscJrpFNBPdFWfcGr87lNOo6yZyM"
+model_name = "GREGoR Data Model"
+model_description = "Data model for the GREGoR consortium"
+model_version = "1"
 
 # table metadata
 meta <- read_sheet(url, sheet="Table overview/status")
@@ -57,9 +60,9 @@ rm(list = c("meta", "tables", "sheets_to_list"))
 # initialize leading text
 master <- list(
     # Overall File Details
-    name = "GREGoR Data Model",
-    description = "Data model for the GREGoR consortium",
-    version = "1",
+    name = model_name,
+    description = model_description,
+    version = model_version,
     
     # Data Table Details
     tables = tab_list
