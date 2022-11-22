@@ -57,9 +57,9 @@ rm(list = c("meta", "tables", "sheets_to_list"))
 # initialize leading text
 master <- list(
     # Overall File Details
-    name = "PRIMED Genotype Data Model",
-    description = "Data model for genotype data in the PRIMED consortium",
-    version = "0.1.2",
+    name = "GREGoR Data Model",
+    description = "Data model for the GREGoR consortium",
+    version = "1",
     
     # Data Table Details
     tables = tab_list

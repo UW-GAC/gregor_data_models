@@ -1,7 +1,7 @@
 {
-  "name": "PRIMED Genotype Data Model",
-  "description": "Data model for genotype data in the PRIMED consortium",
-  "version": "0.1.2",
+  "name": "GREGoR Data Model",
+  "description": "Data model for the GREGoR consortium",
+  "version": "1",
   "tables": [
     {
       "table": "participant",
