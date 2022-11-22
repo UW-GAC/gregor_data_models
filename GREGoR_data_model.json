@@ -1,0 +1,613 @@
+{
+  "name": "GREGoR Data Model",
+  "description": "Data model for the GREGoR consortium",
+  "version": "1",
+  "tables": [
+    {
+      "table": "participant",
+      "required": true,
+      "columns": [
+        {
+          "column": "participant_id",
+          "primary_key": true,
+          "required": true,
+          "description": "Subject/Participant Identifier (primary key)",
+          "data_type": "string",
+          "examples": ["BCM_Subject_1", "BROAD_subj89054"],
+          "notes": "anticipate using RC-assigned ID prefixed by gregor_center value"
+        },
+        {
+          "column": "internal_project_id",
+          "description": "An identifier used by GREGoR research centers to identify a set of participants for their internal tracking",
+          "data_type": "string",
+          "multi_value_delimeter": "|",
+          "examples": ["UWCDR_uwcmg_distal_arthrogryposis_type 1_212", "UWCDR_uwcmg_sponastrime_dysplasia_487"]
+        },
+        {
+          "column": "gregor_center",
+          "required": true,
+          "description": "GREGoR Center to which the participant is originally associated",
+          "data_type": "enumeration",
+          "enumerations": ["BCM", "BROAD", "CNH_I", "UW_CRDR", "GSS", "UW_DCC"]
+        },
+        {
+          "column": "consent_code",
+          "required": true,
+          "description": "Consent group pertaining to this participant's data",
+          "data_type": "enumeration",
+          "enumerations": ["GRU", "HMB"],
+          "examples": "GRU"
+        },
+        {
+          "column": "recontactable",
+          "description": "Is the originating GREGoR Center likely able to recontact this participant",
+          "data_type": "enumeration",
+          "enumerations": ["Yes", "No", "Unknown"]
+        },
+        {
+          "column": "prior_testing",
+          "description": "Text description of any genetic testing for individual conducted prior to enrollment",
+          "data_type": "string",
+          "multi_value_delimeter": "|",
+          "examples": "Normal karyotype | FBN2 screened clinically"
+        },
+        {
+          "column": "pmid_id",
+          "description": "Case specific PubMed ID if applicable",
+          "data_type": "string",
+          "multi_value_delimeter": "|",
+          "examples": "25683120",
+          "notes": "Publication which included participant;  Used for publications which include participant known prior to or after inclusion in GREGoR"
+        },
+        {
+          "column": "family_id",
+          "required": true,
+          "description": "Identifier for family",
+          "data_type": "string",
+          "references": "> family.family_id",
+          "examples": ["CNH-I_fam89052", "UW_CRDR_Family_2"]
+        },
+        {
+          "column": "paternal_id",
+          "required": true,
+          "description": "participant_id for father; 0 if not available",
+          "data_type": "string",
+          "examples": ["BCM_Subject_1", "BROAD_subj89054"],
+          "notes": "intent is to be able to create .ped file format from consortium data;   Can enter 0 for mother or father not present"
+        },
+        {
+          "column": "maternal_id",
+          "required": true,
+          "description": "participant_id for mother; 0 if not available",
+          "data_type": "string",
+          "examples": ["BCM_Subject_1", "BROAD_subj89054"],
+          "notes": "intent is to be able to create .ped file format from consortium data;   Can enter 0 for mother or father not present"
+        },
+        {
+          "column": "twin_id",
+          "description": "participant_id for twins, triplets, etc; 0 if not available",
+          "data_type": "string",
+          "multi_value_delimeter": "|",
+          "examples": ["BCM_Subject_1", "BROAD_subj89054", "BROAD_subj89054|BROAD_subj89055"],
+          "notes": "may be monozygotic, dizygotic, or polyzygotic"
+        },
+        {
+          "column": "proband_relationship",
+          "required": true,
+          "description": "Text description of individual relationship to proband in family, especially useful to capture relationships when connecting distant relatives and connecting relatives not studied",
+          "data_type": "enumeration",
+          "enumerations": ["Self", "Mother", "Father", "Sibling", "Child", "Maternal Half Sibling", "Paternal Half Sibling", "Maternal Grandmother", "Maternal Grandfather", "Paternal Grandmother", "Paternal Grandfather", "Maternal Aunt", "Maternal Uncle", "Paternal Aunt", "Paternal Uncle", "Niece", "Nephew", "Maternal 1st Cousin", "Paternal 1st Cousin", "Other", "Unknown"],
+          "examples": "Mother",
+          "notes": "limit enumerated fields to values in seqr, and use the proband_relationship_detail for other options"
+        },
+        {
+          "column": "proband_relationship_detail",
+          "description": "Other proband relationship not captured in enumeration above",
+          "data_type": "string",
+          "examples": ["Third cousins, through mother's side", "Father's brother's nephew's cousin's former roommate"],
+          "notes": "keeping because not all relationships can be captured in proband_relationship (a way to describe 'other')"
+        },
+        {
+          "column": "sex",
+          "required": true,
+          "description": "Biological sex assigned at birth (aligned with All of Us). If individual has a known DSD / not expected sex chromosome karyotype, this can be noted in the phenotype information section.",
+          "data_type": "enumeration",
+          "enumerations": ["Female", "Male", "Unknown"]
+        },
+        {
+          "column": "sex_detail",
+          "description": "Optional free-text field to describe known discrepancies between 'sex' value (female=>XX, male=>XY) and actual sex chromosome karyotype",
+          "data_type": "string",
+          "examples": ["XXY expected", "XY expected [for someone assigned female at birth with XY DSD]"]
+        },
+        {
+          "column": "reported_race",
+          "description": "Self/submitter-reported race (OMB categories)",
+          "data_type": "enumeration",
+          "enumerations": ["American Indian or Alaska Native", "Asian", "Black or African American", "Native Hawaiian or Other Pacific Islander", "Middle Eastern or North African", "White", "Unknown"],
+          "multi_value_delimeter": "|"
+        },
+        {
+          "column": "reported_ethnicity",
+          "description": "Self/submitter-reported ethnicity (OMB categories)",
+          "data_type": "enumeration",
+          "enumerations": ["Hispanic or Latino", "Not Hispanic or Latino", "Unknown"]
+        },
+        {
+          "column": "ancestry_detail",
+          "description": "Additional specific ancestry description free text beyond what is captured by OMB race/ethnicity categories",
+          "data_type": "string",
+          "examples": ["Polish", "Amish", "Ashkenazi Jewish"]
+        },
+        {
+          "column": "age_at_last_observation",
+          "description": "Age at last observation, aka age in years at the last time the center can vouch for the accuracy phenotype data. For conditions with later age of onset, this field lets users know if individuals marked as unaffected were younger or older than the age when the phenotype is expected to appear.",
+          "data_type": "float",
+          "examples": ["21", "32"]
+        },
+        {
+          "column": "affected_status",
+          "description": "Indicate affected status of individual (overall with respect to primary phenotype in the family). Note: Affected participants must have entry in phenotype table.",
+          "data_type": "enumeration",
+          "enumerations": ["Affected", "Unaffected", "Possibly affected", "Unknown"],
+          "notes": "useful from a ped file point of view;\ngeneral agreement to keep; phenotype table captures details and this is an overall status"
+        },
+        {
+          "column": "phenotype_description",
+          "description": "human-readable 'Phenotypic one-line summary' for why this individual is of interest. Could be the same as the term_details value in the Phenotype table. Strongly encourage/required for proband.",
+          "data_type": "string",
+          "multi_value_delimeter": "|",
+          "examples": ["Missing one variant in gene XXX", "Distal arthrogryposis with stellate teeth"],
+          "notes": "For unaffected/relatives, can note 'parent of ...' or 'relative of ...'"
+        },
+        {
+          "column": "age_at_enrollment",
+          "description": "age in years at which consent was originally obtained",
+          "data_type": "float",
+          "examples": "42"
+        }
+      ]
+    },
+    {
+      "table": "family",
+      "required": true,
+      "columns": [
+        {
+          "column": "family_id",
+          "primary_key": true,
+          "required": true,
+          "description": "Identifier for family (primary key)",
+          "data_type": "string",
+          "examples": ["CNH-I_fam89052", "UW_CRDR_Family_2"],
+          "notes": "Needs to be Unique across centers, use participant.gregor_center as ID prefix."
+        },
+        {
+          "column": "consanguinity",
+          "required": true,
+          "description": "Indicate if consanguinity is present or suspected within a family",
+          "data_type": "enumeration",
+          "enumerations": ["None suspected", "Suspected", "Present", "Unknown"]
+        },
+        {
+          "column": "consanguinity_detail",
+          "description": "Free text description of any additional consanguinity details",
+          "data_type": "string",
+          "examples": "Parents are second cousins once removed"
+        },
+        {
+          "column": "pedigree_file",
+          "description": "name of file (renamed from pedigree_image because it can contain a PED file or image)",
+          "data_type": "string",
+          "examples": ["FamilyID_CMG_Site_PhsID_ConsentGroup_YYYYMMDD_YXQX.pdf", "FamilyID_CMG_Site_PhsID_ConsentGroup_YYYYMMDD_YXQX.ped"],
+          "notes": "pedeigree file should be deposited to upload workspace"
+        },
+        {
+          "column": "pedigree_file_detail",
+          "description": "Free text description of other family structure/pedigree file caption or legend.",
+          "data_type": "string",
+          "examples": "Additional informative family members not sequenced. Sequenced individuals indicated with sample_ID.",
+          "notes": "clarifying purpose: sometimes no PED file is available and the effort involved to encode a full pedigree is high when an image is already available (i.e. legacy publication describing the family)"
+        },
+        {
+          "column": "family_history_detail",
+          "description": "Details about family history that do not fit into structured fields. Family relationship terms should be relative to the proband.",
+          "data_type": "string",
+          "notes": "useful if extended family history suggestive of mode of inheritance"
+        }
+      ]
+    },
+    {
+      "table": "phenotype",
+      "required": true,
+      "columns": [
+        {
+          "column": "phenotype_id",
+          "primary_key": true,
+          "description": "primary key",
+          "data_type": "string",
+          "references": "from: participant_id, term_id",
+          "notes": "This ID generated when loading into AnVIL data table and is not included in the uploaded .tsv file"
+        },
+        {
+          "column": "participant_id",
+          "required": true,
+          "description": "Subject/Participant Identifier",
+          "data_type": "string",
+          "references": "> participant.participant_id",
+          "examples": ["BCM_Subject_1", "BROAD_subj89054"]
+        },
+        {
+          "column": "term_id",
+          "required": true,
+          "data_type": "string",
+          "examples": ["HP:0001627", "MONDO:0003847"]
+        },
+        {
+          "column": "presence",
+          "required": true,
+          "data_type": "enumeration",
+          "enumerations": ["Present", "Absent", "Unknown"]
+        },
+        {
+          "column": "ontology",
+          "required": true,
+          "data_type": "enumeration",
+          "enumerations": ["HPO", "MONDO", "OMIM", "ORPHANET", "SNOMED", "ICD10"],
+          "notes": "HPO (requirement that phenotype must be described in HPO)\nMONDO (optional)\nOMIM (opt)\nORPHANET (opt)\nSNOMED (opt)\nICD10 (opt)"
+        },
+        {
+          "column": "additional_details",
+          "description": "modifier of a term where the additional details are not supported/available as a term in HPO",
+          "data_type": "string",
+          "examples": "intellectual disability, no IQ test but 3rd grade reading level at 15 years old"
+        },
+        {
+          "column": "onset_age_range",
+          "data_type": "enumeration",
+          "enumerations": ["HP:0003581", "HP:0030674", "HP:0011463", "HP:0003577", "HP:0025708", "HP:0011460", "HP:0011461", "HP:0003593", "HP:0025709", "HP:0003621", "HP:0034199", "HP:0003584", "HP:0025710", "HP:0003596", "HP:0003623", "HP:0410280", "HP:4000040", "HP:0034198", "HP:0034197", "HP:0011462"],
+          "notes": "values are subterm of 'Onset' HP:0003674 - specifically,\nHP:0003581 | Adult onset\nHP:0030674 | Antenatal onset\nHP:0011463 | Childhood onset\nHP:0003577 | Congenital onset\nHP:0025708 | Early young adult onset\nHP:0011460 | Embryonal onset\nHP:0011461 | Fetal onset\nHP:0003593 | Infantile onset\nHP:0025709 | Intermediate young adult onset\nHP:0003621 | Juvenile onset\nHP:0034199 | Late first trimester onset\nHP:0003584 | Late onset\nHP:0025710 | Late young adult onset\nHP:0003596 | Middle age onset\nHP:0003623 | Neonatal onset\nHP:0410280 | Pediatric onset\nHP:4000040 | Puerpural onset\nHP:0034198 | Second trimester onset\nHP:0034197 | Third trimester onset\nHP:0011462 | Young adult onset"
+        },
+        {
+          "column": "additional_modifiers",
+          "data_type": "enumeration",
+          "enumerations": ["HP:0025292", "HP:0011009", "HP:0025308", "HP:0025307", "HP:0025306", "HP:0003581", "HP:0011420", "HP:0003831", "HP:0025285", "HP:0032525", "HP:0025286", "HP:0025254", "HP:0032526", "HP:0025257", "HP:0032503", "HP:0025256", "HP:0032522", "HP:0025255", "HP:0030674", "HP:0033820", "HP:4000052", "HP:0025287", "HP:0012832", "HP:0012827", "HP:0033815", "HP:0030645", "HP:0033816", "HP:0032535", "HP:0011463", "HP:0011010", "HP:0031797", "HP:0045088", "HP:4000051", "HP:4000048", "HP:4000047", "HP:0003577", "HP:0011421", "HP:0033763", "HP:0003819", "HP:0100613", "HP:0001522", "HP:0033765", "HP:0033764", "HP:0025294", "HP:0020034", "HP:4000053", "HP:0012839", "HP:0045089", "HP:0025293", "HP:0025302", "HP:0025282", "HP:0025708", "HP:0011460", "HP:0025303", "HP:0032365", "HP:0032502", "HP:0032501", "HP:0025315", "HP:0032534", "HP:0032542", "HP:0032500", "HP:0011461", "HP:0031914", "HP:0030650", "HP:4000042", "HP:0012837", "HP:4000043", "HP:0025295", "HP:0003829", "HP:0003593", "HP:0003587", "HP:0025709", "HP:0032539", "HP:0032540", "HP:0003621", "HP:0034199", "HP:0003584", "HP:0025710", "HP:0025275", "HP:0012831", "HP:0012835", "HP:0012838", "HP:0025291", "HP:0003596", "HP:0030648", "HP:0025279", "HP:0012825", "HP:0033817", "HP:0045090", "HP:0005268", "HP:0012826", "HP:0025296", "HP:0040006", "HP:0030651", "HP:0003811", "HP:0003623", "HP:0025301", "HP:0003680", "HP:4000046", "HP:0003674", "HP:4000050", "HP:0003679", "HP:0025280", "HP:0030647", "HP:0033814", "HP:0410280", "HP:0030649", "HP:0033813", "HP:0033819", "HP:0025304", "HP:0030646", "HP:0003812", "HP:0031450", "HP:0012830", "HP:0032544", "HP:0034241", "HP:0012829", "HP:0003676", "HP:0025297", "HP:0012840", "HP:4000040", "HP:0025305", "HP:0003678", "HP:0031796", "HP:0031375", "HP:0033818", "HP:0012834", "HP:0034198", "HP:4000049", "HP:0033349", "HP:0012828", "HP:0012824", "HP:0025281", "HP:0025284", "HP:0003677", "HP:0012836", "HP:4000045", "HP:0031915", "HP:0003826", "HP:0011011", "HP:0011008", "HP:0025283", "HP:0034197", "HP:0025153", "HP:4000044", "HP:0025204", "HP:0033185", "HP:0033032", "HP:0500261", "HP:0025205", "HP:0025208", "HP:0033789", "HP:0025206", "HP:0025207", "HP:0025334", "HP:0025211", "HP:0025227", "HP:0025377", "HP:0025212", "HP:0034060", "HP:0025215", "HP:0033793", "HP:0025209", "HP:0025213", "HP:0025210", "HP:0500260", "HP:0025214", "HP:0025216", "HP:0025217", "HP:0025218", "HP:0033184", "HP:0031167", "HP:0025220", "HP:0034195", "HP:0031135", "HP:0025221", "HP:0025222", "HP:0025223", "HP:0025224", "HP:0025225", "HP:0025226", "HP:0025228", "HP:0025219", "HP:0025229", "HP:0033198", "HP:0012833", "HP:0025290", "HP:0003828", "HP:0003682", "HP:0410401", "HP:0011462", "MONDO:0021125", "MONDO:0021135", "MONDO:0021139", "MONDO:0021149", "MONDO:0045034", "MONDO:0045040", "MONDO:0100355", "MONDO:0700004", "MONDO:0100369", "MONDO:0700061", "MONDO:0024488", "MONDO:0021126", "MONDO:0021136", "MONDO:0021137", "MONDO:0021140", "MONDO:0021141", "MONDO:0021151", "MONDO:0021152", "MONDO:0045036", "MONDO:0045035", "MONDO:0022202", "MONDO:0045042", "MONDO:0100356", "MONDO:0100357", "MONDO:0700005", "MONDO:0700006", "MONDO:0100427", "MONDO:0100426", "MONDO:0700063", "MONDO:0700062", "MONDO:0024489", "MONDO:0021128", "MONDO:0021127", "MONDO:0024497", "MONDO:0024495", "MONDO:0024490", "MONDO:0024496"],
+          "multi_value_delimeter": "|",
+          "notes": "this field should use the same ontology as above (e.g. Mondo disease characteristic if using mondo). \nIt should be a | delimited list of valid HPO IDs that are subordinate to HP:0012823 (clinical modifier) (For HPO terms) or a\n| delimited list of valid MONDO IDs that are subordinate to MONDO_0021125 (disease characteristic) (For MONDO terms)"
+        }
+      ]
+    },
+    {
+      "table": "analyte",
+      "required": true,
+      "columns": [
+        {
+          "column": "analyte_id",
+          "primary_key": true,
+          "required": true,
+          "description": "identifier for an analyte from a primary biosample source (primary key)",
+          "data_type": "string",
+          "examples": ["Broad_COL_FAM1_1_D1", "Broad_COL_FAM1_1_R1", "GSS_201938-01-021"],
+          "notes": "ID is at level of analyte\nStanford example: SubjectID-TubetypeCode-TissueCode"
+        },
+        {
+          "column": "participant_id",
+          "required": true,
+          "data_type": "string",
+          "references": "> participant.participant_id"
+        },
+        {
+          "column": "analyte_type",
+          "required": true,
+          "description": "analyte derived from the primary_biosample. The actual thing you're sticking into a machine to analyze/sequence",
+          "data_type": "enumeration",
+          "enumerations": ["DNA", "RNA", "blood plasma", "frozen whole blood", "high molecular weight DNA", "urine"],
+          "examples": ["DNA", "RNA", "blood plasma", "frozen whole blood", "high molecular weight DNA", "urine"]
+        },
+        {
+          "column": "analyte_processing_details",
+          "description": "details about how the analyte or original biosample was extracted or processed",
+          "data_type": "string",
+          "examples": "PAX extraction protocol",
+          "notes": "Regarding PMBC isolations from CPT tubes;  Isolations of PBMCs should be done on wet ice following the protocol.  Use only chilled cell freezing media.   Isolated PBMCs in freezing media"
+        },
+        {
+          "column": "primary_biosample",
+          "required": true,
+          "description": "Tissue type of biosample taken from the participant that the analyte was extracted or processed from (for unknown can use tissue - UBERON:0000479), e.g. skin, liver, brain",
+          "data_type": "enumeration",
+          "enumerations": ["UBERON:0000479", "UBERON:0003714", "UBERON:0001836", "UBERON:0001003", "UBERON:0002385", "UBERON:0000178", "UBERON:0002371", "UBERON:0006956", "UBERON:0001359", "UBERON:0001088", "UBERON:0019306"],
+          "examples": "UBERON:0000178",
+          "notes": "Contact the GREGoR Data Standards WG to expanded the list of allowable UBERON codes. Currently allowed values are:\nUBERON:0000479 (tissue) \nUBERON:0003714 (neural tissue) \nUBERON:0001836 (saliva) \nUBERON:0001003 (skin epidermis) \nUBERON:0002385 (muscle tissue) \nUBERON:0000178 (whole blood) \nUBERON:0002371 (bone marrow) \nUBERON:0006956 (buccal mucosa)\nUBERON:0001359 (cerebrospinal fluid)\nUBERON:0001088 (urine)\nUBERON:0019306 (nose epithelium)"
+        },
+        {
+          "column": "primary_biosample_id",
+          "description": "Optional ID for the biosample; allows for linking of multiple analytes extracted or processed from the same biosample",
+          "data_type": "string"
+        },
+        {
+          "column": "primary_biosample_details",
+          "description": "Free text to capture information not in structured fields",
+          "data_type": "string",
+          "examples": "\"Biopsy of birthmark\""
+        },
+        {
+          "column": "tissue_affected_status",
+          "description": "If applicable to disease (suspected mosaic), is the tissue from an affected source or an unaffected source?",
+          "data_type": "enumeration",
+          "enumerations": ["Yes", "No"]
+        },
+        {
+          "column": "age_at_collection",
+          "description": "age or participant in years at biosample collection",
+          "data_type": "float",
+          "notes": "ages >89 are considered PHI."
+        },
+        {
+          "column": "participant_drugs_intake",
+          "description": "The list of drugs patient is on, at the time of sample collection. This information is helpful during analysis of metabolomics and immune asssays. Free Text",
+          "data_type": "string",
+          "notes": "this is relevant when analyzing metabolomics data"
+        },
+        {
+          "column": "participant_special_diet",
+          "description": "If the patient was fasting, when the sample was collected. this is relevant when analyzing metabolomics data. Free Text",
+          "data_type": "string",
+          "examples": ["ketogenic", "gluten-free"]
+        },
+        {
+          "column": "hours_since_last_meal",
+          "description": "his is relevant when analyzing metabolomics data",
+          "data_type": "float",
+          "notes": "this is relevant when analyzing metabolomics data"
+        },
+        {
+          "column": "passage_number",
+          "description": "passage_number is relevant for fibroblast cultures and possibly iPSC.",
+          "data_type": "integer"
+        },
+        {
+          "column": "time_to_freeze",
+          "description": "time (in hours) from collection to freezing the sample. delayed freeze turns out to be useful / important info for PaxGene blood (for RNA isolation).",
+          "data_type": "float",
+          "notes": "Regarding PaxGene blood processing for RNA:   Strict adherence following blood draw; ie minimum 2hrs at Room Temp, longer may be better including overnight incubations.   Post thaw samples to Room Temp and allow another 2 hrs incubate prior to processing.   All in accord with the PaxGene RNA blood isolation manual."
+        },
+        {
+          "column": "sample_transformation_detail",
+          "description": "details regarding sample transformation",
+          "data_type": "string",
+          "notes": "If sample was transformed"
+        }
+      ]
+    },
+    {
+      "table": "experiment_dna_short_read",
+      "columns": [
+        {
+          "column": "experiment_dna_short_read_id",
+          "primary_key": true,
+          "required": true,
+          "description": "identifier for experiment_short_read (primary key)",
+          "data_type": "string",
+          "examples": ["Broad_E1", "Broad_E2", "GSS201938-01-021-SG-1"],
+          "notes": "RCs make their own IDs, must begin with center abbreviation as defined in participant table; need to be globally unique in consortium; may be generated by prepending experiment_sample_id with center abbreviation"
+        },
+        {
+          "column": "analyte_id",
+          "required": true,
+          "data_type": "string",
+          "references": "> analyte.analyte_id"
+        },
+        {
+          "column": "experiment_sample_id",
+          "description": "identifier used in the data file (e.g. VCF header / LIMS ID)",
+          "data_type": "string",
+          "examples": "12339D-SA",
+          "notes": "may be the same as experiment_short_read_id if the file does contain sample identifiers\nshould be present if downstream file contains a sample_id (e.g. BAM, VCF)\nsome centers have one id for the sample (tube) and a diff ID for the sample as named in the VCF; experiment_sample_id = ID in the VCF file; analyte_id = ID for the tube/aliquot/whatever"
+        },
+        {
+          "column": "seq_library_prep_kit_method",
+          "description": "Library prep kit used",
+          "data_type": "string",
+          "examples": ["Kappa Hyper PCR plus ", "Kappa Hyper PCR free"],
+          "notes": "Can be missing if RC receives external data"
+        },
+        {
+          "column": "read_length",
+          "description": "sequenced read length (bp); GREGoR RCs do paired end sequencing, so is the example of 100bp indicates 2x100bp.",
+          "data_type": "integer",
+          "examples": "100",
+          "notes": "Can be missing if RC receives external data; all RCs are doing paired-end reads."
+        },
+        {
+          "column": "experiment_type",
+          "required": true,
+          "data_type": "enumeration",
+          "enumerations": ["targeted", "genome", "exome"],
+          "examples": "targeted",
+          "notes": "facilitates having exome and GS-SR experiments in the same experiment_details table"
+        },
+        {
+          "column": "targeted_regions_method",
+          "description": "Which capture kit is used. Can be missing if RC receives external data",
+          "data_type": "string",
+          "examples": "NimbleGen SeqCap EZ Human Exome Library v2.0"
+        },
+        {
+          "column": "targeted_region_bed_file",
+          "description": "name and path of bed file uploaded to workspace",
+          "data_type": "string",
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/SR_experiment.bed",
+          "notes": "Can be missing if RC receives external data"
+        },
+        {
+          "column": "date_data_generation",
+          "description": "Date of data generation (First sequencing date)",
+          "data_type": "date",
+          "examples": "2022-06-29",
+          "notes": "Can be missing if RC receives external data; ISO 8601 date format"
+        },
+        {
+          "column": "target_insert_size",
+          "description": "insert size the protocol targets for DNA fragments",
+          "data_type": "integer",
+          "examples": "500",
+          "notes": "Can be missing if RC receives external data"
+        },
+        {
+          "column": "sequencing_platform",
+          "description": "sequencing platform used for the experiment",
+          "data_type": "string",
+          "examples": ["HiSeq2000", "HiSeq2500", "HiSeqX", "NovaSeq"],
+          "notes": "Can be missing if RC receives external data"
+        }
+      ]
+    },
+    {
+      "table": "aligned_dna_short_read",
+      "columns": [
+        {
+          "column": "aligned_dna_short_read_id",
+          "primary_key": true,
+          "required": true,
+          "description": "identifier for aligned_short_read (primary key)",
+          "data_type": "string",
+          "examples": "BCM_H7YG5DSX2-3-IDUDI0014-1",
+          "notes": "experiment_short_read_id + alignment indicator"
+        },
+        {
+          "column": "experiment_dna_short_read_id",
+          "required": true,
+          "description": "identifier for experiment",
+          "data_type": "string",
+          "references": "> experiment_dna_short_read.experiment_dna_short_read_id"
+        },
+        {
+          "column": "aligned_dna_short_read_file",
+          "required": true,
+          "description": "name and path of file with aligned reads",
+          "data_type": "string",
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.cram"
+        },
+        {
+          "column": "aligned_dna_short_read_index_file",
+          "required": true,
+          "description": "name and path of index file corresponding to aligned reads file",
+          "data_type": "string",
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.crai"
+        },
+        {
+          "column": "md5sum",
+          "required": true,
+          "description": "md5 checksum for file",
+          "data_type": "string",
+          "examples": "129c28163df082"
+        },
+        {
+          "column": "reference_assembly",
+          "required": true,
+          "data_type": "enumeration",
+          "enumerations": ["GRCh38", "GRCh37", "NCBI36", "NCBI35", "NCBI34"],
+          "examples": "GRCh38"
+        },
+        {
+          "column": "alignment_software",
+          "required": true,
+          "description": "Software including version number",
+          "data_type": "string",
+          "examples": "BWA-MEM-2.3",
+          "notes": "Can be unknown if RC receives external data"
+        },
+        {
+          "column": "mean_coverage",
+          "description": "Mean coverage of either the genome or the targeted regions",
+          "data_type": "float",
+          "examples": "100",
+          "notes": "Can be unknown if RC receives external data"
+        },
+        {
+          "column": "analysis_details",
+          "description": "brief description of the analysis pipeline used for producing the file; perhaps a DOI or link to something like a WDL file or github repository",
+          "data_type": "string",
+          "examples": "DOI:10.5281/zenodo.4469317"
+        }
+      ]
+    },
+    {
+      "table": "aligned_dna_short_read_set",
+      "columns": [
+        {
+          "column": "aligned_dna_short_read_set_id",
+          "primary_key": true,
+          "required": true,
+          "description": "identifier for a set of experiments (primary key)",
+          "data_type": "string",
+          "notes": "RCs make their own IDs (these must begin with center-specific prefix). \naligned_dna_short_read_set_id links the aligned_dna_short_read table to the called_variants_dna_short_read table. For centers that are only uploading single sample files, the aligned_short_read_set_id and aligned_short_read_id values can be identical. For centers uploading multi-sample files, they will need to come up with a value for aligned_short_read_set_id that makes sense to them for indicating the sample group for a multi-sample callset, and use that same value in called_variants_short_read."
+        },
+        {
+          "column": "aligned_dna_short_read_id",
+          "required": true,
+          "data_type": "string",
+          "references": "> aligned_dna_short_read.aligned_dna_short_read_id",
+          "notes": "the identifier for a single-sample aligned_dna_short_read included in the read_set (one per row)"
+        }
+      ]
+    },
+    {
+      "table": "called_variants_dna_short_read",
+      "columns": [
+        {
+          "column": "called_variants_dna_short_read_id",
+          "primary_key": true,
+          "description": "unique key for table (anvil requirement)",
+          "data_type": "string",
+          "references": "from:md5sum"
+        },
+        {
+          "column": "aligned_dna_short_read_set_id",
+          "required": true,
+          "description": "identifier for experiment set",
+          "data_type": "string",
+          "references": "> aligned_dna_short_read_set.aligned_dna_short_read_set_id"
+        },
+        {
+          "column": "called_variants_dna_file",
+          "required": true,
+          "description": "name and path of the file with variant calls",
+          "data_type": "string",
+          "examples": ["gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.SV.vcf", "gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.SNV.gvcf", "gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.EH.vcf"]
+        },
+        {
+          "column": "md5sum",
+          "required": true,
+          "description": "md5 checksum for file",
+          "data_type": "string",
+          "examples": "129c28163df082",
+          "notes": "md5sum computed prior to upload (used to verify file integrity)"
+        },
+        {
+          "column": "caller_software",
+          "required": true,
+          "description": "variant calling software used including version number",
+          "data_type": "string",
+          "multi_value_delimeter": "|",
+          "examples": ["gatk4.1.2", "expansionhunter-denovo-0.2b", "manta-3.1"]
+        },
+        {
+          "column": "variant_types",
+          "required": true,
+          "description": "types of variants called",
+          "data_type": "string",
+          "enumerations": ["SNV", "INDEL", "SV", "CNV", "RE", "MEI"],
+          "multi_value_delimeter": "|",
+          "examples": ["RE = Repeat Expansion", "MEI = Mobile Element Insertion"],
+          "notes": "can add more values as the need arises\nif there are two VCFs for SNV and Indels, there would be two different lines in this table; if combined in one VCF, a |-delimited entry"
+        },
+        {
+          "column": "analysis_details",
+          "description": "brief description of the analysis pipeline used for producing the file; perhaps a link to something like a WDL file or github repository",
+          "data_type": "string"
+        }
+      ]
+    }
+  ]
+}
