@@ -41,7 +41,7 @@ for (i in 1:length(tables)) {
                data_type = `Data Type`, 
                references = References, 
                enumerations = Enumerations, 
-               multi_value_delimeter = `Multi-value delimeter`,
+               multi_value_delimiter = `Multi-value delimiter`,
                examples = `Example Value`, 
                notes) %>%
         mutate(description=gsub('"', "'", description),

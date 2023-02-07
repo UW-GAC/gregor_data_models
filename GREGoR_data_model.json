@@ -20,7 +20,7 @@
           "column": "internal_project_id",
           "description": "An identifier used by GREGoR research centers to identify a set of participants for their internal tracking",
           "data_type": "string",
-          "multi_value_delimeter": "|",
+          "multi_value_delimiter": "|",
           "examples": ["UWCDR_uwcmg_distal_arthrogryposis_type 1_212", "UWCDR_uwcmg_sponastrime_dysplasia_487"]
         },
         {
@@ -48,14 +48,14 @@
           "column": "prior_testing",
           "description": "Text description of any genetic testing for individual conducted prior to enrollment",
           "data_type": "string",
-          "multi_value_delimeter": "|",
+          "multi_value_delimiter": "|",
           "examples": "Normal karyotype | FBN2 screened clinically"
         },
         {
           "column": "pmid_id",
           "description": "Case specific PubMed ID if applicable",
           "data_type": "string",
-          "multi_value_delimeter": "|",
+          "multi_value_delimiter": "|",
           "examples": "25683120",
           "notes": "Publication which included participant;  Used for publications which include participant known prior to or after inclusion in GREGoR"
         },
@@ -87,7 +87,7 @@
           "column": "twin_id",
           "description": "participant_id for twins, triplets, etc; 0 if not available",
           "data_type": "string",
-          "multi_value_delimeter": "|",
+          "multi_value_delimiter": "|",
           "examples": ["BCM_Subject_1", "BROAD_subj89054", "BROAD_subj89054|BROAD_subj89055"],
           "notes": "may be monozygotic, dizygotic, or polyzygotic"
         },
@@ -125,7 +125,7 @@
           "description": "Self/submitter-reported race (OMB categories)",
           "data_type": "enumeration",
           "enumerations": ["American Indian or Alaska Native", "Asian", "Black or African American", "Native Hawaiian or Other Pacific Islander", "Middle Eastern or North African", "White", "Unknown"],
-          "multi_value_delimeter": "|"
+          "multi_value_delimiter": "|"
         },
         {
           "column": "reported_ethnicity",
@@ -156,7 +156,7 @@
           "column": "phenotype_description",
           "description": "human-readable 'Phenotypic one-line summary' for why this individual is of interest. Could be the same as the term_details value in the Phenotype table. Strongly encourage/required for proband.",
           "data_type": "string",
-          "multi_value_delimeter": "|",
+          "multi_value_delimiter": "|",
           "examples": ["Missing one variant in gene XXX", "Distal arthrogryposis with stellate teeth"],
           "notes": "For unaffected/relatives, can note 'parent of ...' or 'relative of ...'"
         },
@@ -198,8 +198,8 @@
           "column": "pedigree_file",
           "description": "name of file (renamed from pedigree_image because it can contain a PED file or image)",
           "data_type": "string",
-          "examples": ["FamilyID_CMG_Site_PhsID_ConsentGroup_YYYYMMDD_YXQX.pdf", "FamilyID_CMG_Site_PhsID_ConsentGroup_YYYYMMDD_YXQX.ped"],
-          "notes": "pedeigree file should be deposited to upload workspace"
+          "examples": ["gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/FamilyID_CMG_Site_PhsID_ConsentGroup_YYYYMMDD_YXQX.pdf", "or", "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/FamilyID_CMG_Site_PhsID_ConsentGroup_YYYYMMDD_YXQX.ped"],
+          "notes": "full path to the pedeigree file, which should be deposited to upload workspace"
         },
         {
           "column": "pedigree_file_detail",
@@ -271,7 +271,7 @@
           "column": "additional_modifiers",
           "data_type": "enumeration",
           "enumerations": ["HP:0025292", "HP:0011009", "HP:0025308", "HP:0025307", "HP:0025306", "HP:0003581", "HP:0011420", "HP:0003831", "HP:0025285", "HP:0032525", "HP:0025286", "HP:0025254", "HP:0032526", "HP:0025257", "HP:0032503", "HP:0025256", "HP:0032522", "HP:0025255", "HP:0030674", "HP:0033820", "HP:4000052", "HP:0025287", "HP:0012832", "HP:0012827", "HP:0033815", "HP:0030645", "HP:0033816", "HP:0032535", "HP:0011463", "HP:0011010", "HP:0031797", "HP:0045088", "HP:4000051", "HP:4000048", "HP:4000047", "HP:0003577", "HP:0011421", "HP:0033763", "HP:0003819", "HP:0100613", "HP:0001522", "HP:0033765", "HP:0033764", "HP:0025294", "HP:0020034", "HP:4000053", "HP:0012839", "HP:0045089", "HP:0025293", "HP:0025302", "HP:0025282", "HP:0025708", "HP:0011460", "HP:0025303", "HP:0032365", "HP:0032502", "HP:0032501", "HP:0025315", "HP:0032534", "HP:0032542", "HP:0032500", "HP:0011461", "HP:0031914", "HP:0030650", "HP:4000042", "HP:0012837", "HP:4000043", "HP:0025295", "HP:0003829", "HP:0003593", "HP:0003587", "HP:0025709", "HP:0032539", "HP:0032540", "HP:0003621", "HP:0034199", "HP:0003584", "HP:0025710", "HP:0025275", "HP:0012831", "HP:0012835", "HP:0012838", "HP:0025291", "HP:0003596", "HP:0030648", "HP:0025279", "HP:0012825", "HP:0033817", "HP:0045090", "HP:0005268", "HP:0012826", "HP:0025296", "HP:0040006", "HP:0030651", "HP:0003811", "HP:0003623", "HP:0025301", "HP:0003680", "HP:4000046", "HP:0003674", "HP:4000050", "HP:0003679", "HP:0025280", "HP:0030647", "HP:0033814", "HP:0410280", "HP:0030649", "HP:0033813", "HP:0033819", "HP:0025304", "HP:0030646", "HP:0003812", "HP:0031450", "HP:0012830", "HP:0032544", "HP:0034241", "HP:0012829", "HP:0003676", "HP:0025297", "HP:0012840", "HP:4000040", "HP:0025305", "HP:0003678", "HP:0031796", "HP:0031375", "HP:0033818", "HP:0012834", "HP:0034198", "HP:4000049", "HP:0033349", "HP:0012828", "HP:0012824", "HP:0025281", "HP:0025284", "HP:0003677", "HP:0012836", "HP:4000045", "HP:0031915", "HP:0003826", "HP:0011011", "HP:0011008", "HP:0025283", "HP:0034197", "HP:0025153", "HP:4000044", "HP:0025204", "HP:0033185", "HP:0033032", "HP:0500261", "HP:0025205", "HP:0025208", "HP:0033789", "HP:0025206", "HP:0025207", "HP:0025334", "HP:0025211", "HP:0025227", "HP:0025377", "HP:0025212", "HP:0034060", "HP:0025215", "HP:0033793", "HP:0025209", "HP:0025213", "HP:0025210", "HP:0500260", "HP:0025214", "HP:0025216", "HP:0025217", "HP:0025218", "HP:0033184", "HP:0031167", "HP:0025220", "HP:0034195", "HP:0031135", "HP:0025221", "HP:0025222", "HP:0025223", "HP:0025224", "HP:0025225", "HP:0025226", "HP:0025228", "HP:0025219", "HP:0025229", "HP:0033198", "HP:0012833", "HP:0025290", "HP:0003828", "HP:0003682", "HP:0410401", "HP:0011462", "MONDO:0021125", "MONDO:0021135", "MONDO:0021139", "MONDO:0021149", "MONDO:0045034", "MONDO:0045040", "MONDO:0100355", "MONDO:0700004", "MONDO:0100369", "MONDO:0700061", "MONDO:0024488", "MONDO:0021126", "MONDO:0021136", "MONDO:0021137", "MONDO:0021140", "MONDO:0021141", "MONDO:0021151", "MONDO:0021152", "MONDO:0045036", "MONDO:0045035", "MONDO:0022202", "MONDO:0045042", "MONDO:0100356", "MONDO:0100357", "MONDO:0700005", "MONDO:0700006", "MONDO:0100427", "MONDO:0100426", "MONDO:0700063", "MONDO:0700062", "MONDO:0024489", "MONDO:0021128", "MONDO:0021127", "MONDO:0024497", "MONDO:0024495", "MONDO:0024490", "MONDO:0024496"],
-          "multi_value_delimeter": "|",
+          "multi_value_delimiter": "|",
           "notes": "this field should use the same ontology as above (e.g. Mondo disease characteristic if using mondo). \nIt should be a | delimited list of valid HPO IDs that are subordinate to HP:0012823 (clinical modifier) (For HPO terms) or a\n| delimited list of valid MONDO IDs that are subordinate to MONDO_0021125 (disease characteristic) (For MONDO terms)"
         }
       ]
@@ -386,7 +386,7 @@
           "column": "experiment_dna_short_read_id",
           "primary_key": true,
           "required": true,
-          "description": "identifier for experiment_short_read (primary key)",
+          "description": "identifier for experiment_dna_short_read (primary key)",
           "data_type": "string",
           "examples": ["Broad_E1", "Broad_E2", "GSS201938-01-021-SG-1"],
           "notes": "RCs make their own IDs, must begin with center abbreviation as defined in participant table; need to be globally unique in consortium; may be generated by prepending experiment_sample_id with center abbreviation"
@@ -472,7 +472,7 @@
           "description": "identifier for aligned_short_read (primary key)",
           "data_type": "string",
           "examples": "BCM_H7YG5DSX2-3-IDUDI0014-1",
-          "notes": "experiment_short_read_id + alignment indicator"
+          "notes": "experiment_dna_short_read_id + alignment indicator"
         },
         {
           "column": "experiment_dna_short_read_id",
@@ -498,7 +498,7 @@
         {
           "column": "md5sum",
           "required": true,
-          "description": "md5 checksum for file",
+          "description": "md5 checksum for aligned_dna_short_read_file file",
           "data_type": "string",
           "examples": "129c28163df082"
         },
@@ -589,7 +589,7 @@
           "required": true,
           "description": "variant calling software used including version number",
           "data_type": "string",
-          "multi_value_delimeter": "|",
+          "multi_value_delimiter": "|",
           "examples": ["gatk4.1.2", "expansionhunter-denovo-0.2b", "manta-3.1"]
         },
         {
@@ -598,7 +598,7 @@
           "description": "types of variants called",
           "data_type": "string",
           "enumerations": ["SNV", "INDEL", "SV", "CNV", "RE", "MEI"],
-          "multi_value_delimeter": "|",
+          "multi_value_delimiter": "|",
           "examples": ["RE = Repeat Expansion", "MEI = Mobile Element Insertion"],
           "notes": "can add more values as the need arises\nif there are two VCFs for SNV and Indels, there would be two different lines in this table; if combined in one VCF, a |-delimited entry"
         },
