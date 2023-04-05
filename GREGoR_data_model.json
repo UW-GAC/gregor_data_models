@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1",
+  "version": "1.1",
   "tables": [
     {
       "table": "participant",
@@ -198,8 +198,8 @@
           "column": "pedigree_file",
           "description": "name of file (renamed from pedigree_image because it can contain a PED file or image)",
           "data_type": "string",
-          "examples": ["gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/FamilyID_CMG_Site_PhsID_ConsentGroup_YYYYMMDD_YXQX.pdf", "or", "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/FamilyID_CMG_Site_PhsID_ConsentGroup_YYYYMMDD_YXQX.ped"],
-          "notes": "full path to the pedeigree file, which should be deposited to upload workspace"
+          "examples": ["FamilyID_CMG_Site_PhsID_ConsentGroup_YYYYMMDD_YXQX.pdf", "FamilyID_CMG_Site_PhsID_ConsentGroup_YYYYMMDD_YXQX.ped"],
+          "notes": "pedigree file should be deposited to upload workspace"
         },
         {
           "column": "pedigree_file_detail",
@@ -225,7 +225,7 @@
           "primary_key": true,
           "description": "primary key",
           "data_type": "string",
-          "references": "from: participant_id, term_id",
+          "references": "from: participant_id, term_id, presence",
           "notes": "This ID generated when loading into AnVIL data table and is not included in the uploaded .tsv file"
         },
         {
@@ -307,7 +307,7 @@
           "column": "analyte_processing_details",
           "description": "details about how the analyte or original biosample was extracted or processed",
           "data_type": "string",
-          "examples": "PAX extraction protocol",
+          "examples": ["PAX extraction protocol,", "CHX treatment,  ", "globin depletion, etc."],
           "notes": "Regarding PMBC isolations from CPT tubes;  Isolations of PBMCs should be done on wet ice following the protocol.  Use only chilled cell freezing media.   Isolated PBMCs in freezing media"
         },
         {
@@ -315,9 +315,9 @@
           "required": true,
           "description": "Tissue type of biosample taken from the participant that the analyte was extracted or processed from (for unknown can use tissue - UBERON:0000479), e.g. skin, liver, brain",
           "data_type": "enumeration",
-          "enumerations": ["UBERON:0000479", "UBERON:0003714", "UBERON:0001836", "UBERON:0001003", "UBERON:0002385", "UBERON:0000178", "UBERON:0002371", "UBERON:0006956", "UBERON:0001359", "UBERON:0001088", "UBERON:0019306"],
+          "enumerations": ["UBERON:0000479", "UBERON:0003714", "UBERON:0001836", "UBERON:0001003", "UBERON:0002385", "UBERON:0000178", "UBERON:0002371", "UBERON:0006956", "UBERON:0001359", "UBERON:0001088", "UBERON:0019306", "CL: 0000034", "CL: 0000576", "CL: 0000542", "CL: 0000057", "UBERON: 0005291", "CL: 0011020", "UBERON: 0002037", "UBERON: 0001133"],
           "examples": "UBERON:0000178",
-          "notes": "Contact the GREGoR Data Standards WG to expanded the list of allowable UBERON codes. Currently allowed values are:\nUBERON:0000479 (tissue) \nUBERON:0003714 (neural tissue) \nUBERON:0001836 (saliva) \nUBERON:0001003 (skin epidermis) \nUBERON:0002385 (muscle tissue) \nUBERON:0000178 (whole blood) \nUBERON:0002371 (bone marrow) \nUBERON:0006956 (buccal mucosa)\nUBERON:0001359 (cerebrospinal fluid)\nUBERON:0001088 (urine)\nUBERON:0019306 (nose epithelium)"
+          "notes": "Contact the GREGoR Data Standards WG to expand the list of allowable UBERON codes. Currently allowed values are:\nUBERON:0000479 (tissue) \nUBERON:0003714 (neural tissue) \nUBERON:0001836 (saliva) \nUBERON:0001003 (skin epidermis) \nUBERON:0002385 (muscle tissue) \nUBERON:0000178 (whole blood) \nUBERON:0002371 (bone marrow) \nUBERON:0006956 (buccal mucosa)\nUBERON:0001359 (cerebrospinal fluid)\nUBERON:0001088 (urine)\nUBERON:0019306 (nose epithelium)\nCL: 0000034 (iPSC)\nCL: 0000576 (monocytes - PBMCs)\nCL: 0000542 (lymphocytes - LCLs)\nCL: 0000057 (fibroblasts)\nUBERON: 0005291 (embryonic tissue)\nCL: 0011020 (iPSC NPC)\nUBERON: 0002037 (cerebellum tissue)\nUBERON: 0001133 (cardiac tissue)"
         },
         {
           "column": "primary_biosample_id",
@@ -334,7 +334,7 @@
           "column": "tissue_affected_status",
           "description": "If applicable to disease (suspected mosaic), is the tissue from an affected source or an unaffected source?",
           "data_type": "enumeration",
-          "enumerations": ["Yes", "No"]
+          "enumerations": ["Yes", "No", "Unknown"]
         },
         {
           "column": "age_at_collection",
@@ -376,6 +376,12 @@
           "description": "details regarding sample transformation",
           "data_type": "string",
           "notes": "If sample was transformed"
+        },
+        {
+          "column": "quality_issues",
+          "description": "freetext (limited characters) to concisely describe if there are any QC issues that would be important to note",
+          "data_type": "string",
+          "examples": "degraded sample; unable to obtain more DNA"
         }
       ]
     },
@@ -472,7 +478,7 @@
           "description": "identifier for aligned_short_read (primary key)",
           "data_type": "string",
           "examples": "BCM_H7YG5DSX2-3-IDUDI0014-1",
-          "notes": "experiment_dna_short_read_id + alignment indicator"
+          "notes": "experiment_short_read_id + alignment indicator"
         },
         {
           "column": "experiment_dna_short_read_id",
@@ -498,7 +504,7 @@
         {
           "column": "md5sum",
           "required": true,
-          "description": "md5 checksum for aligned_dna_short_read_file file",
+          "description": "md5 checksum for file",
           "data_type": "string",
           "examples": "129c28163df082"
         },
@@ -519,7 +525,7 @@
         },
         {
           "column": "mean_coverage",
-          "description": "Mean coverage of either the genome or the targeted regions",
+          "description": "For WGS, mean coverage is calculated as total aligned bases divided by length of the genome. For WES, mean coverage is calculated as total bases within capture regions divided by length of the capture regions. The capture regions are defined in the BED file for the sample (linked in the experiment_dna_short_read table targeted_region_bed_file field).",
           "data_type": "float",
           "examples": "100",
           "notes": "Can be unknown if RC receives external data"
@@ -529,6 +535,11 @@
           "description": "brief description of the analysis pipeline used for producing the file; perhaps a DOI or link to something like a WDL file or github repository",
           "data_type": "string",
           "examples": "DOI:10.5281/zenodo.4469317"
+        },
+        {
+          "column": "quality_issues",
+          "description": "describe if there are any QC issues that would be important to note",
+          "data_type": "string"
         }
       ]
     },
@@ -605,6 +616,270 @@
         {
           "column": "analysis_details",
           "description": "brief description of the analysis pipeline used for producing the file; perhaps a link to something like a WDL file or github repository",
+          "data_type": "string"
+        }
+      ]
+    },
+    {
+      "table": "experiment_rna_short_read",
+      "columns": [
+        {
+          "column": "experiment_rna_short_read_id",
+          "primary_key": true,
+          "required": true,
+          "description": "identifier for experiment_rna_short_read (primary key)",
+          "data_type": "string",
+          "examples": ["Broad_E1", "Broad_E2", "GSS201938-01-021-SG-1"],
+          "notes": "RCs make their own IDs, must begin with center abbreviation as defined in participant table; need to be globally unique in consortium; may be generated by prepending experiment_sample_id with center abbreviation"
+        },
+        {
+          "column": "analyte_id",
+          "required": true,
+          "data_type": "string",
+          "references": "> analyte.analyte_id"
+        },
+        {
+          "column": "experiment_sample_id",
+          "description": "identifier used in the data file (e.g. VCF header / LIMS ID)",
+          "data_type": "string",
+          "examples": "12339D-SA",
+          "notes": "may be the same as experiment_short_read_id if the file does contain sample identifiers\nshould be present if downstream file contains a sample_id (e.g. BAM, VCF)\nsome centers have one id for the sample (tube) and a diff ID for the sample as named in the VCF; experiment_sample_id = ID in the VCF file; analyte_id = ID for the tube/aliquot/whatever"
+        },
+        {
+          "column": "seq_library_prep_kit_method",
+          "description": "Library prep kit used",
+          "data_type": "string",
+          "examples": ["Kappa Hyper PCR plus, ", "Kappa Hyper PCR free"],
+          "notes": "Can be missing if RC receives external data"
+        },
+        {
+          "column": "library_prep_type",
+          "description": "type of library prep",
+          "data_type": "enumeration",
+          "enumerations": ["stranded poly-A pulldown", "stranded total RNA", "rRNA depletion", "globin depletion"],
+          "multi_value_delimiter": "|",
+          "examples": "stranded total RNA|globin depletion"
+        },
+        {
+          "column": "experiment_type",
+          "required": true,
+          "data_type": "enumeration",
+          "enumerations": ["single-end", "paired-end", "targeted", "untargeted"],
+          "multi_value_delimiter": "|",
+          "examples": "paired-end|targeted"
+        },
+        {
+          "column": "read_length",
+          "required": true,
+          "description": "sequenced read length (bp); GREGoR RCs do paired end sequencing, so is the example of 100bp indicates 2x100bp.",
+          "data_type": "integer",
+          "examples": "100",
+          "notes": "contact the DCC if not doing paired-end or you wish to share data with unknown read length."
+        },
+        {
+          "column": "single_or_paired_ends",
+          "required": true,
+          "description": "single or paired end",
+          "data_type": "enumeration",
+          "enumerations": "single-end, paired-end"
+        },
+        {
+          "column": "date_data_generation",
+          "description": "Date of data generation (First sequencing date)",
+          "data_type": "date",
+          "examples": "2022-06-29",
+          "notes": "Can be missing if RC receives external data; ISO 8601 date format"
+        },
+        {
+          "column": "sequencing_platform",
+          "required": true,
+          "description": "sequencing platform used for the experiment",
+          "data_type": "string",
+          "examples": ["HiSeq2000", "HiSeq2500", "HiSeqX", "NovaSeq"],
+          "notes": "Can be missing if RC receives external data"
+        },
+        {
+          "column": "within_site_batch_name",
+          "required": true,
+          "description": "batch number for the site, important for future batch correction",
+          "data_type": "string",
+          "examples": "Batch 4"
+        },
+        {
+          "column": "RIN",
+          "description": "RIN number for quality of sample",
+          "data_type": "integer",
+          "examples": "9.8"
+        },
+        {
+          "column": "estimated_library_size",
+          "data_type": "float",
+          "examples": "364"
+        },
+        {
+          "column": "total_reads",
+          "description": "total number of reads",
+          "data_type": "integer",
+          "examples": "58,112,692"
+        },
+        {
+          "column": "percent_rRNA",
+          "data_type": "float",
+          "examples": "20"
+        },
+        {
+          "column": "percent_mRNA",
+          "data_type": "float",
+          "examples": "75"
+        },
+        {
+          "column": "percent_mtRNA",
+          "data_type": "float",
+          "examples": "4"
+        },
+        {
+          "column": "percent_Globin",
+          "data_type": "float",
+          "examples": "1"
+        },
+        {
+          "column": "percent_UMI",
+          "data_type": "float",
+          "examples": "0"
+        },
+        {
+          "column": "5prime3prime_bias",
+          "data_type": "float",
+          "examples": "?"
+        },
+        {
+          "column": "percent_GC",
+          "data_type": "float",
+          "examples": "66"
+        },
+        {
+          "column": "percent_chrX_Y",
+          "data_type": "float",
+          "examples": "12"
+        }
+      ]
+    },
+    {
+      "table": "aligned_rna_short_read",
+      "columns": [
+        {
+          "column": "aligned_rna_short_read_id",
+          "primary_key": true,
+          "required": true,
+          "description": "identifier for aligned_short_read (primary key)",
+          "data_type": "string",
+          "examples": "BCM_H7YG5DSX2-3-IDUDI0014-1",
+          "notes": "experiment_short_read_id + alignment indicator"
+        },
+        {
+          "column": "experiment_rna_short_read_id",
+          "required": true,
+          "description": "identifier for experiment",
+          "data_type": "string",
+          "references": "> experiment_rna_short_read.experiment_rna_short_read_id"
+        },
+        {
+          "column": "aligned_rna_short_read_file",
+          "required": true,
+          "description": "name and path of file with aligned reads",
+          "data_type": "string",
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.cram"
+        },
+        {
+          "column": "aligned_rna_short_read_index_file",
+          "required": true,
+          "description": "name and path of index file corresponding to aligned reads file",
+          "data_type": "string",
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.crai"
+        },
+        {
+          "column": "md5sum",
+          "required": true,
+          "description": "md5 checksum for file",
+          "data_type": "string",
+          "examples": "129c28163df082"
+        },
+        {
+          "column": "reference_assembly",
+          "required": true,
+          "data_type": "string",
+          "examples": "GRCh38.p13.primary_assembly.v33.gtf"
+        },
+        {
+          "column": "reference_assembly_uri",
+          "data_type": "string",
+          "examples": "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_33/GRCh38.primary_assembly.genome.fa.gz"
+        },
+        {
+          "column": "reference_assembly_details",
+          "data_type": "string",
+          "examples": "primary, chrY-masked"
+        },
+        {
+          "column": "gene_annotation",
+          "required": true,
+          "description": "annotation file used for alignment",
+          "data_type": "string",
+          "examples": "GENCODEv35"
+        },
+        {
+          "column": "gene_annotation_details",
+          "data_type": "enumeration",
+          "examples": ["examples corresponding to GENCODE options", "gencode_comprehensive_chr", "gencode_comprehensive_all", "gencode_comprehensive_pri"]
+        },
+        {
+          "column": "alignment_software",
+          "required": true,
+          "description": "Software including version number",
+          "data_type": "string",
+          "examples": "STARvXXX",
+          "notes": "Can be unknown if RC receives external data"
+        },
+        {
+          "column": "alignment_log_file",
+          "description": "path of (log) file with all parameters for alignment software",
+          "data_type": "string",
+          "examples": "/path/to/STAR.log"
+        },
+        {
+          "column": "alignment_postprocessing",
+          "description": "If any post processing was applied",
+          "data_type": "string",
+          "examples": "multimapped reads removed, reads trimmed"
+        },
+        {
+          "column": "mean_coverage",
+          "description": "Mean coverage of either the genome or the targeted regions",
+          "data_type": "float",
+          "examples": "100",
+          "notes": "Can be unknown if RC receives external data"
+        },
+        {
+          "column": "percent_uniquely_aligned",
+          "description": "how many reads aligned to just one place",
+          "data_type": "float",
+          "examples": "81"
+        },
+        {
+          "column": "percent_multimapped",
+          "description": "how many reads aligned to multiple places",
+          "data_type": "float",
+          "examples": "10"
+        },
+        {
+          "column": "percent_unaligned",
+          "description": "how many reads didn't align",
+          "data_type": "float",
+          "examples": "9"
+        },
+        {
+          "column": "quality_issues",
+          "description": "describe if there are any QC issues that would be important to note",
           "data_type": "string"
         }
       ]
