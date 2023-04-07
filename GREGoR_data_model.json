@@ -516,6 +516,16 @@
           "examples": "GRCh38"
         },
         {
+          "column": "reference_assembly_uri",
+          "data_type": "string",
+          "examples": "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_33/GRCh38.primary_assembly.genome.fa.gz"
+        },
+        {
+          "column": "reference_assembly_details",
+          "data_type": "string",
+          "examples": "primary, chrY-masked"
+        },
+        {
           "column": "alignment_software",
           "required": true,
           "description": "Software including version number",
@@ -807,8 +817,9 @@
         {
           "column": "reference_assembly",
           "required": true,
-          "data_type": "string",
-          "examples": "GRCh38.p13.primary_assembly.v33.gtf"
+          "data_type": "enumeration",
+          "enumerations": ["GRCh38", "GRCh37", "NCBI36", "NCBI35", "NCBI34"],
+          "examples": "GRCh38"
         },
         {
           "column": "reference_assembly_uri",
