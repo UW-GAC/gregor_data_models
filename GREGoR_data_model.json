@@ -617,8 +617,8 @@
           "column": "variant_types",
           "required": true,
           "description": "types of variants called",
-          "data_type": "string",
-          "enumerations": ["SNV", "INDEL", "SV", "CNV", "RE", "MEI"],
+          "data_type": "enumeration",
+          "enumerations": ["SNV", "INDEL", "SV", "CNV", "RE", "MEI", "STR"],
           "multi_value_delimiter": "|",
           "examples": ["RE = Repeat Expansion", "MEI = Mobile Element Insertion"],
           "notes": "can add more values as the need arises\nif there are two VCFs for SNV and Indels, there would be two different lines in this table; if combined in one VCF, a |-delimited entry"
