@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.1",
+  "version": "1.2",
   "tables": [
     {
       "table": "participant",
@@ -42,7 +42,7 @@
           "column": "recontactable",
           "description": "Is the originating GREGoR Center likely able to recontact this participant",
           "data_type": "enumeration",
-          "enumerations": ["Yes", "No", "Unknown"]
+          "enumerations": ["Yes", "No"]
         },
         {
           "column": "prior_testing",
@@ -124,14 +124,14 @@
           "column": "reported_race",
           "description": "Self/submitter-reported race (OMB categories)",
           "data_type": "enumeration",
-          "enumerations": ["American Indian or Alaska Native", "Asian", "Black or African American", "Native Hawaiian or Other Pacific Islander", "Middle Eastern or North African", "White", "Unknown"],
+          "enumerations": ["American Indian or Alaska Native", "Asian", "Black or African American", "Native Hawaiian or Other Pacific Islander", "Middle Eastern or North African", "White"],
           "multi_value_delimiter": "|"
         },
         {
           "column": "reported_ethnicity",
           "description": "Self/submitter-reported ethnicity (OMB categories)",
           "data_type": "enumeration",
-          "enumerations": ["Hispanic or Latino", "Not Hispanic or Latino", "Unknown"]
+          "enumerations": ["Hispanic or Latino", "Not Hispanic or Latino"]
         },
         {
           "column": "ancestry_detail",
@@ -147,6 +147,7 @@
         },
         {
           "column": "affected_status",
+          "required": true,
           "description": "Indicate affected status of individual (overall with respect to primary phenotype in the family). Note: Affected participants must have entry in phenotype table.",
           "data_type": "enumeration",
           "enumerations": ["Affected", "Unaffected", "Possibly affected", "Unknown"],
@@ -334,7 +335,7 @@
           "column": "tissue_affected_status",
           "description": "If applicable to disease (suspected mosaic), is the tissue from an affected source or an unaffected source?",
           "data_type": "enumeration",
-          "enumerations": ["Yes", "No", "Unknown"]
+          "enumerations": ["Yes", "No"]
         },
         {
           "column": "age_at_collection",
@@ -691,7 +692,7 @@
           "required": true,
           "description": "single or paired end",
           "data_type": "enumeration",
-          "enumerations": "single-end, paired-end"
+          "enumerations": ["single-end", "paired-end"]
         },
         {
           "column": "date_data_generation",
