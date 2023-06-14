@@ -5,11 +5,10 @@ library(stringr)
 library(jsonlite)
 
 #url <- "https://docs.google.com/spreadsheets/d/16UKkv3E11ArkSyaTscJrpFNBPdFWfcGr87lNOo6yZyM"
-#url <- "https://docs.google.com/spreadsheets/d/1VEL0c9gbaA3dCXoO7VsmyjsMgmXghpBLw3cBY3D_x_g"
-url <- "https://docs.google.com/spreadsheets/d/14zNEZPJj8xCrkapeEx1_D_ID1QEcyOKOALij-UpJOII"
+url <- "https://docs.google.com/spreadsheets/d/1VEL0c9gbaA3dCXoO7VsmyjsMgmXghpBLw3cBY3D_x_g"
 model_name = "GREGoR Data Model"
 model_description = "Data model for the GREGoR consortium"
-model_version = "1.2"
+model_version = "1.1.1"
 
 # table metadata
 meta <- read_sheet(url, sheet="Table overview/status")

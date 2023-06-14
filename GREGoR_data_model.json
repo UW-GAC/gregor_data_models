@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.2",
+  "version": "1.1.1",
   "tables": [
     {
       "table": "participant",
@@ -719,7 +719,7 @@
         {
           "column": "RIN",
           "description": "RIN number for quality of sample",
-          "data_type": "integer",
+          "data_type": "float",
           "examples": "9.8"
         },
         {
@@ -842,6 +842,7 @@
         {
           "column": "gene_annotation_details",
           "data_type": "enumeration",
+          "enumerations": ["gencode_comprehensive_chr", "gencode_comprehensive_all", "gencode_comprehensive_pri ", "gencode_basic_chr gencode_basic_all", "gencode_basic_pri  lncRNA_annotation", "polyA_feature_annotation", "consensus_pseudogenes", "predicted_tRNA_genes"],
           "examples": ["examples corresponding to GENCODE options", "gencode_comprehensive_chr", "gencode_comprehensive_all", "gencode_comprehensive_pri"]
         },
         {
