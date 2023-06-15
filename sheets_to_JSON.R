@@ -8,7 +8,7 @@ library(jsonlite)
 url <- "https://docs.google.com/spreadsheets/d/1VEL0c9gbaA3dCXoO7VsmyjsMgmXghpBLw3cBY3D_x_g"
 model_name = "GREGoR Data Model"
 model_description = "Data model for the GREGoR consortium"
-model_version = "1.1.1"
+model_version = "1.1.2"
 
 # table metadata
 meta <- read_sheet(url, sheet="Table overview/status")
@@ -16,9 +16,6 @@ meta <- read_sheet(url, sheet="Table overview/status")
 # remove tables below blank line
 brk <- which(is.na(meta$Table))
 meta <- meta[1:(brk-1),]
-
-# remove experiment table for now
-meta <- filter(meta, Table != "experiment")
 
 meta <- meta %>%
     mutate(required=ifelse(tolower(Required) == "yes", TRUE, NA)) %>%
