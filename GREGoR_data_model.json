@@ -842,7 +842,7 @@
         {
           "column": "gene_annotation_details",
           "data_type": "enumeration",
-          "enumerations": ["gencode_comprehensive_chr", "gencode_comprehensive_all", "gencode_comprehensive_pri ", "gencode_basic_chr gencode_basic_all", "gencode_basic_pri  lncRNA_annotation", "polyA_feature_annotation", "consensus_pseudogenes", "predicted_tRNA_genes"],
+          "enumerations": ["gencode_comprehensive_chr", "gencode_comprehensive_all", "gencode_comprehensive_pri ", "gencode_basic_chr", "gencode_basic_all", "gencode_basic_pri ", "lncRNA_annotation", "polyA_feature_annotation", "consensus_pseudogenes", "predicted_tRNA_genes"],
           "examples": ["examples corresponding to GENCODE options", "gencode_comprehensive_chr", "gencode_comprehensive_all", "gencode_comprehensive_pri"]
         },
         {
