@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "tables": [
     {
       "table": "participant",
@@ -383,6 +383,39 @@
           "description": "freetext (limited characters) to concisely describe if there are any QC issues that would be important to note",
           "data_type": "string",
           "examples": "degraded sample; unable to obtain more DNA"
+        }
+      ]
+    },
+    {
+      "table": "experiment",
+      "columns": [
+        {
+          "column": "experiment_id",
+          "primary_key": true,
+          "required": true,
+          "description": "table_name.experiment_id_in_table",
+          "data_type": "string",
+          "examples": "experiment_dna_short_read.GSS201938-01-021-SG-1"
+        },
+        {
+          "column": "table_name",
+          "required": true,
+          "data_type": "enumeration",
+          "enumerations": ["experiment_dna_short_read", "experiment_rna_short_read"],
+          "examples": "experiment_dna_short_read"
+        },
+        {
+          "column": "id_in_table",
+          "required": true,
+          "data_type": "string",
+          "enumerations": "GSS201938-01-021-SG-1"
+        },
+        {
+          "column": "participant_id",
+          "required": true,
+          "data_type": "string",
+          "references": "> participant.participant_id",
+          "enumerations": "GSS201938"
         }
       ]
     },
