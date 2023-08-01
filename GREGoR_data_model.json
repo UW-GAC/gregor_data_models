@@ -1003,7 +1003,7 @@
           "description": "sequencing platform used for the experiment",
           "data_type": "enumeration",
           "enumerations": ["Oxford Nanopore PromethION 48", "Oxford Nanopore PromethION 24", "Oxford Nanopore PromethION P2", "Oxford Nanopore PromethION P2 Solo", "Oxford Nanopore MinION Mk1C", "Oxford Nanopore MinION Mk1B", "Oxford Nanopore Flongle"],
-          "examples": "Oxford Nanopore PromethION",
+          "examples": "Oxford Nanopore PromethION 48",
           "notes": "Can be missing if RC receives external data"
         },
         {
