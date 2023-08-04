@@ -16,7 +16,7 @@ meta <- read_sheet(url, sheet="Table overview/status")
 meta <- filter(meta, !(Table %in% "genetic_findings"))
 
 meta <- meta %>%
-    mutate(required=ifelse(tolower(Required) == "yes", TRUE, NA)) %>%
+    mutate(required=ifelse(tolower(Required) == "yes", TRUE, Required)) %>%
     select(table=Table, required)
 
 

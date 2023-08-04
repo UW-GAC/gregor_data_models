@@ -301,7 +301,7 @@
           "required": true,
           "description": "analyte derived from the primary_biosample. The actual thing you're sticking into a machine to analyze/sequence",
           "data_type": "enumeration",
-          "enumerations": ["DNA", "direct RNA", "cDNA", "blood plasma", "frozen whole blood", "high molecular weight DNA", "urine"],
+          "enumerations": ["DNA", "RNA", "cDNA", "blood plasma", "frozen whole blood", "high molecular weight DNA", "urine"],
           "examples": "DNA"
         },
         {
@@ -421,6 +421,7 @@
     },
     {
       "table": "experiment_dna_short_read",
+      "required": "CONDITIONAL (aligned_dna_short_read)",
       "columns": [
         {
           "column": "experiment_dna_short_read_id",
@@ -504,6 +505,7 @@
     },
     {
       "table": "aligned_dna_short_read",
+      "required": "CONDITIONAL (aligned_dna_short_read_set)",
       "columns": [
         {
           "column": "aligned_dna_short_read_id",
@@ -589,6 +591,7 @@
     },
     {
       "table": "aligned_dna_short_read_set",
+      "required": "CONDITIONAL (called_variants_dna_short_read)",
       "columns": [
         {
           "column": "aligned_dna_short_read_set_id",
@@ -666,6 +669,7 @@
     },
     {
       "table": "experiment_rna_short_read",
+      "required": "CONDITIONAL (aligned_rna_short_read)",
       "columns": [
         {
           "column": "experiment_rna_short_read_id",
@@ -932,6 +936,7 @@
     },
     {
       "table": "experiment_nanopore",
+      "required": "CONDITIONAL (aligned_nanopore)",
       "columns": [
         {
           "column": "experiment_nanopore_id",
@@ -1030,6 +1035,7 @@
     },
     {
       "table": "aligned_nanopore",
+      "required": "CONDITIONAL (aligned_nanopore_set)",
       "columns": [
         {
           "column": "aligned_nanopore_id",
@@ -1173,6 +1179,7 @@
     },
     {
       "table": "aligned_nanopore_set",
+      "required": "CONDITIONAL (called_variants_nanopore)",
       "columns": [
         {
           "column": "aligned_nanopore_set_id",
