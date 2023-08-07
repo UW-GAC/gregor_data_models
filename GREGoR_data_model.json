@@ -421,7 +421,7 @@
     },
     {
       "table": "experiment_dna_short_read",
-      "required": "CONDITIONAL (aligned_dna_short_read)",
+      "required": "CONDITIONAL (aligned_dna_short_read, aligned_dna_short_read_set, called_variants_dna_short_read)",
       "columns": [
         {
           "column": "experiment_dna_short_read_id",
@@ -505,7 +505,7 @@
     },
     {
       "table": "aligned_dna_short_read",
-      "required": "CONDITIONAL (aligned_dna_short_read_set)",
+      "required": "CONDITIONAL (aligned_dna_short_read_set, called_variants_dna_short_read)",
       "columns": [
         {
           "column": "aligned_dna_short_read_id",
@@ -936,7 +936,7 @@
     },
     {
       "table": "experiment_nanopore",
-      "required": "CONDITIONAL (aligned_nanopore)",
+      "required": "CONDITIONAL (aligned_nanopore, aligned_nanopore_set, called_variants_nanopore)",
       "columns": [
         {
           "column": "experiment_nanopore_id",
@@ -1035,7 +1035,7 @@
     },
     {
       "table": "aligned_nanopore",
-      "required": "CONDITIONAL (aligned_nanopore_set)",
+      "required": "CONDITIONAL (aligned_nanopore_set, called_variants_nanopore)",
       "columns": [
         {
           "column": "aligned_nanopore_id",
