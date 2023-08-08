@@ -199,7 +199,8 @@
           "column": "pedigree_file",
           "description": "name of file (renamed from pedigree_image because it can contain a PED file or image)",
           "data_type": "string",
-          "examples": ["FamilyID_CMG_Site_PhsID_ConsentGroup_YYYYMMDD_YXQX.pdf", "FamilyID_CMG_Site_PhsID_ConsentGroup_YYYYMMDD_YXQX.ped"],
+          "is_bucket_path": true,
+          "examples": ["gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/FamilyID_CMG_Site_PhsID_ConsentGroup_YYYYMMDD_YXQX.pdf", "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/FamilyID_CMG_Site_PhsID_ConsentGroup_YYYYMMDD_YXQX.ped"],
           "notes": "pedigree file should be deposited to upload workspace"
         },
         {
@@ -477,6 +478,7 @@
           "column": "targeted_region_bed_file",
           "description": "name and path of bed file uploaded to workspace",
           "data_type": "string",
+          "is_bucket_path": true,
           "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/SR_experiment.bed",
           "notes": "Can be missing if RC receives external data"
         },
@@ -513,6 +515,7 @@
           "required": true,
           "description": "identifier for aligned_short_read (primary key)",
           "data_type": "string",
+          "is_unique": true,
           "examples": "BCM_H7YG5DSX2-3-IDUDI0014-1",
           "notes": "experiment_short_read_id + alignment indicator"
         },
@@ -528,6 +531,8 @@
           "required": true,
           "description": "name and path of file with aligned reads",
           "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
           "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.cram"
         },
         {
@@ -535,6 +540,8 @@
           "required": true,
           "description": "name and path of index file corresponding to aligned reads file",
           "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
           "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.crai"
         },
         {
@@ -542,6 +549,7 @@
           "required": true,
           "description": "md5 checksum for file",
           "data_type": "string",
+          "is_unique": true,
           "examples": "129c28163df082"
         },
         {
@@ -618,7 +626,8 @@
           "primary_key": true,
           "description": "unique key for table (anvil requirement)",
           "data_type": "string",
-          "references": "from:md5sum"
+          "references": "from:md5sum",
+          "is_unique": true
         },
         {
           "column": "aligned_dna_short_read_set_id",
@@ -632,6 +641,8 @@
           "required": true,
           "description": "name and path of the file with variant calls",
           "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
           "examples": ["gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.SV.vcf", "gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.SNV.gvcf", "gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.EH.vcf"]
         },
         {
@@ -639,6 +650,7 @@
           "required": true,
           "description": "md5 checksum for file",
           "data_type": "string",
+          "is_unique": true,
           "examples": "129c28163df082",
           "notes": "md5sum computed prior to upload (used to verify file integrity)"
         },
@@ -821,6 +833,7 @@
           "required": true,
           "description": "identifier for aligned_short_read (primary key)",
           "data_type": "string",
+          "is_unique": true,
           "examples": "BCM_H7YG5DSX2-3-IDUDI0014-1",
           "notes": "experiment_short_read_id + alignment indicator"
         },
@@ -836,6 +849,8 @@
           "required": true,
           "description": "name and path of file with aligned reads",
           "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
           "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.cram"
         },
         {
@@ -843,6 +858,8 @@
           "required": true,
           "description": "name and path of index file corresponding to aligned reads file",
           "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
           "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.crai"
         },
         {
@@ -850,6 +867,7 @@
           "required": true,
           "description": "md5 checksum for file",
           "data_type": "string",
+          "is_unique": true,
           "examples": "129c28163df082"
         },
         {
@@ -894,6 +912,7 @@
           "column": "alignment_log_file",
           "description": "path of (log) file with all parameters for alignment software",
           "data_type": "string",
+          "is_bucket_path": true,
           "examples": "/path/to/STAR.log"
         },
         {
@@ -993,6 +1012,7 @@
           "column": "targeted_region_bed_file",
           "description": "name and path of bed file uploaded to workspace",
           "data_type": "string",
+          "is_bucket_path": true,
           "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/LR_experiment.bed",
           "notes": "Can be missing if RC receives external data"
         },
@@ -1043,6 +1063,7 @@
           "required": true,
           "description": "identifier for aligned_nanopore (primary key)",
           "data_type": "string",
+          "is_unique": true,
           "examples": "BCM_H7YG5DSX2-3-IDUDI0014-1",
           "notes": "experiment_short_read_id + alignment indicator"
         },
@@ -1058,6 +1079,8 @@
           "required": true,
           "description": "name and path of file with aligned reads",
           "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
           "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.bam"
         },
         {
@@ -1065,6 +1088,8 @@
           "required": true,
           "description": "name and path of index file corresponding to aligned reads file",
           "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
           "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.bam.bai"
         },
         {
@@ -1072,6 +1097,7 @@
           "required": true,
           "description": "md5 checksum for file",
           "data_type": "string",
+          "is_unique": true,
           "examples": "129c28163df082"
         },
         {
@@ -1206,7 +1232,8 @@
           "primary_key": true,
           "description": "unique key for table (anvil requirement)",
           "data_type": "string",
-          "references": "from:md5sum"
+          "references": "from:md5sum",
+          "is_unique": true
         },
         {
           "column": "aligned_nanopore_set_id",
@@ -1220,6 +1247,8 @@
           "required": true,
           "description": "name and path of the file with variant calls",
           "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
           "examples": ["gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.SV.vcf", "gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.SNV.gvcf", "gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.EH.vcf"]
         },
         {
@@ -1227,6 +1256,7 @@
           "required": true,
           "description": "md5 checksum for file",
           "data_type": "string",
+          "is_unique": true,
           "examples": "129c28163df082",
           "notes": "md5sum computed prior to upload (used to verify file integrity)"
         },

@@ -32,7 +32,16 @@ for (i in 1:length(tables)) {
     tables[[i]] <- tables[[i]] %>%
         filter(!is.na(Column)) %>%
         mutate(primary_key = ifelse(paste0(names(tables)[i], "_id") == Column, TRUE, NA),
-               required=ifelse(tolower(Required) == "yes", TRUE, NA)) %>%
+               required = ifelse(tolower(Required) == "yes", TRUE, NA),
+               is_bucket_path = ifelse(grepl("_file$", Column), TRUE, NA))
+    if ("Is Unique" %in% names(tables[[i]])) {
+        tables[[i]] <- tables[[i]] %>%
+            mutate(is_unique = ifelse(tolower(`Is Unique`) == "yes", TRUE, primary_key))
+    } else {
+        tables[[i]] <- tables[[i]] %>%
+            mutate(is_unique = NA)
+    }
+    tables[[i]] <- tables[[i]] %>%
         select(column = Column, 
                primary_key,
                required,
@@ -41,6 +50,8 @@ for (i in 1:length(tables)) {
                references = References, 
                enumerations = Enumerations, 
                multi_value_delimiter = `Multi-value delimiter`,
+               is_bucket_path,
+               is_unique,
                examples = `Example Value`, 
                notes) %>%
         mutate(description=gsub('"', "'", description),
