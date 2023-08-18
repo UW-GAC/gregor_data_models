@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "XXX",
+  "version": "1.2",
   "tables": [
     {
       "table": "participant",
@@ -12,7 +12,7 @@
           "primary_key": true,
           "required": true,
           "description": "Subject/Participant Identifier (primary key)",
-          "data_type": "foo",
+          "data_type": "string",
           "examples": ["BCM_Subject_1", "BROAD_subj89054"],
           "notes": "anticipate using RC-assigned ID prefixed by gregor_center value"
         },
