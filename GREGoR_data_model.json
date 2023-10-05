@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.2",
+  "version": "1.2.1",
   "tables": [
     {
       "table": "participant",
@@ -402,7 +402,7 @@
           "column": "table_name",
           "required": true,
           "data_type": "enumeration",
-          "enumerations": ["experiment_dna_short_read", "experiment_rna_short_read"],
+          "enumerations": ["experiment_dna_short_read", "experiment_rna_short_read", "experiment_nanopore"],
           "examples": "experiment_dna_short_read"
         },
         {
@@ -417,6 +417,39 @@
           "data_type": "string",
           "references": "> participant.participant_id",
           "enumerations": "GSS201938"
+        }
+      ]
+    },
+    {
+      "table": "aligned",
+      "columns": [
+        {
+          "column": "aligned_id",
+          "primary_key": true,
+          "required": true,
+          "description": "table_name.aligned_id_in_table",
+          "data_type": "string",
+          "examples": "aligned_dna_short_read.BCM_H7YG5DSX2-3-IDUDI0014-1"
+        },
+        {
+          "column": "table_name",
+          "required": true,
+          "data_type": "enumeration",
+          "enumerations": ["aligned_dna_short_read", "aligned_rna_short_read", "aligned_nanopore"],
+          "examples": "aligned_dna_short_read"
+        },
+        {
+          "column": "id_in_table",
+          "required": true,
+          "data_type": "string",
+          "enumerations": "BCM_H7YG5DSX2-3-IDUDI0014-1"
+        },
+        {
+          "column": "participant_id",
+          "required": true,
+          "data_type": "string",
+          "references": "> participant.participant_id",
+          "enumerations": "BCM_H7YG5DSX2"
         }
       ]
     },
