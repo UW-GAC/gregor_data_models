@@ -4,10 +4,10 @@ library(tidyr)
 library(stringr)
 library(jsonlite)
 
-url <- "https://docs.google.com/spreadsheets/d/1Vtkes5H-AN2-NiREE0EkGhkiO5kTTYdOtImroO9hVAo"
+url <- "https://docs.google.com/spreadsheets/d/1-TcKKMJMSMV_zhkmJGswmFY2ECGi_S2heqAjBkat5tM"
 model_name = "GREGoR Data Model"
 model_description = "Data model for the GREGoR consortium"
-model_version = "1.2"
+model_version = "1.2.1"
 
 # table metadata
 meta <- read_sheet(url, sheet="Table overview/status")
