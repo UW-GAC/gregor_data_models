@@ -178,15 +178,16 @@
         {
           "column": "missing_variant_case",
           "required": true,
-          "description": "Indication of whether this is known to be a missing variant case.",
+          "description": "Indication of whether this is known to be a missing variant case, see notes for a description of the Missing Variant Project and inclusion criteria.",
           "data_type": "enumeration",
           "enumerations": ["Yes", "No", "Unknown"],
-          "notes": "MVP cases can include both those initially ascertained prospectively based on expectation of a missing pathogenic variant and those ascertained retrospectively after analysis identifies an expectation of a missing pathogenic variant within a narrow search space.\n\nThe case should meet one of the following criteria:\n\n- Has a LP/P variant identified in a gene underlying a recessive condition consistent with the phenotype observed in the patient, and suspected to be the correct diagnosis, for which a second explanatory LP/P variant has not been identified by prior genetic testing\n- Has a specific clinical diagnosis supported by evidence (e.g. biochemical testing) for a dominant condition known to be of single gene etiology for which an explanatory LP/P variant has not been identified by prior genetic testing(very uncommon) \n- Has no LP/P variants in a gene underlying a recessive condition consistent with the phenotype observed in the patient and the recessive condition is associated with a specific clinical diagnosis and has only been attributed to variants in a single gene (e.g. an individual clinically diagnosed with cystic fibrosis but no variants identified in CFTR)\n\nAny cases with potentially explanatory VUS identified as the 'missing variant,' are eligible and should be included (e.g. an individual with a LP/P variant and VUS in trans identified in a gene underlying a recessive condition consistent with the phenotype observed should be flagged for MVP)."
+          "notes": "The goal of the Missing Variant Project (MVP) is to identify a cohort of cases for which there is an extremely high expectation of the presence of one or two 'missing' pathogenic variants within a narrow and specific search space, i.e. a single gene/locus of interest for which the known phenotype is the suspected/likely diagnosis for the affected individual.\n\nMVP cases can include both those initially ascertained prospectively based on expectation of a missing pathogenic variant and those ascertained retrospectively after analysis identifies an expectation of a missing pathogenic variant within a narrow search space.\n\nThe case should meet one of the following criteria:\n- Has a LP/P variant identified in a gene underlying a recessive condition consistent with the phenotype observed in the patient, and suspected to be the correct diagnosis, for which a second explanatory LP/P variant has not been identified by prior genetic testing\n- Has a specific clinical diagnosis supported by evidence (e.g. biochemical testing) for a dominant condition known to be of single gene etiology for which an explanatory LP/P variant has not been identified by prior genetic testing(very uncommon) \n- Has no LP/P variants in a gene underlying a recessive condition consistent with the phenotype observed in the patient and the recessive condition is associated with a specific clinical diagnosis and has only been attributed to variants in a single gene (e.g. an individual clinically diagnosed with cystic fibrosis but no variants identified in CFTR)\n\nAny cases with potentially explanatory VUS identified as the 'missing variant,' are eligible and should be included (e.g. an individual with a LP/P variant and VUS in trans identified in a gene underlying a recessive condition consistent with the phenotype observed should be flagged for MVP)."
         },
         {
           "column": "missing_variant_details",
-          "description": "Text description of what’s missing , including a description of region or gene of interest when available",
-          "data_type": "string"
+          "description": "For missing variant cases, indicate gene(s) or region of interest and reason for inclusion in MVP.",
+          "data_type": "string",
+          "examples": ["Werner syndrome case with single pathogenic hit in WRN ", "Clinical diagnosis of Marfan syndrome with no pathogenic or likely pathogenic variant identified in FBN1", "Clinical diagnosis of neurofibromatosis type 1 with no pathogenic or likely pathogenic variant identified in NF1 "]
         }
       ]
     },
@@ -2202,7 +2203,8 @@
           "column": "called_peaks_atac_short_read_id",
           "required": true,
           "description": "identifier for called peaks",
-          "data_type": "string"
+          "data_type": "string",
+          "references": "> called_peaks_atac_short_read.called_peaks_atac_short_read_id"
         },
         {
           "column": "asc_file",
