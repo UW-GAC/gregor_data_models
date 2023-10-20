@@ -2084,7 +2084,8 @@
           "required": true,
           "description": "Software including version number",
           "data_type": "string",
-          "examples": "bowtie2"
+          "examples": "bowtie2",
+          "notes": "Can be unknown if RC receives external data"
         },
         {
           "column": "gene_annotation_details",
