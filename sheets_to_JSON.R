@@ -4,16 +4,16 @@ library(tidyr)
 library(stringr)
 library(jsonlite)
 
-url <- "https://docs.google.com/spreadsheets/d/1-TcKKMJMSMV_zhkmJGswmFY2ECGi_S2heqAjBkat5tM"
+url <- "https://docs.google.com/spreadsheets/d/1mZlJ9IauaVNiJ6f2Q14pg6rGEpWVrAjMJmAZ_FioVTY"
 model_name = "GREGoR Data Model"
 model_description = "Data model for the GREGoR consortium"
-model_version = "1.2.1"
+model_version = "1.3"
 
 # table metadata
-meta <- read_sheet(url, sheet="Table overview/status")
+meta <- read_sheet(url, sheet="Table overview/status", skip=1)
 
 # can't validate genetics_findings table
-meta <- filter(meta, !(Table %in% "genetic_findings"))
+#meta <- filter(meta, !(Table %in% "genetic_findings"))
 
 meta <- meta %>%
     mutate(required=ifelse(tolower(Required) == "yes", TRUE, Required)) %>%
@@ -24,7 +24,7 @@ meta <- meta %>%
 table_names <- meta$table
 tables <- lapply(table_names, function(x) read_sheet(url, sheet=x, skip=1, col_types="c"))
 names(tables) <- table_names
-rm(list = c("table_names", "url"))
+#rm(list = c("table_names", "url"))
 
 
 # rename and reorder columns
@@ -64,7 +64,7 @@ for (i in 1:length(tables)) {
 # 2) the list of data tables corresponding to the first argument
 source("sheets_to_list.R")
 tab_list <- sheets_to_list(apply(meta, 1, as.list), tables)
-rm(list = c("meta", "tables", "sheets_to_list"))
+#rm(list = c("meta", "tables", "sheets_to_list"))
 
 
 # initialize leading text
@@ -77,7 +77,7 @@ master <- list(
     # Data Table Details
     tables = tab_list
 )
-rm(list = c("tab_list"))
+#rm(list = c("tab_list"))
 
 
 # compile master file in JSON format
@@ -85,7 +85,7 @@ out <- toJSON(x = master,
               pretty = TRUE,
               auto_unbox = TRUE,
               unbox = TRUE)
-rm(list = c("master"))
+#rm(list = c("master"))
 
 
 # unquote the logical parameters TRUE and FALSE
