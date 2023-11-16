@@ -11,8 +11,16 @@ log <- read_sheet(url, sheet="Change Log") %>%
     mutate(Version = ifelse(Table == "genetic_findings", 1.3, Version)) %>%
     arrange(Version)
 
-write_tsv(log, file="change_log.tsv")
-
-# markdown table for release notes
-log %>% filter(Version == "1.3") %>%
-    knitr::kable("pipe")
+con <- file("CHANGELOG.md", "w")
+writeLines("# Change log\n", con)
+versions <- sort(unique(log$Version), decreasing = TRUE)
+for (v in versions) {
+    writeLines(paste("##", v, "\n"), con)
+    log %>%
+        filter(Version == v) %>%
+        select(-Version) %>%
+        knitr::kable("pipe") %>%
+        writeLines(con)
+    writeLines("\n", con)
+}
+close(con)
