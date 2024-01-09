@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.3.1",
+  "version": "1.4",
   "tables": [
     {
       "table": "participant",
@@ -392,6 +392,7 @@
         },
         {
           "column": "transcript",
+          "required": "CONDITIONAL (gene)",
           "description": "Text description of transcript overlapping the variant",
           "data_type": "string",
           "examples": "ENST00000382103.7",
@@ -399,12 +400,14 @@
         },
         {
           "column": "hgvsc",
+          "required": "CONDITIONAL (gene)",
           "description": "HGVS c. description of the variant (m. for mitochondrial)",
           "data_type": "string",
           "examples": "c.846G>A"
         },
         {
           "column": "hgvsp",
+          "required": "CONDITIONAL (gene)",
           "description": "HGVS p. description of the variant",
           "data_type": "string",
           "examples": "p.Leu282=",
@@ -457,6 +460,7 @@
         },
         {
           "column": "known_condition_name",
+          "required": "CONDITIONAL (gene_known_for_phenotype = Known)",
           "description": "Free text of condition name. Variant/phenotype/inheritance in proband should be consistent with the condition.",
           "data_type": "string",
           "examples": "Pontocerebellar hypoplasia type 2D",
@@ -464,6 +468,7 @@
         },
         {
           "column": "condition_id",
+          "required": "CONDITIONAL (gene_known_for_phenotype = Known)",
           "description": "MONDO/OMIM number for condition used for variant interpretation.",
           "data_type": "string",
           "examples": ["OMIM:613811", "MONDO:0013438"],
@@ -471,6 +476,7 @@
         },
         {
           "column": "condition_inheritance",
+          "required": "CONDITIONAL (gene_known_for_phenotype = Known)",
           "description": "Description of the expected inheritance of condition used for variant interpretation",
           "data_type": "enumeration",
           "enumerations": ["Autosomal recessive", "Autosomal dominant", "X-linked", "Mitochondrial", "Y-linked", "Contiguous gene syndrome", "Somatic mosaicism", "Digenic", "Other", "Unknown"],
@@ -484,13 +490,13 @@
           "data_type": "enumeration",
           "enumerations": ["Benign", "Likely benign", "Uncertain significance - low", "Uncertain significance - moderate", "Uncertain significance - high", "Uncertain significance", "Likely pathogenic", "Pathogenic", "Curation in progress", "Well-established P/LP"],
           "examples": "Curation in progress",
-          "notes": "Field to be updated in subsequent data submissions. TBD requirement timeline."
+          "notes": "Field to be updated in subsequent data submissions. TBD requirement timeline. Currently optional, to consider whether required if known disease gene."
         },
         {
           "column": "GREGoR_ClinVar_SCV",
           "description": "ClinVar accession number for the variant curation submitted by your center",
           "data_type": "string",
-          "notes": "Field to be updated in subsequent data submissions. TBD requirement timeline."
+          "notes": "Field to be updated in subsequent data submissions. TBD requirement timeline. Currently optional, to consider whether required if already submitted."
         },
         {
           "column": "public_database_other",
@@ -514,6 +520,7 @@
         },
         {
           "column": "partial_contribution_explained",
+          "required": "CONDITIONAL (phenotype_contribution = Partial)",
           "description": "List of specific phenotypes (HPO IDs) explained by the condition associated with this variant/gene in cases of partial contribution",
           "data_type": "string",
           //"references": "> phenotype.term_id",

@@ -4,10 +4,11 @@ library(tidyr)
 library(stringr)
 library(jsonlite)
 
-url <- "https://docs.google.com/spreadsheets/d/1mZlJ9IauaVNiJ6f2Q14pg6rGEpWVrAjMJmAZ_FioVTY"
+#url <- "https://docs.google.com/spreadsheets/d/1mZlJ9IauaVNiJ6f2Q14pg6rGEpWVrAjMJmAZ_FioVTY"
+url <- "https://docs.google.com/spreadsheets/d/1y9dVKOLpnXRYJjHk6_RIBI4MFIbj_XHpZaTrlpy8n1E"
 model_name = "GREGoR Data Model"
 model_description = "Data model for the GREGoR consortium"
-model_version = "1.3"
+model_version = "1.4"
 
 # table metadata
 meta <- read_sheet(url, sheet="Table overview/status", skip=1)
@@ -32,7 +33,7 @@ for (i in 1:length(tables)) {
     tables[[i]] <- tables[[i]] %>%
         filter(!is.na(Column)) %>%
         mutate(primary_key = ifelse(paste0(names(tables)[i], "_id") == Column, TRUE, NA),
-               required = ifelse(tolower(Required) == "yes", TRUE, NA),
+               required = ifelse(tolower(Required) == "yes", TRUE, Required),
                is_bucket_path = ifelse(grepl("_file$", Column), TRUE, NA))
     if ("Is Unique" %in% names(tables[[i]])) {
         tables[[i]] <- tables[[i]] %>%
