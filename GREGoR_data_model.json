@@ -523,7 +523,7 @@
           "required": "CONDITIONAL (phenotype_contribution = Partial)",
           "description": "List of specific phenotypes (HPO IDs) explained by the condition associated with this variant/gene in cases of partial contribution",
           "data_type": "string",
-          //"references": "> phenotype.term_id",
+          "references": "> phenotype.term_id",
           "multi_value_delimiter": "|",
           "examples": "HP:0000365",
           "notes": "Field used when a genetic finding only partially explains participant phenotype and a second genetic finding is expected. For example, a syndromic case with a well-established pathogenic non-syndromic hearing loss variant. \n- For recesssive variants with partial contribution, only one of the linked variants needs to list HPO IDs explained by the linked candidate set."
@@ -532,7 +532,7 @@
           "column": "additional_family_members_with_variant",
           "description": "List of related participant IDs carrying the same variant",
           "data_type": "string",
-          //"references": "> participant.participant_id",
+          "references": "> participant.participant_id",
           "multi_value_delimiter": "|"
         },
         {
