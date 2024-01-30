@@ -297,6 +297,14 @@
           "enumerations": ["HP:0025292", "HP:0011009", "HP:0025308", "HP:0025307", "HP:0025306", "HP:0003581", "HP:0011420", "HP:0003831", "HP:0025285", "HP:0032525", "HP:0025286", "HP:0025254", "HP:0032526", "HP:0025257", "HP:0032503", "HP:0025256", "HP:0032522", "HP:0025255", "HP:0030674", "HP:0033820", "HP:4000052", "HP:0025287", "HP:0012832", "HP:0012827", "HP:0033815", "HP:0030645", "HP:0033816", "HP:0032535", "HP:0011463", "HP:0011010", "HP:0031797", "HP:0045088", "HP:4000051", "HP:4000048", "HP:4000047", "HP:0003577", "HP:0011421", "HP:0033763", "HP:0003819", "HP:0100613", "HP:0001522", "HP:0033765", "HP:0033764", "HP:0025294", "HP:0020034", "HP:4000053", "HP:0012839", "HP:0045089", "HP:0025293", "HP:0025302", "HP:0025282", "HP:0025708", "HP:0011460", "HP:0025303", "HP:0032365", "HP:0032502", "HP:0032501", "HP:0025315", "HP:0032534", "HP:0032542", "HP:0032500", "HP:0011461", "HP:0031914", "HP:0030650", "HP:4000042", "HP:0012837", "HP:4000043", "HP:0025295", "HP:0003829", "HP:0003593", "HP:0003587", "HP:0025709", "HP:0032539", "HP:0032540", "HP:0003621", "HP:0034199", "HP:0003584", "HP:0025710", "HP:0025275", "HP:0012831", "HP:0012835", "HP:0012838", "HP:0025291", "HP:0003596", "HP:0030648", "HP:0025279", "HP:0012825", "HP:0033817", "HP:0045090", "HP:0005268", "HP:0012826", "HP:0025296", "HP:0040006", "HP:0030651", "HP:0003811", "HP:0003623", "HP:0025301", "HP:0003680", "HP:4000046", "HP:0003674", "HP:4000050", "HP:0003679", "HP:0025280", "HP:0030647", "HP:0033814", "HP:0410280", "HP:0030649", "HP:0033813", "HP:0033819", "HP:0025304", "HP:0030646", "HP:0003812", "HP:0031450", "HP:0012830", "HP:0032544", "HP:0034241", "HP:0012829", "HP:0003676", "HP:0025297", "HP:0012840", "HP:4000040", "HP:0025305", "HP:0003678", "HP:0031796", "HP:0031375", "HP:0033818", "HP:0012834", "HP:0034198", "HP:4000049", "HP:0033349", "HP:0012828", "HP:0012824", "HP:0025281", "HP:0025284", "HP:0003677", "HP:0012836", "HP:4000045", "HP:0031915", "HP:0003826", "HP:0011011", "HP:0011008", "HP:0025283", "HP:0034197", "HP:0025153", "HP:4000044", "HP:0025204", "HP:0033185", "HP:0033032", "HP:0500261", "HP:0025205", "HP:0025208", "HP:0033789", "HP:0025206", "HP:0025207", "HP:0025334", "HP:0025211", "HP:0025227", "HP:0025377", "HP:0025212", "HP:0034060", "HP:0025215", "HP:0033793", "HP:0025209", "HP:0025213", "HP:0025210", "HP:0500260", "HP:0025214", "HP:0025216", "HP:0025217", "HP:0025218", "HP:0033184", "HP:0031167", "HP:0025220", "HP:0034195", "HP:0031135", "HP:0025221", "HP:0025222", "HP:0025223", "HP:0025224", "HP:0025225", "HP:0025226", "HP:0025228", "HP:0025219", "HP:0025229", "HP:0033198", "HP:0012833", "HP:0025290", "HP:0003828", "HP:0003682", "HP:0410401", "HP:0011462", "MONDO:0021125", "MONDO:0021135", "MONDO:0021139", "MONDO:0021149", "MONDO:0045034", "MONDO:0045040", "MONDO:0100355", "MONDO:0700004", "MONDO:0100369", "MONDO:0700061", "MONDO:0024488", "MONDO:0021126", "MONDO:0021136", "MONDO:0021137", "MONDO:0021140", "MONDO:0021141", "MONDO:0021151", "MONDO:0021152", "MONDO:0045036", "MONDO:0045035", "MONDO:0022202", "MONDO:0045042", "MONDO:0100356", "MONDO:0100357", "MONDO:0700005", "MONDO:0700006", "MONDO:0100427", "MONDO:0100426", "MONDO:0700063", "MONDO:0700062", "MONDO:0024489", "MONDO:0021128", "MONDO:0021127", "MONDO:0024497", "MONDO:0024495", "MONDO:0024490", "MONDO:0024496"],
           "multi_value_delimiter": "|",
           "notes": "this field should use the same ontology as above (e.g. Mondo disease characteristic if using mondo). \nIt should be a | delimited list of valid HPO IDs that are subordinate to HP:0012823 (clinical modifier) (For HPO terms) or a\n| delimited list of valid MONDO IDs that are subordinate to MONDO_0021125 (disease characteristic) (For MONDO terms)"
+        },
+        {
+          "column": "syndromic",
+          "description": "For participants with few HPO terms, this optional field is to provide context on whether it is likely the most notable phenotype or cohort level phenotype or whether the individual really only has one trait.",
+          "data_type": "enumeration",
+          "enumerations": ["syndromic", "non-syndromic"],
+          "examples": "non-syndromic",
+          "notes": "this field is intended to address a concern that if someone has only entered one trait/HPO term, there may be uncertainy about whether it is just the most notable phenotype or cohort level phenotype or whether the individual really only has one trait. For example, there could be a hearing loss cohort and someone might enter only 'sensorineural hearing loss' only, but an individual could have a syndromic hearing loss. Adding the syndromic/non-syndromic would provide a bit more assurance that if there are only one or two traits/HPO terms entered that there is not 'missing' traits/phenotype."
         }
       ]
     },
@@ -328,7 +336,7 @@
           "data_type": "string",
           "multi_value_delimiter": "|",
           "examples": ["experiment_dna_short_read.GSS201938-01-021-SG-1", "experiment_nanopore.BCM_00001"],
-          "notes": "RC submitted. \n- If experiment identifier is not available due to current data model limitations, use line 35 'original_method_of_discovery'\n- If variant is identified in multiple datasets, list the assigned primary experiment_id first and fill the following rows (e.g. allele balance) with data from this experiment\n- Additional information on orthogonal experiments can noted in line 35 or line 36"
+          "notes": "RC submitted. \n- If experiment identifier is not available due to current data model limitations, use the 'method_of_discovery' field\n- If variant is identified in multiple datasets, list the assigned primary experiment_id first and fill the following rows (e.g. allele balance) with data from this experiment\n- Additional information on orthogonal experiments can noted in the 'method_of_discovery' or 'notes' field"
         },
         {
           "column": "variant_type",
@@ -392,7 +400,6 @@
         },
         {
           "column": "transcript",
-          "required": "CONDITIONAL (gene)",
           "description": "Text description of transcript overlapping the variant",
           "data_type": "string",
           "examples": "ENST00000382103.7",
@@ -400,18 +407,16 @@
         },
         {
           "column": "hgvsc",
-          "required": "CONDITIONAL (gene)",
           "description": "HGVS c. description of the variant (m. for mitochondrial)",
           "data_type": "string",
           "examples": "c.846G>A"
         },
         {
           "column": "hgvsp",
-          "required": "CONDITIONAL (gene)",
           "description": "HGVS p. description of the variant",
           "data_type": "string",
           "examples": "p.Leu282=",
-          "notes": "Use 'p.?' for non-coding variants"
+          "notes": "May use 'p.?' for non-coding variants"
         },
         {
           "column": "zygosity",
@@ -758,7 +763,8 @@
         },
         {
           "column": "experiment_sample_id",
-          "description": "identifier used in the data file (e.g. VCF header / LIMS ID)",
+          "required": true,
+          "description": "identifier used in the data file (e.g. the SM tag in a BAM header, column headers for genotype fields in a VCF file)",
           "data_type": "string",
           "examples": "12339D-SA",
           "notes": "may be the same as experiment_short_read_id if the file does contain sample identifiers\nshould be present if downstream file contains a sample_id (e.g. BAM, VCF)\nsome centers have one id for the sample (tube) and a diff ID for the sample as named in the VCF; experiment_sample_id = ID in the VCF file; analyte_id = ID for the tube/aliquot/whatever"
@@ -819,6 +825,10 @@
           "data_type": "string",
           "examples": ["HiSeq2000", "HiSeq2500", "HiSeqX", "NovaSeq"],
           "notes": "Can be missing if RC receives external data"
+        },
+        {
+          "column": "sequencing_event_details",
+          "data_type": "string"
         }
       ]
     },
@@ -1017,7 +1027,7 @@
         },
         {
           "column": "experiment_sample_id",
-          "description": "identifier used in the data file (e.g. VCF header / LIMS ID)",
+          "description": "identifier used in the data file (e.g. the SM tag in a BAM header)",
           "data_type": "string",
           "examples": "12339D-SA",
           "notes": "may be the same as experiment_short_read_id if the file does contain sample identifiers\nshould be present if downstream file contains a sample_id (e.g. BAM, VCF)\nsome centers have one id for the sample (tube) and a diff ID for the sample as named in the VCF; experiment_sample_id = ID in the VCF file; analyte_id = ID for the tube/aliquot/whatever"
@@ -1097,7 +1107,8 @@
           "column": "total_reads",
           "description": "total number of reads",
           "data_type": "float",
-          "examples": "58,112,692"
+          "examples": "58,112,692",
+          "notes": "float type required for large number, but value entered should be an integer"
         },
         {
           "column": "percent_rRNA",
@@ -1291,7 +1302,7 @@
         },
         {
           "column": "experiment_sample_id",
-          "description": "identifier used in the data file (e.g. VCF header / LIMS ID)",
+          "description": "identifier used in the data file (e.g. the SM tag in a BAM header, column headers for genotype fields in a VCF file)",
           "data_type": "string",
           "examples": "12339D-SA",
           "notes": "may be the same as experiment_short_read_id if the file does contain sample identifiers\nshould be present if downstream file contains a sample_id (e.g. BAM, VCF)\nsome centers have one id for the sample (tube) and a diff ID for the sample as named in the VCF; experiment_sample_id = ID in the VCF file; analyte_id = ID for the tube/aliquot/whatever"
@@ -1301,7 +1312,7 @@
           "required": true,
           "description": "Library prep kit used",
           "data_type": "enumeration",
-          "enumerations": ["LSK109", "LSK110", "LSK111", "Kit 14", "Rapid", "Rapid kit 14"],
+          "enumerations": ["LSK109", "LSK110", "LSK111", "Kit 14", "Rapid", "Rapid kit 14", "Unknown"],
           "examples": "Kit 14",
           "notes": "Can be missing if RC receives external data"
         },
@@ -1517,6 +1528,11 @@
           "description": "Indicates whether 5mC and 6mA methylation has been called and annotated in the BAM file's MM and ML tags",
           "data_type": "boolean",
           "examples": true
+        },
+        {
+          "column": "quality_issues",
+          "description": "describe if there are any QC issues that would be important to note",
+          "data_type": "string"
         }
       ]
     },
@@ -1623,7 +1639,7 @@
         },
         {
           "column": "experiment_sample_id",
-          "description": "identifier used in the data file (e.g. VCF header / LIMS ID)",
+          "description": "identifier used in the data file (e.g. the SM tag in a BAM header, column headers for genotype fields in a VCF file)",
           "data_type": "string",
           "examples": "12339D-SA",
           "notes": "may be the same as experiment_short_read_id if the file does contain sample identifiers\nshould be present if downstream file contains a sample_id (e.g. BAM, VCF)\nsome centers have one id for the sample (tube) and a diff ID for the sample as named in the VCF; experiment_sample_id = ID in the VCF file; analyte_id = ID for the tube/aliquot/whatever"
@@ -1714,6 +1730,72 @@
           "description": "Version number of PacBio instrument control software",
           "data_type": "string",
           "examples": "12.0.0.173080"
+        },
+        {
+          "column": "size_selection_method",
+          "description": "library prep - method use for library size selection",
+          "data_type": "string",
+          "examples": "“SRE” or “PippinHT >10kb”"
+        },
+        {
+          "column": "library_size",
+          "description": "library prep - expected size of library from FemtoPulse",
+          "data_type": "string",
+          "examples": "18 kb"
+        },
+        {
+          "column": "smrt_cell_kit",
+          "description": "sequencing - part number of the SMRT Cell",
+          "data_type": "string",
+          "examples": "part number of the SMRT Cell"
+        },
+        {
+          "column": "smrt_cell_id",
+          "description": "sequencing - unique serial number for SMRT Cell",
+          "data_type": "string",
+          "examples": "EA005414"
+        },
+        {
+          "column": "movie_name",
+          "description": "sequencing - unique name of sequencing collection",
+          "data_type": "string",
+          "examples": "m84024_230427_202940_s4"
+        },
+        {
+          "column": "polymerase_kit",
+          "description": "sequencing - part number of polymerase kit used",
+          "data_type": "string",
+          "examples": "Revio polymerase kit 102-739-100"
+        },
+        {
+          "column": "sequencing_kit",
+          "description": "sequencing - part number of sequencing kit reagents",
+          "data_type": "string",
+          "examples": "evio sequencing kits 102-587-400"
+        },
+        {
+          "column": "movie_length_hours",
+          "description": "sequencing - length of sequencing collection, in hrs",
+          "data_type": "float",
+          "examples": "24"
+        },
+        {
+          "column": "includes_kinetics",
+          "description": "run reports base kinetics",
+          "data_type": "boolean",
+          "examples": true
+        },
+        {
+          "column": "includes_CpG_methylation",
+          "description": "run reports CpG methylation",
+          "data_type": "boolean",
+          "examples": true
+        },
+        {
+          "column": "by_strand",
+          "description": "run reports separate reads per strand",
+          "data_type": "boolean",
+          "examples": false
         }
       ]
     },
@@ -1727,6 +1809,7 @@
           "required": true,
           "description": "identifier for aligned_short_read (primary key)",
           "data_type": "string",
+          "is_unique": true,
           "examples": "BCM_H7YG5DSX2-3-IDUDI0014-1",
           "notes": "experiment_short_read_id + alignment indicator"
         },
@@ -1743,6 +1826,7 @@
           "description": "name and path of file with aligned reads",
           "data_type": "string",
           "is_bucket_path": true,
+          "is_unique": true,
           "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.bam"
         },
         {
@@ -1751,6 +1835,7 @@
           "description": "name and path of index file corresponding to aligned reads file",
           "data_type": "string",
           "is_bucket_path": true,
+          "is_unique": true,
           "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.bam.bai"
         },
         {
@@ -1758,6 +1843,7 @@
           "required": true,
           "description": "md5 checksum for file",
           "data_type": "string",
+          "is_unique": true,
           "examples": "129c28163df082"
         },
         {
@@ -1892,7 +1978,8 @@
           "primary_key": true,
           "description": "unique key for table (anvil requirement)",
           "data_type": "string",
-          "references": "from:md5sum"
+          "references": "from:md5sum",
+          "is_unique": true
         },
         {
           "column": "aligned_pac_bio_set_id",
@@ -1907,6 +1994,7 @@
           "description": "name and path of the file with variant calls",
           "data_type": "string",
           "is_bucket_path": true,
+          "is_unique": true,
           "examples": ["gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.SV.vcf", "gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.SNV.gvcf", "gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.EH.vcf"]
         },
         {
@@ -1914,6 +2002,7 @@
           "required": true,
           "description": "md5 checksum for file",
           "data_type": "string",
+          "is_unique": true,
           "examples": "129c28163df082",
           "notes": "md5sum computed prior to upload (used to verify file integrity)"
         },
@@ -1963,7 +2052,7 @@
         },
         {
           "column": "experiment_sample_id",
-          "description": "identifier used in the data file (e.g. VCF header / LIMS ID)",
+          "description": "identifier used in the data file (e.g. the SM tag in a BAM header)",
           "data_type": "string",
           "examples": "12339D-SA",
           "notes": "may be the same as experiment_short_read_id if the file does contain sample identifiers\nshould be present if downstream file contains a sample_id (e.g. BAM, VCF)\nsome centers have one id for the sample (tube) and a diff ID for the sample as named in the VCF; experiment_sample_id = ID in the VCF file; analyte_id = ID for the tube/aliquot/whatever"
@@ -2037,6 +2126,7 @@
           "required": true,
           "description": "identifier for aligned_atac_short_read (primary key)",
           "data_type": "string",
+          "is_unique": true,
           "examples": "BCM_H7YG5DSX2-3-IDUDI0014-1",
           "notes": "experiment_short_read_id + alignment indicator"
         },
@@ -2053,6 +2143,7 @@
           "description": "name and path of file with aligned reads",
           "data_type": "string",
           "is_bucket_path": true,
+          "is_unique": true,
           "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.cram"
         },
         {
@@ -2061,6 +2152,7 @@
           "description": "name and path of index file corresponding to aligned reads file",
           "data_type": "string",
           "is_bucket_path": true,
+          "is_unique": true,
           "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.crai"
         },
         {
@@ -2068,6 +2160,7 @@
           "required": true,
           "description": "md5 checksum for file",
           "data_type": "string",
+          "is_unique": true,
           "examples": "129c28163df082"
         },
         {
@@ -2149,7 +2242,8 @@
           "primary_key": true,
           "description": "unique key for table (anvil requirement)",
           "data_type": "string",
-          "references": "from:peaks_md5sum"
+          "references": "from:peaks_md5sum",
+          "is_unique": true
         },
         {
           "column": "aligned_atac_short_read_id",
@@ -2164,6 +2258,7 @@
           "description": "name and path of the bed file with open chromatin peaks after QC filtering",
           "data_type": "string",
           "is_bucket_path": true,
+          "is_unique": true,
           "examples": "gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.ATAC.IDR.bed"
         },
         {
@@ -2171,6 +2266,7 @@
           "required": true,
           "description": "md5 checksum for called_peaks_file",
           "data_type": "string",
+          "is_unique": true,
           "examples": "129c28163df082",
           "notes": "md5sum computed prior to upload (used to verify file integrity)"
         },

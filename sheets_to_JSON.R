@@ -4,18 +4,13 @@ library(tidyr)
 library(stringr)
 library(jsonlite)
 
-#url <- "https://docs.google.com/spreadsheets/d/1mZlJ9IauaVNiJ6f2Q14pg6rGEpWVrAjMJmAZ_FioVTY"
-url <- "https://docs.google.com/spreadsheets/d/1y9dVKOLpnXRYJjHk6_RIBI4MFIbj_XHpZaTrlpy8n1E"
+url <- "https://docs.google.com/spreadsheets/d/1NcB5pz7rWr2AJpjmDFu6v5E5pGVWmAoaS2kH-pF86H8"
 model_name = "GREGoR Data Model"
 model_description = "Data model for the GREGoR consortium"
 model_version = "1.4"
 
 # table metadata
 meta <- read_sheet(url, sheet="Table overview/status", skip=1)
-
-# can't validate genetics_findings table
-#meta <- filter(meta, !(Table %in% "genetic_findings"))
-
 meta <- meta %>%
     mutate(required=ifelse(tolower(Required) == "yes", TRUE, Required)) %>%
     select(table=Table, required)
