@@ -332,7 +332,7 @@
         {
           "column": "experiment_id",
           "required": true,
-          "description": "The experiment table and experiment ID(s) in which discovery was identified:\nexperiment_table.id_in_table.\nShould correspond to an experiment_id in the DCC-generated experiment table.",
+          "description": "The experiment table and experiment ID(s) in which discovery was identified: experiment_table.id_in_table. Should correspond to an experiment_id in the DCC-generated experiment table.",
           "data_type": "string",
           "multi_value_delimiter": "|",
           "examples": ["experiment_dna_short_read.GSS201938-01-021-SG-1", "experiment_nanopore.BCM_00001"],
@@ -1027,7 +1027,7 @@
         },
         {
           "column": "experiment_sample_id",
-          "description": "identifier used in the data file (e.g. the SM tag in a BAM header)",
+          "description": "identifier used in the data file (e.g. the SM tag in a BAM header, column headers for genotype fields in a VCF file)",
           "data_type": "string",
           "examples": "12339D-SA",
           "notes": "may be the same as experiment_short_read_id if the file does contain sample identifiers\nshould be present if downstream file contains a sample_id (e.g. BAM, VCF)\nsome centers have one id for the sample (tube) and a diff ID for the sample as named in the VCF; experiment_sample_id = ID in the VCF file; analyte_id = ID for the tube/aliquot/whatever"
@@ -2052,7 +2052,7 @@
         },
         {
           "column": "experiment_sample_id",
-          "description": "identifier used in the data file (e.g. the SM tag in a BAM header)",
+          "description": "identifier used in the data file (e.g. the SM tag in a BAM header, column headers for genotype fields in a VCF file)",
           "data_type": "string",
           "examples": "12339D-SA",
           "notes": "may be the same as experiment_short_read_id if the file does contain sample identifiers\nshould be present if downstream file contains a sample_id (e.g. BAM, VCF)\nsome centers have one id for the sample (tube) and a diff ID for the sample as named in the VCF; experiment_sample_id = ID in the VCF file; analyte_id = ID for the tube/aliquot/whatever"
