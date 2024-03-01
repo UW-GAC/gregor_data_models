@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.4",
+  "version": "1.4.1",
   "tables": [
     {
       "table": "participant",
@@ -172,8 +172,9 @@
           "required": true,
           "description": "Indication of whether the submitting RC considers this case 'solved'",
           "data_type": "enumeration",
-          "enumerations": ["Yes", "Likely", "No", "Partial"],
-          "examples": "partial"
+          "enumerations": ["Solved", "Partially solved", "Probably solved", "Unsolved", "Unaffected"],
+          "examples": "Partially solved",
+          "notes": "See https://docs.google.com/document/d/1Qg-wjF34F3h4pyMjFNQcDP5-PvmlOh0HxDEDR8DyexE"
         },
         {
           "column": "missing_variant_case",
