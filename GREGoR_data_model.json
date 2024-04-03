@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "tables": [
     {
       "table": "participant",
@@ -28,7 +28,7 @@
           "required": true,
           "description": "GREGoR Center to which the participant is originally associated",
           "data_type": "enumeration",
-          "enumerations": ["BCM", "BROAD", "CNH_I", "UW_CRDR", "GSS", "UW_DCC"]
+          "enumerations": ["BCM", "BROAD", "CNH_I", "UCI", "UW_CRDR", "GSS", "UW_DCC"]
         },
         {
           "column": "consent_code",

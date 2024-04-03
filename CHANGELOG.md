@@ -25,6 +25,7 @@
 |experiment_pac_bio         |includes_CpG_methylation    |added; not required                                                                                |
 |experiment_pac_bio         |by_strand                   |added; not required                                                                                |
 |participant                |solve_status                |change to enumerated values                                                                        |
+|participant                |gregor_center               |add UCI to enumerated values                                                                       |
 
 
 ## 1.3 

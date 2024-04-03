@@ -7,7 +7,7 @@ library(jsonlite)
 url <- "https://docs.google.com/spreadsheets/d/1NcB5pz7rWr2AJpjmDFu6v5E5pGVWmAoaS2kH-pF86H8"
 model_name = "GREGoR Data Model"
 model_description = "Data model for the GREGoR consortium"
-model_version = "1.4.1"
+model_version = "1.4.2"
 
 # table metadata
 meta <- read_sheet(url, sheet="Table overview/status", skip=1)
