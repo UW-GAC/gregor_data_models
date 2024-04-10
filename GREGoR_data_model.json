@@ -715,7 +715,7 @@
           "column": "table_name",
           "required": true,
           "data_type": "enumeration",
-          "enumerations": ["aligned_dna_short_read", "aligned_rna_short_read", "aligned_nanopore", "aligned_pac_bio ", "aligned_atac_short_read"],
+          "enumerations": ["aligned_dna_short_read", "aligned_rna_short_read", "aligned_nanopore", "aligned_pac_bio", "aligned_atac_short_read"],
           "examples": "aligned_dna_short_read"
         },
         {
