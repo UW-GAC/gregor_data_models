@@ -2,13 +2,14 @@ library(googlesheets4)
 library(dplyr)
 library(readr)
 
-url <- "https://docs.google.com/spreadsheets/d/1NcB5pz7rWr2AJpjmDFu6v5E5pGVWmAoaS2kH-pF86H8"
+url <- "https://docs.google.com/spreadsheets/d/1rC5ZgpzVMXiWDbzO8SQx_LyH566ZFoxkZk7O9xjOYr4"
 
-log <- read_sheet(url, sheet="Change Log") %>%
+log <- read_sheet(url, sheet="Change Log", col_types="cccc") %>%
     filter(!is.na(Version)) %>%
+    mutate(Version = as.character(Version)) %>%
     mutate(`Change notes` = gsub('"', "'", `Change notes`)) %>%
     filter(!(Version == "1.3" & Table == "genetic_findings")) %>%
-    mutate(Version = ifelse(Table == "genetic_findings", 1.3, Version)) %>%
+    mutate(Version = ifelse(Table == "genetic_findings" & Version == "1.2", "1.3", Version)) %>%
     arrange(Version)
 
 con <- file("CHANGELOG.md", "w")
