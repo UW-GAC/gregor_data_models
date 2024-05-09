@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.4.2",
+  "version": "1.5",
   "tables": [
     {
       "table": "participant",
@@ -343,9 +343,15 @@
           "column": "variant_type",
           "required": true,
           "data_type": "enumeration",
-          "enumerations": ["SNV/INDEL", "SV", "CNV", "RE", "MEI"],
+          "enumerations": ["SNV/INDEL", "RE", "SV"],
           "examples": "SNV/INDEL",
-          "notes": "Current data model only supports SNV/INDEL variant types. \n-Other variant type in process."
+          "notes": "SNV/INDEL: single nucelotide variants or short insertion/deletions (<50bp)\nRE: repeat elements\nSV: structural variants, including copy number variants and mobile element insertions"
+        },
+        {
+          "column": "sv_type",
+          "data_type": "enumeration",
+          "enumerations": ["BND", "CNV", "CPX", "CTX", "DEL", "DUP", "INS", "INS:ME", "INS:ME:ALU", "INS:ME:LINE1", "INS:ME:SVA", "INS:UNK", "INV"],
+          "notes": "SV-vcf code descriptions:\nBND = 'Translocation'\nCNV = 'Copy Number Variant'\nCPX  = 'Complex SV'\nCTX  = 'Reciprocal chromosomal translocation'\nDEL  = 'Deletion'\nDUP  = 'Duplication'\nINS  = 'Insertion'\nINS:ME  = 'Mobile element insertion of unspecified ME class'\nINS:ME:ALU  = 'Alu element insertion'\nINS:ME:LINE1  = 'LINE1 element insertion'\nINS:ME:SVA  = 'SVA element insertion'\nINS:UNK  = 'Sequence insertion of unspecified origin'\nINV  = 'Inversion'"
         },
         {
           "column": "variant_reference_assembly",
@@ -358,32 +364,50 @@
         },
         {
           "column": "chrom",
-          "required": true,
+          "required": "CONDITIONAL (variant_type = SNV/INDEL, variant_type = RE)",
           "description": "Chromosome of the variant",
           "data_type": "enumeration",
           "enumerations": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"],
           "examples": "4"
         },
         {
+          "column": "chrom_end",
+          "description": "End position chromosome of SV",
+          "data_type": "enumeration",
+          "enumerations": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"],
+          "notes": "Optional field to report second chromosome in SV"
+        },
+        {
           "column": "pos",
-          "required": true,
+          "required": "CONDITIONAL (variant_type = SNV/INDEL, variant_type = RE)",
           "description": "Start position of the variant",
           "data_type": "integer",
           "examples": "25145092"
         },
         {
+          "column": "pos_end",
+          "description": "End position of SV",
+          "data_type": "integer"
+        },
+        {
           "column": "ref",
-          "required": true,
+          "required": "CONDITIONAL (variant_type = SNV/INDEL, variant_type = RE)",
           "description": "Reference allele of the variant",
           "data_type": "string",
           "examples": "C"
         },
         {
           "column": "alt",
-          "required": true,
+          "required": "CONDITIONAL (variant_type = SNV/INDEL, variant_type = RE)",
           "description": "Alternate position of the variant",
           "data_type": "string",
           "examples": "T"
+        },
+        {
+          "column": "copy_number",
+          "description": "CNV copy number",
+          "data_type": "integer",
+          "notes": "To indicate copy number for CNVs that aren't covered by DUP or DEL, such as a triplication"
         },
         {
           "column": "ClinGen_allele_ID",
@@ -392,12 +416,13 @@
           "examples": "CA2877328"
         },
         {
-          "column": "gene",
-          "required": true,
-          "description": "HGNC approved gene symbol, if known",
+          "column": "gene_of_interest",
+          "required": "CONDITIONAL (variant_type = SNV/INDEL, variant_type = RE)",
+          "description": "HGNC approved symbol of the known or candidate gene(s) that are relevant for the observed phenotype.",
           "data_type": "string",
+          "multi_value_delimiter": "|",
           "examples": "SEPSECS",
-          "notes": "HGNC symbol related to the identified variant in context of the proposed condition \nIf non-coding and intergenic, use 'intergenic'. \nIf non-coding and not intergenic, use 'other'.  \n\n- Currently only single genes are allowed. Multi-gene and multi-locus variants are being discussed with the SV/CNV data model. \n- In situations where the variant overlaps two equally viable gene candidates on a single site, we suggest listing a separate discovery entry for each gene."
+          "notes": "- If the SNV/INDEL or RE is intergenic with no clear gene of interest, use 'intergenic'\n- If the SV has multiple genes of interest, use a multi-value delimiter\n- If the SV has no specific gene of interest, leave blank"
         },
         {
           "column": "transcript",
@@ -420,11 +445,17 @@
           "notes": "May use 'p.?' for non-coding variants"
         },
         {
+          "column": "hgvs",
+          "description": "genomic HGVS description of the variant",
+          "data_type": "string",
+          "notes": "Strongly encouraged for complex SVs (SV_type=CPX). \nCan be used to show uncertainty in SV breakends (g.(?_234567)_(345678_?)del)"
+        },
+        {
           "column": "zygosity",
           "required": true,
           "description": "Zygosity of variant",
           "data_type": "enumeration",
-          "enumerations": ["Heterozygous", "Homozygous", "Hemizygous", "Heteroplasmy", "Homoplasmy", "Mosaic"],
+          "enumerations": ["Heterozygous", "Homozygous", "Hemizygous", "Heteroplasmy", "Homoplasmy", "Mosaic", "Unknown"],
           "examples": "Heterozygous"
         },
         {
@@ -503,6 +534,13 @@
           "description": "ClinVar accession number for the variant curation submitted by your center",
           "data_type": "string",
           "notes": "Field to be updated in subsequent data submissions. TBD requirement timeline. Currently optional, to consider whether required if already submitted."
+        },
+        {
+          "column": "gene_disease_validity",
+          "description": "Validity assessment of the gene-disease relationship",
+          "data_type": "enumeration",
+          "enumerations": ["Definitive", "Strong", "Moderate", "Limited", "Disputed", "Animal Model Only", "Refuted"],
+          "notes": "Gene-disease validity as defined by ClinGen framework. \nEach RC can lookup in GenCC (search.thegencc.org; PMID 35507016) or curate themselves. \nAcceptable to use unpublished evidence/case data if an RC would like to curate a novel gene-disease association. \n\nCurrently optional, can change to required if gene_known_for_phenotype = known"
         },
         {
           "column": "public_database_other",
@@ -829,6 +867,7 @@
         },
         {
           "column": "sequencing_event_details",
+          "description": "describe if there are any sequencing-specific issues that would be important to note",
           "data_type": "string"
         }
       ]
@@ -1987,7 +2026,8 @@
           "required": true,
           "description": "identifier for experiment set",
           "data_type": "string",
-          "references": "> aligned_pac_bio_set.aligned_pac_bio_set_id"
+          "references": "> aligned_pac_bio_set.aligned_pac_bio_set_id",
+          "is_unique": true
         },
         {
           "column": "called_variants_dna_file",
@@ -2251,7 +2291,8 @@
           "required": true,
           "description": "identifier for aligned ATAC-seq data",
           "data_type": "string",
-          "references": "> aligned_atac_short_read.aligned_atac_short_read_id"
+          "references": "> aligned_atac_short_read.aligned_atac_short_read_id",
+          "is_unique": true
         },
         {
           "column": "called_peaks_file",
