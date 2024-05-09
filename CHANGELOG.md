@@ -1,5 +1,17 @@
 # Change log
 
+## 1.5.1 
+
+|Table                             |Field |Change notes |
+|:---------------------------------|:-----|:------------|
+|experiment_optical_mapping        |all   |table added  |
+|molecule_file_optical_mapping     |all   |table added  |
+|aligned_molecules_optical_mapping |all   |table added  |
+|aligned_assembly_optical_mapping  |all   |table added  |
+|optical_mapping_set               |all   |table added  |
+|called_variants_optical_mapping   |all   |table added  |
+
+
 ## 1.5 
 
 |Table                     |Field                    |Change notes                                           |

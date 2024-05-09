@@ -2,7 +2,7 @@ library(googlesheets4)
 library(dplyr)
 library(readr)
 
-url <- "https://docs.google.com/spreadsheets/d/1rC5ZgpzVMXiWDbzO8SQx_LyH566ZFoxkZk7O9xjOYr4"
+url <- "https://docs.google.com/spreadsheets/d/1p_0nhKMvKBueSrUAQMCe9cHv16WyhKSX_jnxNCuGFWg"
 
 log <- read_sheet(url, sheet="Change Log", col_types="cccc") %>%
     filter(!is.na(Version)) %>%
