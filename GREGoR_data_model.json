@@ -188,7 +188,7 @@
           "column": "missing_variant_details",
           "description": "For missing variant cases, indicate gene(s) or region of interest and reason for inclusion in MVP.",
           "data_type": "string",
-          "examples": ["Werner syndrome case with single pathogenic hit in WRN ", "Clinical diagnosis of Marfan syndrome with no pathogenic or likely pathogenic variant identified in FBN1", "Clinical diagnosis of neurofibromatosis type 1 with no pathogenic or likely pathogenic variant identified in NF1 "]
+          "examples": ["Werner syndrome case with single pathogenic hit in WRN", "Clinical diagnosis of Marfan syndrome with no pathogenic or likely pathogenic variant identified in FBN1", "Clinical diagnosis of neurofibromatosis type 1 with no pathogenic or likely pathogenic variant identified in NF1"]
         }
       ]
     },
@@ -593,6 +593,9 @@
           "description": "Free text field to explain edge cases or discovery updates or list parallel experiment IDs or list parental allele balance when mosaic... etc.",
           "data_type": "string",
           "notes": "Data collected in this section will be used to determine data model updates needed for future submission rounds."
+        },
+        {
+          "column": "VRS_ID"
         }
       ]
     },
@@ -627,7 +630,7 @@
           "column": "analyte_processing_details",
           "description": "details about how the analyte or original biosample was extracted or processed",
           "data_type": "string",
-          "examples": ["PAX extraction protocol,", "CHX treatment,  ", "globin depletion, etc."],
+          "examples": ["PAX extraction protocol,", "CHX treatment,", "globin depletion, etc."],
           "notes": "Regarding PMBC isolations from CPT tubes;  Isolations of PBMCs should be done on wet ice following the protocol.  Use only chilled cell freezing media.   Isolated PBMCs in freezing media"
         },
         {
@@ -812,7 +815,7 @@
           "column": "seq_library_prep_kit_method",
           "description": "Library prep kit used",
           "data_type": "string",
-          "examples": ["Kappa Hyper PCR plus ", "Kappa Hyper PCR free"],
+          "examples": ["Kappa Hyper PCR plus", "Kappa Hyper PCR free"],
           "notes": "Can be missing if RC receives external data"
         },
         {
@@ -1076,7 +1079,7 @@
           "column": "seq_library_prep_kit_method",
           "description": "Library prep kit used",
           "data_type": "string",
-          "examples": ["Kappa Hyper PCR plus, ", "Kappa Hyper PCR free"],
+          "examples": ["Kappa Hyper PCR plus,", "Kappa Hyper PCR free"],
           "notes": "Can be missing if RC receives external data"
         },
         {
@@ -1265,7 +1268,7 @@
         {
           "column": "gene_annotation_details",
           "data_type": "enumeration",
-          "enumerations": ["gencode_comprehensive_chr", "gencode_comprehensive_all", "gencode_comprehensive_pri ", "gencode_basic_chr", "gencode_basic_all", "gencode_basic_pri ", "lncRNA_annotation", "polyA_feature_annotation", "consensus_pseudogenes", "predicted_tRNA_genes"],
+          "enumerations": ["gencode_comprehensive_chr", "gencode_comprehensive_all", "gencode_comprehensive_pri", "gencode_basic_chr", "gencode_basic_all", "gencode_basic_pri", "lncRNA_annotation", "polyA_feature_annotation", "consensus_pseudogenes", "predicted_tRNA_genes"],
           "examples": ["examples corresponding to GENCODE options", "gencode_comprehensive_chr", "gencode_comprehensive_all", "gencode_comprehensive_pri"]
         },
         {
@@ -2102,7 +2105,7 @@
           "column": "seq_library_prep_kit_method",
           "description": "Library prep kit used",
           "data_type": "string",
-          "examples": ["Kappa Hyper PCR plus ", "Kappa Hyper PCR free"],
+          "examples": ["Kappa Hyper PCR plus", "Kappa Hyper PCR free"],
           "notes": "Can be missing if RC receives external data"
         },
         {
