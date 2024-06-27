@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "tables": [
     {
       "table": "participant",
@@ -593,9 +593,6 @@
           "description": "Free text field to explain edge cases or discovery updates or list parallel experiment IDs or list parental allele balance when mosaic... etc.",
           "data_type": "string",
           "notes": "Data collected in this section will be used to determine data model updates needed for future submission rounds."
-        },
-        {
-          "column": "VRS_ID"
         }
       ]
     },
