@@ -18,12 +18,12 @@ sheets_to_list <- function(tab_list, tables) {
       # coerce enumerations to a vector
       make_enum_vec <- ifelse(is.na(tab_list[[i]][[var_loc]][[j]]$enumerations), NA,
                               strsplit(as.character(unlist(tab_list[[i]][[var_loc]][[j]]$enumerations)), split = "\n"))
-      tab_list[[i]][[var_loc]][[j]]$enumerations <- unlist(make_enum_vec)
+      tab_list[[i]][[var_loc]][[j]]$enumerations <- str_trim(unlist(make_enum_vec))
       
       # coerce examples to a vector
       make_examp_vec <- ifelse(is.na(tab_list[[i]][[var_loc]][[j]]$examples), NA,
                                strsplit(as.character(unlist(tab_list[[i]][[var_loc]][[j]]$examples)), split = "\n"))
-      tab_list[[i]][[var_loc]][[j]]$examples <- unlist(make_examp_vec)
+      tab_list[[i]][[var_loc]][[j]]$examples <- str_trim(unlist(make_examp_vec))
       
       # manually remove null entries from the variable list
       tab_list[[i]][[var_loc]][[j]] <- tab_list[[i]][[var_loc]][[j]][sapply(tab_list[[i]][[var_loc]][[j]], function(x){!all(is.na(x))})]
