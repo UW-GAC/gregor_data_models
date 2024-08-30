@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.5.2",
+  "version": "1.6",
   "tables": [
     {
       "table": "participant",
@@ -336,16 +336,17 @@
           "description": "The experiment table and experiment ID(s) in which discovery was identified: experiment_table.id_in_table. Should correspond to an experiment_id in the DCC-generated experiment table.",
           "data_type": "string",
           "multi_value_delimiter": "|",
-          "examples": ["experiment_dna_short_read.GSS201938-01-021-SG-1", "experiment_nanopore.BCM_00001"],
+          "examples": ["experiment_dna_short_read.GSS201938-01-021-SG-1", "experiment_nanopore.BCM_00001", "see_notes", "see_MOD"],
           "notes": "RC submitted. \n- If experiment identifier is not available due to current data model limitations, use the 'method_of_discovery' field\n- If variant is identified in multiple datasets, list the assigned primary experiment_id first and fill the following rows (e.g. allele balance) with data from this experiment\n- Additional information on orthogonal experiments can noted in the 'method_of_discovery' or 'notes' field"
         },
         {
           "column": "variant_type",
           "required": true,
           "data_type": "enumeration",
-          "enumerations": ["SNV/INDEL", "RE", "SV"],
+          "enumerations": ["SNV", "INDEL", "SV", "CNV", "RE", "MEI", "STR"],
+          "multi_value_delimiter": "|",
           "examples": "SNV/INDEL",
-          "notes": "SNV/INDEL: single nucelotide variants or short insertion/deletions (<50bp)\nRE: repeat elements\nSV: structural variants, including copy number variants and mobile element insertions"
+          "notes": "SNV: single nucelotide variants\nINDEL: short insertion/deletions (<50bp)\nRE: repeat elements\nSV: structural variants, including copy number variants and mobile element insertions"
         },
         {
           "column": "sv_type",
@@ -364,7 +365,7 @@
         },
         {
           "column": "chrom",
-          "required": "CONDITIONAL (variant_type = SNV/INDEL, variant_type = RE)",
+          "required": "CONDITIONAL (variant_type = SNV, variant_type = INDEL, variant_type = RE)",
           "description": "Chromosome of the variant",
           "data_type": "enumeration",
           "enumerations": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"],
@@ -379,26 +380,28 @@
         },
         {
           "column": "pos",
-          "required": "CONDITIONAL (variant_type = SNV/INDEL, variant_type = RE)",
+          "required": "CONDITIONAL (variant_type = SNV, variant_type = INDEL, variant_type = RE)",
           "description": "Start position of the variant",
           "data_type": "integer",
-          "examples": "25145092"
+          "examples": "25145092",
+          "notes": "this field uses VCF-style coordinates"
         },
         {
           "column": "pos_end",
           "description": "End position of SV",
-          "data_type": "integer"
+          "data_type": "integer",
+          "notes": "this field uses VCF-style coordinates"
         },
         {
           "column": "ref",
-          "required": "CONDITIONAL (variant_type = SNV/INDEL, variant_type = RE)",
+          "required": "CONDITIONAL (variant_type = SNV, variant_type = INDEL, variant_type = RE)",
           "description": "Reference allele of the variant",
           "data_type": "string",
           "examples": "C"
         },
         {
           "column": "alt",
-          "required": "CONDITIONAL (variant_type = SNV/INDEL, variant_type = RE)",
+          "required": "CONDITIONAL (variant_type = SNV, variant_type = INDEL, variant_type = RE)",
           "description": "Alternate position of the variant",
           "data_type": "string",
           "examples": "T"
@@ -417,7 +420,7 @@
         },
         {
           "column": "gene_of_interest",
-          "required": "CONDITIONAL (variant_type = SNV/INDEL, variant_type = RE)",
+          "required": "CONDITIONAL (variant_type = SNV, variant_type = INDEL, variant_type = RE)",
           "description": "HGNC approved symbol of the known or candidate gene(s) that are relevant for the observed phenotype.",
           "data_type": "string",
           "multi_value_delimiter": "|",
@@ -433,9 +436,10 @@
         },
         {
           "column": "hgvsc",
-          "description": "HGVS c. description of the variant (m. for mitochondrial)",
+          "description": "HGVS c. description of the variant (m. for mitochondrial, n. for noncoding)",
           "data_type": "string",
-          "examples": "c.846G>A"
+          "examples": "c.846G>A",
+          "notes": "This field is strongly encouraged if transcript is provided"
         },
         {
           "column": "hgvsp",
@@ -523,6 +527,7 @@
         },
         {
           "column": "GREGoR_variant_classification",
+          "required": "CONDITIONAL (gene_known_for_phenotype = Known)",
           "description": "Clinical significance of variant described to condition listed as determined by the RC's variant curation.",
           "data_type": "enumeration",
           "enumerations": ["Benign", "Likely benign", "Uncertain significance - low", "Uncertain significance - moderate", "Uncertain significance - high", "Uncertain significance", "Likely pathogenic", "Pathogenic", "Curation in progress", "Well-established P/LP"],
@@ -537,10 +542,16 @@
         },
         {
           "column": "gene_disease_validity",
+          "required": "CONDITIONAL (gene_known_for_phenotype = Known)",
           "description": "Validity assessment of the gene-disease relationship",
           "data_type": "enumeration",
-          "enumerations": ["Definitive", "Strong", "Moderate", "Limited", "Disputed", "Animal Model Only", "Refuted"],
-          "notes": "Gene-disease validity as defined by ClinGen framework. \nEach RC can lookup in GenCC (search.thegencc.org; PMID 35507016) or curate themselves. \nAcceptable to use unpublished evidence/case data if an RC would like to curate a novel gene-disease association. \n\nCurrently optional, can change to required if gene_known_for_phenotype = known"
+          "enumerations": ["Definitive", "Strong", "Moderate", "Limited", "Disputed", "Animal Model Only", "Refuted", "Curation in progress"],
+          "notes": "Gene-disease validity as defined by ClinGen framework. \nEach RC can lookup in GenCC (search.thegencc.org; PMID 35507016) or curate themselves. \nAcceptable to use unpublished evidence/case data if an RC would like to curate a novel gene-disease association."
+        },
+        {
+          "column": "gene_disease_validity_notes",
+          "description": "additional context or explanation about the gene_disease_validity assessment",
+          "data_type": "string"
         },
         {
           "column": "public_database_other",
@@ -593,6 +604,13 @@
           "description": "Free text field to explain edge cases or discovery updates or list parallel experiment IDs or list parental allele balance when mosaic... etc.",
           "data_type": "string",
           "notes": "Data collected in this section will be used to determine data model updates needed for future submission rounds."
+        },
+        {
+          "column": "VRS_ID",
+          "description": "The Variation Representation Specification (VRS, pronounced “verse”) is a standard developed by the Global Alliance for Genomic Health to facilitate and improve sharing of genetic information.",
+          "data_type": "string",
+          "examples": "rs429358C",
+          "notes": "https://vrs.ga4gh.org/en/stable/\n doi:10.1016/j.xgen.2021.100027"
         }
       ]
     },
@@ -1043,6 +1061,13 @@
           "column": "analysis_details",
           "description": "brief description of the analysis pipeline used for producing the file; perhaps a link to something like a WDL file or github repository",
           "data_type": "string"
+        },
+        {
+          "column": "chrom",
+          "description": "chromosome of the variants in the VCF file",
+          "data_type": "enumeration",
+          "enumerations": ["ALL", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"],
+          "notes": "Use ALL for VCFs with autosomes + sex chromosomes"
         }
       ]
     },
@@ -1086,6 +1111,12 @@
           "enumerations": ["stranded poly-A pulldown", "stranded total RNA", "rRNA depletion", "globin depletion"],
           "multi_value_delimiter": "|",
           "examples": "stranded total RNA|globin depletion"
+        },
+        {
+          "column": "depletion_targets",
+          "description": "depletion kit or list of depletion targets used",
+          "data_type": "string",
+          "multi_value_delimiter": "|"
         },
         {
           "column": "experiment_type",
@@ -1646,7 +1677,7 @@
           "required": true,
           "description": "types of variants called",
           "data_type": "string",
-          "enumerations": ["SNV", "INDEL", "SV", "CNV", "RE", "MEI"],
+          "enumerations": ["SNV", "INDEL", "SV", "CNV", "RE", "MEI", "STR"],
           "multi_value_delimiter": "|",
           "examples": "SNV|INDEL",
           "notes": "can add more values as the need arises\nif there are two VCFs for SNV and Indels, there would be two different lines in this table; if combined in one VCF, a |-delimited entry"
@@ -1655,6 +1686,13 @@
           "column": "analysis_details",
           "description": "brief description of the analysis pipeline used for producing the file; perhaps a link to something like a WDL file or github repository",
           "data_type": "string"
+        },
+        {
+          "column": "chrom",
+          "description": "chromosome of the variants in the VCF file",
+          "data_type": "enumeration",
+          "enumerations": ["ALL", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"],
+          "notes": "Use ALL for VCFs with autosomes + sex chromosomes"
         }
       ]
     },
@@ -2060,7 +2098,7 @@
           "required": true,
           "description": "types of variants called",
           "data_type": "string",
-          "enumerations": ["SNV", "INDEL", "SV", "CNV", "RE", "MEI"],
+          "enumerations": ["SNV", "INDEL", "SV", "CNV", "RE", "MEI", "STR"],
           "multi_value_delimiter": "|",
           "examples": "SNV|INDEL",
           "notes": "can add more values as the need arises\nif there are two VCFs for SNV and Indels, there would be two different lines in this table; if combined in one VCF, a |-delimited entry"
@@ -2069,6 +2107,13 @@
           "column": "analysis_details",
           "description": "brief description of the analysis pipeline used for producing the file; perhaps a link to something like a WDL file or github repository",
           "data_type": "string"
+        },
+        {
+          "column": "chrom",
+          "description": "chromosome of the variants in the VCF file",
+          "data_type": "enumeration",
+          "enumerations": ["ALL", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"],
+          "notes": "Use ALL for VCFs with autosomes + sex chromosomes"
         }
       ]
     },
@@ -2890,6 +2935,13 @@
           "column": "analysis_details",
           "description": "brief description of the analysis pipeline used for producing the file; perhaps a link to something like a WDL file or github repository",
           "data_type": "string"
+        },
+        {
+          "column": "chrom",
+          "description": "chromosome of the variants in the VCF file",
+          "data_type": "enumeration",
+          "enumerations": ["ALL", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"],
+          "notes": "Use ALL for VCFs with autosomes + sex chromosomes"
         }
       ]
     }

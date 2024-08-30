@@ -1,5 +1,35 @@
 # Change log
 
+## 1.6 
+
+|Table                           |Field                         |Change notes                                                                                                                                  |
+|:-------------------------------|:-----------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------|
+|called_variants_nanopore        |variant_types                 |added STR as enumerated value                                                                                                                 |
+|called_variants_pac_bio         |variant_types                 |added STR as enumerated value                                                                                                                 |
+|genetic_findings                |experiment_id                 |added 'see_notes' and 'see_MOD' as example values (this field will be required for validation)                                                |
+|genetic_findings                |variant_type                  |changed allowable values to match other 'called_variants' tables (SNV, INDEL as separate values posssibly with delimiter instead of SNV/INDEL |
+|genetic_findings                |pos                           |added note describing that this is .vcf-style coordinates                                                                                     |
+|genetic_findings                |pos                           |updated conditional requirement to align with variant_type change                                                                             |
+|genetic_findings                |GREGoR_variant_classification |required if known disease gene                                                                                                                |
+|genetic_findings                |gene_disease_validity_notes   |required if known disease gene                                                                                                                |
+|genetic_findings                |gene_disease_validity_notes   |added; not required                                                                                                                           |
+|genetic_findings                |VRS_ID                        |added; not required                                                                                                                           |
+|experiment_rna_short_read       |depletion_targets             |added; not required                                                                                                                           |
+|called_variants_nanopore        |chrom                         |added; not required                                                                                                                           |
+|called_variants_pac_bio         |chrom                         |added; not required                                                                                                                           |
+|called_variants_optical_mapping |chrom                         |added; not required                                                                                                                           |
+
+
+## 1.5.2 
+
+|Table                           |Field |Change notes        |
+|:-------------------------------|:-----|:-------------------|
+|called_variants_dna_short_read  |chrom |added; not required |
+|called_variants_nanopore        |chrom |added; not required |
+|called_variants_pac_bio         |chrom |added; not required |
+|called_variants_optical_mapping |chrom |added; not required |
+
+
 ## 1.5.1 
 
 |Table                             |Field |Change notes |
