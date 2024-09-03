@@ -2492,7 +2492,7 @@
           "notes": "Can be missing if RC receives external data; ISO 8601 date format"
         },
         {
-          "column": "DNA concentration",
+          "column": "DNA_concentration",
           "description": "DNA concentration in ng/uL",
           "data_type": "float",
           "examples": "112",
@@ -2806,25 +2806,28 @@
           "examples": "CLIA-000026 - Guided Assembly_07172023"
         },
         {
-          "column": "r.cmap file",
+          "column": "r_cmap_file",
           "required": true,
           "description": "Location of reference cmap file",
           "data_type": "string",
+          "is_bucket_path": true,
           "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/exp_refineFinal1_merged_r.cmap"
         },
         {
-          "column": "xmap file",
+          "column": "xmap_file",
           "required": true,
           "description": "Location of molecule to alignment xmap file",
           "data_type": "string",
+          "is_bucket_path": true,
           "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/exp_refineFinal1_merged.xmap"
         },
         {
-          "column": "q.cmap file",
+          "column": "q_cmap_file",
           "required": true,
           "description": "Location of aligned molecule cmap file",
           "data_type": "string",
-          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/exp_refineFinal1_merged_r.cmap"
+          "is_bucket_path": true,
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/exp_refineFinal1_merged_q.cmap"
         },
         {
           "column": "cmap_file_version",
