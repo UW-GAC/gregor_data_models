@@ -18,6 +18,16 @@
 |called_variants_nanopore        |chrom                         |added; not required                                                                                                                           |
 |called_variants_pac_bio         |chrom                         |added; not required                                                                                                                           |
 |called_variants_optical_mapping |chrom                         |added; not required                                                                                                                           |
+|aligned_nanopore                |num_reads                     |changed data type to float for large number support                                                                                           |
+|aligned_nanopore                |num_bases                     |changed data type to float for large number support                                                                                           |
+|aligned_nanopore                |num_aligned_reads             |changed data type to float for large number support                                                                                           |
+|aligned_nanopore                |num_aligned_bases             |changed data type to float for large number support                                                                                           |
+|aligned_nanopore                |read_length_mean              |changed data type to float                                                                                                                    |
+|aligned_pac_bio                 |num_reads                     |changed data type to float for large number support                                                                                           |
+|aligned_pac_bio                 |num_bases                     |changed data type to float for large number support                                                                                           |
+|aligned_pac_bio                 |num_aligned_reads             |changed data type to float for large number support                                                                                           |
+|aligned_pac_bio                 |num_aligned_bases             |changed data type to float for large number support                                                                                           |
+|aligned_pac_bio                 |read_length_mean              |changed data type to float                                                                                                                    |
 
 
 ## 1.5.2 

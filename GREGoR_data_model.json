@@ -345,7 +345,7 @@
           "data_type": "enumeration",
           "enumerations": ["SNV", "INDEL", "SV", "CNV", "RE", "MEI", "STR"],
           "multi_value_delimiter": "|",
-          "examples": "SNV/INDEL",
+          "examples": "SNV|CNV",
           "notes": "SNV: single nucelotide variants\nINDEL: short insertion/deletions (<50bp)\nRE: repeat elements\nSV: structural variants, including copy number variants and mobile element insertions"
         },
         {
@@ -1548,37 +1548,41 @@
         {
           "column": "num_reads",
           "description": "Total reads (before/ignoring alignment)",
-          "data_type": "integer",
-          "examples": "11946552"
+          "data_type": "float",
+          "examples": "11946552",
+          "notes": "float type required for large number, but value entered should be an integer"
         },
         {
           "column": "num_bases",
           "description": "Number of bases (before/ignoring alignment)",
-          "data_type": "integer",
-          "examples": "101126719147"
+          "data_type": "float",
+          "examples": "101126719147",
+          "notes": "float type required for large number, but value entered should be an integer"
         },
         {
           "column": "read_length_mean",
           "description": "Mean length of all reads (before/ignoring alignment)",
-          "data_type": "integer",
+          "data_type": "float",
           "examples": "18232"
         },
         {
           "column": "num_aligned_reads",
           "description": "Total aligned reads",
-          "data_type": "integer",
-          "examples": "10751896"
+          "data_type": "float",
+          "examples": "10751896",
+          "notes": "float type required for large number, but value entered should be an integer"
         },
         {
           "column": "num_aligned_bases",
           "description": "Number of bases in aligned reads",
-          "data_type": "integer",
-          "examples": "91014047232"
+          "data_type": "float",
+          "examples": "91014047232",
+          "notes": "float type required for large number, but value entered should be an integer"
         },
         {
           "column": "aligned_read_length_mean",
           "description": "Mean length of aligned reads",
-          "data_type": "integer",
+          "data_type": "float",
           "examples": "18104"
         },
         {
@@ -1973,37 +1977,41 @@
         {
           "column": "num_reads",
           "description": "Total reads (before/ignoring alignment)",
-          "data_type": "integer",
-          "examples": "11946552"
+          "data_type": "float",
+          "examples": "11946552",
+          "notes": "float type required for large number, but value entered should be an integer"
         },
         {
           "column": "num_bases",
           "description": "Number of bases (before/ignoring alignment)",
-          "data_type": "integer",
-          "examples": "101126719147"
+          "data_type": "float",
+          "examples": "101126719147",
+          "notes": "float type required for large number, but value entered should be an integer"
         },
         {
           "column": "read_length_mean",
           "description": "Mean length of all reads (before/ignoring alignment)",
-          "data_type": "integer",
+          "data_type": "float",
           "examples": "18232"
         },
         {
           "column": "num_aligned_reads",
           "description": "Total aligned reads",
-          "data_type": "integer",
-          "examples": "10751896"
+          "data_type": "float",
+          "examples": "10751896",
+          "notes": "float type required for large number, but value entered should be an integer"
         },
         {
           "column": "num_aligned_bases",
           "description": "Number of bases in aligned reads",
-          "data_type": "integer",
-          "examples": "91014047232"
+          "data_type": "float",
+          "examples": "91014047232",
+          "notes": "float type required for large number, but value entered should be an integer"
         },
         {
           "column": "aligned_read_length_mean",
           "description": "Mean length of aligned reads",
-          "data_type": "integer",
+          "data_type": "float",
           "examples": "18104"
         },
         {
