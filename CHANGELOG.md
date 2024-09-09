@@ -1,5 +1,12 @@
 # Change log
 
+## 1.6.1 
+
+|Table   |Field        |Change notes                   |
+|:-------|:------------|:------------------------------|
+|analyte |analyte_type |added PBMC as enumerated value |
+
+
 ## 1.6 
 
 |Table                           |Field                         |Change notes                                                                                                                                  |

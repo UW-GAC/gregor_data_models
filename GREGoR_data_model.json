@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.6",
+  "version": "1.6.1",
   "tables": [
     {
       "table": "participant",
@@ -638,7 +638,7 @@
           "required": true,
           "description": "analyte derived from the primary_biosample. The actual thing you're sticking into a machine to analyze/sequence",
           "data_type": "enumeration",
-          "enumerations": ["DNA", "RNA", "cDNA", "blood plasma", "frozen whole blood", "high molecular weight DNA", "urine"],
+          "enumerations": ["DNA", "RNA", "cDNA", "blood plasma", "frozen whole blood", "high molecular weight DNA", "urine", "PBMC"],
           "examples": "DNA"
         },
         {
