@@ -343,10 +343,10 @@
           "column": "variant_type",
           "required": true,
           "data_type": "enumeration",
-          "enumerations": ["SNV", "INDEL", "SV", "CNV", "RE", "MEI", "STR"],
+          "enumerations": ["SNV/INDEL", "SV", "RE", "SNV", "INDEL", "CNV", "MEI", "STR"],
           "multi_value_delimiter": "|",
           "examples": "SNV|CNV",
-          "notes": "SNV: single nucelotide variants\nINDEL: short insertion/deletions (<50bp)\nRE: repeat elements\nSV: structural variants, including copy number variants and mobile element insertions"
+          "notes": "SNV/INDEL: single nucelotide variants or short insertion/deletions (<50bp)\nRE: repeat elements\nSV: structural variants, including copy number variants and mobile element insertions"
         },
         {
           "column": "sv_type",
@@ -638,7 +638,7 @@
           "required": true,
           "description": "analyte derived from the primary_biosample. The actual thing you're sticking into a machine to analyze/sequence",
           "data_type": "enumeration",
-          "enumerations": ["DNA", "RNA", "cDNA", "blood plasma", "frozen whole blood", "high molecular weight DNA", "urine"],
+          "enumerations": ["DNA", "RNA", "cDNA", "blood plasma", "frozen whole blood", "high molecular weight DNA", "urine", "PBMC"],
           "examples": "DNA"
         },
         {

@@ -2,32 +2,33 @@
 
 ## 1.6 
 
-|Table                           |Field                         |Change notes                                                                                                                                  |
-|:-------------------------------|:-----------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------|
-|called_variants_nanopore        |variant_types                 |added STR as enumerated value                                                                                                                 |
-|called_variants_pac_bio         |variant_types                 |added STR as enumerated value                                                                                                                 |
-|genetic_findings                |experiment_id                 |added 'see_notes' and 'see_MOD' as example values (this field will be required for validation)                                                |
-|genetic_findings                |variant_type                  |changed allowable values to match other 'called_variants' tables (SNV, INDEL as separate values posssibly with delimiter instead of SNV/INDEL |
-|genetic_findings                |pos                           |added note describing that this is .vcf-style coordinates                                                                                     |
-|genetic_findings                |pos                           |updated conditional requirement to align with variant_type change                                                                             |
-|genetic_findings                |GREGoR_variant_classification |required if known disease gene                                                                                                                |
-|genetic_findings                |gene_disease_validity_notes   |required if known disease gene                                                                                                                |
-|genetic_findings                |gene_disease_validity_notes   |added; not required                                                                                                                           |
-|genetic_findings                |VRS_ID                        |added; not required                                                                                                                           |
-|experiment_rna_short_read       |depletion_targets             |added; not required                                                                                                                           |
-|called_variants_nanopore        |chrom                         |added; not required                                                                                                                           |
-|called_variants_pac_bio         |chrom                         |added; not required                                                                                                                           |
-|called_variants_optical_mapping |chrom                         |added; not required                                                                                                                           |
-|aligned_nanopore                |num_reads                     |changed data type to float for large number support                                                                                           |
-|aligned_nanopore                |num_bases                     |changed data type to float for large number support                                                                                           |
-|aligned_nanopore                |num_aligned_reads             |changed data type to float for large number support                                                                                           |
-|aligned_nanopore                |num_aligned_bases             |changed data type to float for large number support                                                                                           |
-|aligned_nanopore                |read_length_mean              |changed data type to float                                                                                                                    |
-|aligned_pac_bio                 |num_reads                     |changed data type to float for large number support                                                                                           |
-|aligned_pac_bio                 |num_bases                     |changed data type to float for large number support                                                                                           |
-|aligned_pac_bio                 |num_aligned_reads             |changed data type to float for large number support                                                                                           |
-|aligned_pac_bio                 |num_aligned_bases             |changed data type to float for large number support                                                                                           |
-|aligned_pac_bio                 |read_length_mean              |changed data type to float                                                                                                                    |
+|Table                           |Field                         |Change notes                                                                                      |
+|:-------------------------------|:-----------------------------|:-------------------------------------------------------------------------------------------------|
+|called_variants_nanopore        |variant_types                 |added STR as enumerated value                                                                     |
+|called_variants_pac_bio         |variant_types                 |added STR as enumerated value                                                                     |
+|genetic_findings                |experiment_id                 |added 'see_notes' and 'see_MOD' as example values (this field will be required for validation)    |
+|genetic_findings                |variant_type                  |added more specific enumerated values (possibly with delimiter) to match 'called_variants' tables |
+|genetic_findings                |pos                           |added note describing that this is .vcf-style coordinates                                         |
+|genetic_findings                |pos                           |updated conditional requirement to align with variant_type change                                 |
+|genetic_findings                |GREGoR_variant_classification |required if known disease gene                                                                    |
+|genetic_findings                |gene_disease_validity_notes   |required if known disease gene                                                                    |
+|genetic_findings                |gene_disease_validity_notes   |added; not required                                                                               |
+|genetic_findings                |VRS_ID                        |added; not required                                                                               |
+|experiment_rna_short_read       |depletion_targets             |added; not required                                                                               |
+|called_variants_nanopore        |chrom                         |added; not required                                                                               |
+|called_variants_pac_bio         |chrom                         |added; not required                                                                               |
+|called_variants_optical_mapping |chrom                         |added; not required                                                                               |
+|aligned_nanopore                |num_reads                     |changed data type to float for large number support                                               |
+|aligned_nanopore                |num_bases                     |changed data type to float for large number support                                               |
+|aligned_nanopore                |num_aligned_reads             |changed data type to float for large number support                                               |
+|aligned_nanopore                |num_aligned_bases             |changed data type to float for large number support                                               |
+|aligned_nanopore                |read_length_mean              |changed data type to float                                                                        |
+|aligned_pac_bio                 |num_reads                     |changed data type to float for large number support                                               |
+|aligned_pac_bio                 |num_bases                     |changed data type to float for large number support                                               |
+|aligned_pac_bio                 |num_aligned_reads             |changed data type to float for large number support                                               |
+|aligned_pac_bio                 |num_aligned_bases             |changed data type to float for large number support                                               |
+|aligned_pac_bio                 |read_length_mean              |changed data type to float                                                                        |
+|analyte                         |analyte_type                  |added PBMC as enumerated value                                                                    |
 
 
 ## 1.5.2 
