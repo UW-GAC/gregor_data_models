@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.6.1",
+  "version": "1.6",
   "tables": [
     {
       "table": "participant",
@@ -343,10 +343,10 @@
           "column": "variant_type",
           "required": true,
           "data_type": "enumeration",
-          "enumerations": ["SNV", "INDEL", "SV", "CNV", "RE", "MEI", "STR"],
+          "enumerations": ["SNV/INDEL", "SV", "RE", "SNV", "INDEL", "CNV", "MEI", "STR"],
           "multi_value_delimiter": "|",
           "examples": "SNV|CNV",
-          "notes": "SNV: single nucelotide variants\nINDEL: short insertion/deletions (<50bp)\nRE: repeat elements\nSV: structural variants, including copy number variants and mobile element insertions"
+          "notes": "SNV/INDEL: single nucelotide variants or short insertion/deletions (<50bp)\nRE: repeat elements\nSV: structural variants, including copy number variants and mobile element insertions"
         },
         {
           "column": "sv_type",
