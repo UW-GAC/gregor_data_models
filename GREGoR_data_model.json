@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.6",
+  "version": "1.6.1",
   "tables": [
     {
       "table": "participant",
@@ -653,9 +653,9 @@
           "required": true,
           "description": "Tissue type of biosample taken from the participant that the analyte was extracted or processed from (for unknown can use tissue - UBERON:0000479), e.g. skin, liver, brain",
           "data_type": "enumeration",
-          "enumerations": ["UBERON:0000479", "UBERON:0003714", "UBERON:0001836", "UBERON:0001003", "UBERON:0002385", "UBERON:0000178", "UBERON:0002371", "UBERON:0006956", "UBERON:0001359", "UBERON:0001088", "UBERON:0019306", "CL: 0000034", "CL: 0000576", "CL: 0000542", "CL: 0000057", "UBERON: 0005291", "CL: 0011020", "UBERON: 0002037", "UBERON: 0001133"],
+          "enumerations": ["UBERON:0000479", "UBERON:0003714", "UBERON:0001836", "UBERON:0001003", "UBERON:0002385", "UBERON:0000178", "UBERON:0002371", "UBERON:0006956", "UBERON:0001359", "UBERON:0001088", "UBERON:0019306", "CL: 0000034", "CL: 0000576", "CL: 0000542", "CL: 0000057", "UBERON:0005291", "CL: 0011020", "UBERON:0002037", "UBERON:0001133"],
           "examples": "UBERON:0000178",
-          "notes": "Contact the GREGoR Data Standards WG to expand the list of allowable UBERON codes. Currently allowed values are:\nUBERON:0000479 (tissue) \nUBERON:0003714 (neural tissue) \nUBERON:0001836 (saliva) \nUBERON:0001003 (skin epidermis) \nUBERON:0002385 (muscle tissue) \nUBERON:0000178 (whole blood) \nUBERON:0002371 (bone marrow) \nUBERON:0006956 (buccal mucosa)\nUBERON:0001359 (cerebrospinal fluid)\nUBERON:0001088 (urine)\nUBERON:0019306 (nose epithelium)\nCL: 0000034 (iPSC)\nCL: 0000576 (monocytes - PBMCs)\nCL: 0000542 (lymphocytes - LCLs)\nCL: 0000057 (fibroblasts)\nUBERON: 0005291 (embryonic tissue)\nCL: 0011020 (iPSC NPC)\nUBERON: 0002037 (cerebellum tissue)\nUBERON: 0001133 (cardiac tissue)"
+          "notes": "Contact the GREGoR Data Standards WG to expand the list of allowable UBERON codes. Currently allowed values are:\nUBERON:0000479 (tissue) \nUBERON:0003714 (neural tissue) \nUBERON:0001836 (saliva) \nUBERON:0001003 (skin epidermis) \nUBERON:0002385 (muscle tissue) \nUBERON:0000178 (whole blood) \nUBERON:0002371 (bone marrow) \nUBERON:0006956 (buccal mucosa)\nUBERON:0001359 (cerebrospinal fluid)\nUBERON:0001088 (urine)\nUBERON:0019306 (nose epithelium)\nCL: 0000034 (iPSC)\nCL: 0000576 (monocytes - PBMCs)\nCL: 0000542 (lymphocytes - LCLs)\nCL: 0000057 (fibroblasts)\nUBERON:0005291 (embryonic tissue)\nCL: 0011020 (iPSC NPC)\nUBERON:0002037 (cerebellum tissue)\nUBERON:0001133 (cardiac tissue)"
         },
         {
           "column": "primary_biosample_id",
@@ -2072,8 +2072,7 @@
           "required": true,
           "description": "identifier for experiment set",
           "data_type": "string",
-          "references": "> aligned_pac_bio_set.aligned_pac_bio_set_id",
-          "is_unique": true
+          "references": "> aligned_pac_bio_set.aligned_pac_bio_set_id"
         },
         {
           "column": "called_variants_dna_file",
