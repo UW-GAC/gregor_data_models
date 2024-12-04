@@ -1731,7 +1731,7 @@
           "required": true,
           "description": "Library prep kit used",
           "data_type": "enumeration",
-          "enumerations": ["SMRTbell prep kit 3.0", "HiFI express template prep kit 2.0"],
+          "enumerations": ["SMRTbell prep kit 3.0", "SMRTbell prep kit - Revio 1.0", "HiFI express template prep kit 2.0"],
           "examples": "SMRTbell prep kit 3.0",
           "notes": "Can be missing if RC receives external data"
         },
