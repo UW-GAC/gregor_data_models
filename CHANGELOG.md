@@ -1,5 +1,14 @@
 # Change log
 
+## 1.6.1 
+
+|Table                   |Field                       |Change notes                                              |
+|:-----------------------|:---------------------------|:---------------------------------------------------------|
+|analyte                 |primary_biosample           |removed spaces from UBERON codes                          |
+|called_variants_pac_bio |aligned_pac_bio_set_id      |not unique                                                |
+|experiment_pac_bio      |seq_library_prep_kit_method |added 'SMRTbell prep kit - Revio 1.0' as enumerated value |
+
+
 ## 1.6 
 
 |Table                           |Field                         |Change notes                                                                                      |

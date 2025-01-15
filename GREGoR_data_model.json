@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.6.1",
+  "version": "1.7",
   "tables": [
     {
       "table": "participant",
