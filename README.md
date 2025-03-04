@@ -1,4 +1,7 @@
 # gregor_data_models
+
+[![DOI](https://zenodo.org/badge/446912475.svg)](https://doi.org/10.5281/zenodo.14660039)
+
 A repository for version control of the [GREGoR Consortium](https://gregorconsortium.org/) data model encoded as JSON. 
 
 The JSON is defined to be easily translated to Database Markup Language (DBML) using the [AnvilDataModels](https://github.com/UW-GAC/AnvilDataModels) R package. The DBML file is rendered using [dbdiagram.io](https://dbdiagram.io/d/624227bbbed6183873142297) for visualization.
