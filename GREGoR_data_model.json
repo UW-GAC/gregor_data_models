@@ -745,14 +745,14 @@
           "column": "id_in_table",
           "required": true,
           "data_type": "string",
-          "enumerations": "GSS201938-01-021-SG-1"
+          "examples": "GSS201938-01-021-SG-1"
         },
         {
           "column": "participant_id",
           "required": true,
           "data_type": "string",
           "references": "> participant.participant_id",
-          "enumerations": "GSS201938"
+          "examples": "GSS201938"
         }
       ]
     },
@@ -778,14 +778,14 @@
           "column": "id_in_table",
           "required": true,
           "data_type": "string",
-          "enumerations": "BCM_H7YG5DSX2-3-IDUDI0014-1"
+          "examples": "BCM_H7YG5DSX2-3-IDUDI0014-1"
         },
         {
           "column": "participant_id",
           "required": true,
           "data_type": "string",
           "references": "> participant.participant_id",
-          "enumerations": "BCM_H7YG5DSX2"
+          "examples": "BCM_H7YG5DSX2"
         },
         {
           "column": "aligned_file",
