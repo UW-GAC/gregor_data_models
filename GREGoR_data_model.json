@@ -1107,7 +1107,7 @@
         },
         {
           "column": "prep_targets_detail",
-          "required": "required if library_prep_type = custom",
+          "required": "CONDITIONAL (library_prep_type = custom)",
           "description": "depletion kit or list of depletion targets used",
           "data_type": "string",
           "multi_value_delimiter": "|"
@@ -2140,6 +2140,11 @@
           "description": "Indicates whether 5mC methylation has been called and annotated in the BAM file's MM and ML tags",
           "data_type": "boolean",
           "examples": true
+        },
+        {
+          "column": "quality_issues",
+          "description": "describe if there are any QC issues that would be important to note",
+          "data_type": "string"
         }
       ]
     },
