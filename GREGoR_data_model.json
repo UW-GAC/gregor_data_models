@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "tables": [
     {
       "table": "participant",
@@ -1091,6 +1091,13 @@
           "references": "> analyte.analyte_id"
         },
         {
+          "column": "experiment_sample_id",
+          "description": "identifier used in the data file (e.g. the SM tag in a BAM header, column headers for genotype fields in a VCF file)",
+          "data_type": "string",
+          "examples": "12339D-SA",
+          "notes": "may be the same as experiment_short_read_id if the file does contain sample identifiers\nshould be present if downstream file contains a sample_id (e.g. BAM, VCF)\nsome centers have one id for the sample (tube) and a diff ID for the sample as named in the VCF; experiment_sample_id = ID in the VCF file; analyte_id = ID for the tube/aliquot/whatever"
+        },
+        {
           "column": "seq_library_prep_kit_method",
           "description": "Library prep kit used",
           "data_type": "string",
@@ -1200,7 +1207,6 @@
         },
         {
           "column": "experiment_sample_id",
-          "required": true,
           "description": "identifier used in the data file (e.g. the SM tag in a BAM header, column headers for genotype fields in a VCF file)",
           "data_type": "string",
           "examples": "12339D-SA",
