@@ -1113,10 +1113,10 @@
         },
         {
           "column": "prep_targets_detail",
-          "required": "CONDITIONAL (library_prep_type = custom)",
           "description": "depletion kit or list of depletion targets used",
           "data_type": "string",
-          "multi_value_delimiter": "|"
+          "multi_value_delimiter": "|",
+          "notes": "include this field if library_prep_type = 'custom'"
         },
         {
           "column": "experiment_type",
@@ -1453,7 +1453,6 @@
           "column": "single_source",
           "description": "indicate if counts are from a single RC (TRUE) or from a harmonized/merged dataset (FALSE)",
           "data_type": "boolean",
-          "enumerations": ["TRUE", "FALSE"],
           "examples": true
         }
       ]
