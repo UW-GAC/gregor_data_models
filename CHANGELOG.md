@@ -2,31 +2,30 @@
 
 ## 1.7.1 
 
-|Table                        |Field                |Change notes                                            |
-|:----------------------------|:--------------------|:-------------------------------------------------------|
-|experiment_rna_short_read    |experiment_sample_id |move to aligned_rna_short_read table                    |
-|experiment_rna_short_read    |depletion_targets    |name changed to prep_targets_detail                     |
-|experiment_rna_short_read    |library_prep_type    |add 'custom' as an allowable value                      |
-|experiment_rna_short_read    |prep_targets_detail  |conditionally required if library_prep_type is 'custom' |
-|experiment_rna_short_read    |percent_rRNA         |move to aligned_rna_short_read table                    |
-|experiment_rna_short_read    |percent_mRNA         |move to aligned_rna_short_read table                    |
-|experiment_rna_short_read    |percent_mtRNA        |move to aligned_rna_short_read table                    |
-|experiment_rna_short_read    |percent_Globin       |move to aligned_rna_short_read table                    |
-|experiment_rna_short_read    |percent_UMI          |move to aligned_rna_short_read table                    |
-|experiment_rna_short_read    |5prime3prime_bias    |move to aligned_rna_short_read table                    |
-|experiment_rna_short_read    |percent_GC           |move to aligned_rna_short_read table                    |
-|experiment_rna_short_read    |percent_chrX_Y       |move to aligned_rna_short_read table                    |
-|aligned_rna_short_read table |experiment_sample_id |added as required field                                 |
-|aligned_rna_short_read table |percent_rRNA         |added as optional field                                 |
-|aligned_rna_short_read table |percent_mRNA         |added as optional field                                 |
-|aligned_rna_short_read table |percent_mtRNA        |added as optional field                                 |
-|aligned_rna_short_read table |percent_Globin       |added as optional field                                 |
-|aligned_rna_short_read table |percent_UMI          |added as optional field                                 |
-|aligned_rna_short_read table |5prime3prime_bias    |added as optional field                                 |
-|aligned_rna_short_read table |percent_GC           |added as optional field                                 |
-|aligned_rna_short_read table |percent_chrX_Y       |added as optional field                                 |
-|aligned_rna_short_read_set   |all                  |table added                                             |
-|readcounts_rna_short_read    |all                  |table added                                             |
+|Table                        |Field               |Change notes                                                              |
+|:----------------------------|:-------------------|:-------------------------------------------------------------------------|
+|experiment_rna_short_read    |depletion_targets   |name changed to prep_targets_detail                                       |
+|experiment_rna_short_read    |library_prep_type   |add 'custom' as an allowable value                                        |
+|experiment_rna_short_read    |prep_targets_detail |recommended to use if library_prep_type is 'custom'                       |
+|experiment_rna_short_read    |percent_rRNA        |move to aligned_rna_short_read table                                      |
+|experiment_rna_short_read    |percent_mRNA        |move to aligned_rna_short_read table                                      |
+|experiment_rna_short_read    |percent_mtRNA       |move to aligned_rna_short_read table                                      |
+|experiment_rna_short_read    |percent_Globin      |move to aligned_rna_short_read table                                      |
+|experiment_rna_short_read    |percent_UMI         |move to aligned_rna_short_read table                                      |
+|experiment_rna_short_read    |5prime3prime_bias   |move to aligned_rna_short_read table                                      |
+|experiment_rna_short_read    |percent_GC          |move to aligned_rna_short_read table                                      |
+|experiment_rna_short_read    |percent_chrX_Y      |move to aligned_rna_short_read table                                      |
+|aligned_rna_short_read table |percent_rRNA        |added as optional field                                                   |
+|aligned_rna_short_read table |percent_mRNA        |added as optional field                                                   |
+|aligned_rna_short_read table |percent_mtRNA       |added as optional field                                                   |
+|aligned_rna_short_read table |percent_Globin      |added as optional field                                                   |
+|aligned_rna_short_read table |percent_UMI         |added as optional field                                                   |
+|aligned_rna_short_read table |5prime3prime_bias   |added as optional field                                                   |
+|aligned_rna_short_read table |percent_GC          |added as optional field                                                   |
+|aligned_rna_short_read table |percent_chrX_Y      |added as optional field                                                   |
+|aligned_rna_short_read_set   |all                 |table added                                                               |
+|readcounts_rna_short_read    |all                 |table added                                                               |
+|aligned_pac_bio              |quality_issues      |added as optional field (for consistency with the aligned_nanopore table) |
 
 
 ## 1.6.1 
