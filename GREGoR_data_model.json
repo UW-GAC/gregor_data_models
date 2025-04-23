@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.7",
+  "version": "1.7.2",
   "tables": [
     {
       "table": "participant",
@@ -1073,7 +1073,7 @@
     },
     {
       "table": "experiment_rna_short_read",
-      "required": "CONDITIONAL (aligned_rna_short_read)",
+      "required": "CONDITIONAL (aligned_rna_short_read, aligned_rna_short_read_set, readcounts_rna_short_read)",
       "columns": [
         {
           "column": "experiment_rna_short_read_id",
@@ -1094,8 +1094,7 @@
           "column": "experiment_sample_id",
           "description": "identifier used in the data file (e.g. the SM tag in a BAM header, column headers for genotype fields in a VCF file)",
           "data_type": "string",
-          "examples": "12339D-SA",
-          "notes": "may be the same as experiment_short_read_id if the file does contain sample identifiers\nshould be present if downstream file contains a sample_id (e.g. BAM, VCF)\nsome centers have one id for the sample (tube) and a diff ID for the sample as named in the VCF; experiment_sample_id = ID in the VCF file; analyte_id = ID for the tube/aliquot/whatever"
+          "examples": "12339D-SA"
         },
         {
           "column": "seq_library_prep_kit_method",
@@ -1108,15 +1107,16 @@
           "column": "library_prep_type",
           "description": "type of library prep",
           "data_type": "enumeration",
-          "enumerations": ["stranded poly-A pulldown", "stranded total RNA", "rRNA depletion", "globin depletion"],
+          "enumerations": ["stranded poly-A pulldown", "stranded total RNA", "rRNA depletion", "globin depletion", "custom"],
           "multi_value_delimiter": "|",
           "examples": "stranded total RNA|globin depletion"
         },
         {
-          "column": "depletion_targets",
+          "column": "prep_targets_detail",
           "description": "depletion kit or list of depletion targets used",
           "data_type": "string",
-          "multi_value_delimiter": "|"
+          "multi_value_delimiter": "|",
+          "notes": "include this field if library_prep_type = 'custom'"
         },
         {
           "column": "experiment_type",
@@ -1180,51 +1180,12 @@
           "data_type": "float",
           "examples": "58,112,692",
           "notes": "float type required for large number, but value entered should be an integer"
-        },
-        {
-          "column": "percent_rRNA",
-          "data_type": "float",
-          "examples": "20"
-        },
-        {
-          "column": "percent_mRNA",
-          "data_type": "float",
-          "examples": "75"
-        },
-        {
-          "column": "percent_mtRNA",
-          "data_type": "float",
-          "examples": "4"
-        },
-        {
-          "column": "percent_Globin",
-          "data_type": "float",
-          "examples": "1"
-        },
-        {
-          "column": "percent_UMI",
-          "data_type": "float",
-          "examples": "0"
-        },
-        {
-          "column": "5prime3prime_bias",
-          "data_type": "float",
-          "examples": "1.09"
-        },
-        {
-          "column": "percent_GC",
-          "data_type": "float",
-          "examples": "66"
-        },
-        {
-          "column": "percent_chrX_Y",
-          "data_type": "float",
-          "examples": "12"
         }
       ]
     },
     {
       "table": "aligned_rna_short_read",
+      "required": "CONDITIONAL (aligned_rna_short_read_set, readcounts_rna_short_read)",
       "columns": [
         {
           "column": "aligned_rna_short_read_id",
@@ -1349,6 +1310,150 @@
           "column": "quality_issues",
           "description": "describe if there are any QC issues that would be important to note",
           "data_type": "string"
+        },
+        {
+          "column": "alignment_QC_output_file",
+          "data_type": "string",
+          "is_bucket_path": true
+        },
+        {
+          "column": "percent_rRNA",
+          "data_type": "float",
+          "examples": "20"
+        },
+        {
+          "column": "percent_mRNA",
+          "data_type": "float",
+          "examples": "75"
+        },
+        {
+          "column": "percent_mtRNA",
+          "data_type": "float",
+          "examples": "4"
+        },
+        {
+          "column": "percent_Globin",
+          "data_type": "float",
+          "examples": "1"
+        },
+        {
+          "column": "percent_UMI",
+          "data_type": "float",
+          "examples": "0"
+        },
+        {
+          "column": "5prime3prime_bias",
+          "data_type": "float",
+          "examples": "1.09"
+        },
+        {
+          "column": "percent_GC",
+          "data_type": "float",
+          "examples": "66"
+        },
+        {
+          "column": "percent_chrX_Y",
+          "data_type": "float",
+          "examples": "12"
+        }
+      ]
+    },
+    {
+      "table": "aligned_rna_short_read_set",
+      "required": "CONDITIONAL (readcounts_rna_short_read)",
+      "columns": [
+        {
+          "column": "aligned_rna_short_read_set_id",
+          "primary_key": true,
+          "required": true,
+          "description": "identifier for a set of experiments (primary key)",
+          "data_type": "string",
+          "notes": "RCs make their own IDs (these must begin with center-specific prefix). \naligned_dna_short_read_set_id links the aligned_dna_short_read table to the called_variants_dna_short_read table. For centers that are only uploading single sample files, the aligned_short_read_set_id and aligned_short_read_id values can be identical. For centers uploading multi-sample files, they will need to come up with a value for aligned_short_read_set_id that makes sense to them for indicating the sample group for a multi-sample callset, and use that same value in called_variants_short_read."
+        },
+        {
+          "column": "aligned_rna_short_read_id",
+          "required": true,
+          "data_type": "string",
+          "references": "> aligned_rna_short_read.aligned_rna_short_read_id",
+          "notes": "the identifier for a single-sample aligned_dna_short_read included in the read_set (one per row)"
+        }
+      ]
+    },
+    {
+      "table": "readcounts_rna_short_read",
+      "columns": [
+        {
+          "column": "readcounts_rna_short_read_id",
+          "primary_key": true,
+          "description": "unique key for table (anvil requirement)",
+          "data_type": "string",
+          "references": "from:md5sum",
+          "is_unique": true
+        },
+        {
+          "column": "aligned_rna_short_read_set_id",
+          "required": true,
+          "description": "identifier for experiment set",
+          "data_type": "string",
+          "references": "> aligned_rna_short_read_set.aligned_rna_short_read_set_id"
+        },
+        {
+          "column": "readcounts_rna_file",
+          "required": true,
+          "description": "name and path of the file with readcounts/feature quantifications",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
+          "examples": ["gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.SV.vcf", "gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.SNV.gvcf", "gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.EH.vcf"]
+        },
+        {
+          "column": "md5sum",
+          "required": true,
+          "description": "md5 checksum for file",
+          "data_type": "string",
+          "is_unique": true,
+          "examples": "129c28163df082",
+          "notes": "md5sum computed prior to upload (used to verify file integrity)"
+        },
+        {
+          "column": "quantification_software",
+          "required": true,
+          "description": "Quantification software used including version number",
+          "data_type": "string",
+          "multi_value_delimiter": "|",
+          "examples": ["gatk4.1.2", "expansionhunter-denovo-0.2b", "manta-3.1"]
+        },
+        {
+          "column": "quantification_types",
+          "required": true,
+          "description": "features used for quantification",
+          "data_type": "enumeration",
+          "enumerations": ["gene", "exon", "transcript"],
+          "multi_value_delimiter": "|",
+          "notes": "can add more values as the need arises\nif there are two VCFs for SNV and Indels, there would be two different lines in this table; if combined in one VCF, a |-delimited entry"
+        },
+        {
+          "column": "quantification_unit",
+          "required": true,
+          "description": "TPM or raw counts",
+          "data_type": "enumeration",
+          "enumerations": ["TPM", "raw"]
+        },
+        {
+          "column": "analysis_details",
+          "description": "brief description of the analysis pipeline used for producing the file; perhaps a link to something like a WDL file or github repository",
+          "data_type": "string"
+        },
+        {
+          "column": "annotation_file_for_quantification",
+          "description": "name and path of the file with quantification annotations",
+          "data_type": "string"
+        },
+        {
+          "column": "single_source",
+          "description": "indicate if counts are from a single RC (TRUE) or from a harmonized/merged dataset (FALSE)",
+          "data_type": "boolean",
+          "examples": true
         }
       ]
     },
@@ -2032,6 +2137,11 @@
           "description": "Indicates whether 5mC methylation has been called and annotated in the BAM file's MM and ML tags",
           "data_type": "boolean",
           "examples": true
+        },
+        {
+          "column": "quality_issues",
+          "description": "describe if there are any QC issues that would be important to note",
+          "data_type": "string"
         }
       ]
     },
