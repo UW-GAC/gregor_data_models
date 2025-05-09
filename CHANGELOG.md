@@ -1,5 +1,23 @@
 # Change log
 
+## 1.8.1 
+
+|Table               |Field              |Change notes                                                                        |
+|:-------------------|:------------------|:-----------------------------------------------------------------------------------|
+|experiment_pac_bio  |experiment_type    |enumerated value 'fiberseq' replaced with 'fiberseq-genome' and 'fiberseq-targeted' |
+|aligned_pac_bio     |methylation_called |updated description                                                                 |
+|aligned_pac_bio     |fiberseq_format    |added as optional field                                                             |
+|experiment_nanopore |experiment_type    |add enumerated values 'fiberseq-genome' and 'fiberseq-targeted'                     |
+|aligned_nanopore    |fiberseq_format    |added as optional field                                                             |
+
+
+## 1.8 
+
+|Table |Field |Change notes                                                        |
+|:-----|:-----|:-------------------------------------------------------------------|
+|NA    |NA    |incrementing major version number for next Consortium Upload Cycle. |
+
+
 ## 1.7.1 
 
 |Table                        |Field               |Change notes                                                              |

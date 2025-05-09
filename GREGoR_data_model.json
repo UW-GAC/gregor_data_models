@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.8",
+  "version": "1.8.1",
   "tables": [
     {
       "table": "participant",
@@ -1502,7 +1502,7 @@
           "column": "experiment_type",
           "required": true,
           "data_type": "enumeration",
-          "enumerations": ["targeted", "genome"],
+          "enumerations": ["targeted", "genome", "fiberseq-genome", "fiberseq-targeted"],
           "examples": "targeted",
           "notes": "While the most common use of ONT is whole-genome sequencing, targeted sequencing is possible and may be of interest to the consortium."
         },
@@ -1713,6 +1713,13 @@
           "column": "quality_issues",
           "description": "describe if there are any QC issues that would be important to note",
           "data_type": "string"
+        },
+        {
+          "column": "fiberseq_format",
+          "description": "Indicates if BAM file has been formatted using fibertools to include nucleosome and methyltransferase-sensitive patch (MSP) calls",
+          "data_type": "boolean",
+          "examples": true,
+          "notes": "See https://fiberseq.github.io/index.html for details on methods and Fiber-seq BAM specific tags"
         }
       ]
     },
@@ -1850,7 +1857,7 @@
           "column": "experiment_type",
           "required": true,
           "data_type": "enumeration",
-          "enumerations": ["targeted", "genome", "fiberseq", "isoseq", "masseq"],
+          "enumerations": ["targeted", "genome", "fiberseq-genome", "fiberseq-targeted", "isoseq", "masseq"],
           "examples": "targeted",
           "notes": "While the most common use of PacBio is whole-genome sequencing, targeted sequencing is possible and may be of interest to the consortium."
         },
@@ -2134,7 +2141,7 @@
         {
           "column": "methylation_called",
           "required": true,
-          "description": "Indicates whether 5mC methylation has been called and annotated in the BAM file's MM and ML tags",
+          "description": "Indicates whether 5mC and 6mA methylation has been called and annotated in the BAM file's MM and ML tags",
           "data_type": "boolean",
           "examples": true
         },
@@ -2142,6 +2149,13 @@
           "column": "quality_issues",
           "description": "describe if there are any QC issues that would be important to note",
           "data_type": "string"
+        },
+        {
+          "column": "fiberseq_format",
+          "description": "Indicates if BAM file has been formatted using fibertools to include nucleosome and methyltransferase-sensitive patch (MSP) calls",
+          "data_type": "boolean",
+          "examples": true,
+          "notes": "See https://fiberseq.github.io/index.html for details on methods and Fiber-seq BAM specific tags"
         }
       ]
     },
