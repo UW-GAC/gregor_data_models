@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "tables": [
     {
       "table": "participant",
@@ -638,7 +638,7 @@
           "required": true,
           "description": "analyte derived from the primary_biosample. The actual thing you're sticking into a machine to analyze/sequence",
           "data_type": "enumeration",
-          "enumerations": ["DNA", "RNA", "cDNA", "blood plasma", "frozen whole blood", "high molecular weight DNA", "urine", "PBMC"],
+          "enumerations": ["DNA", "RNA", "cDNA", "blood plasma", "frozen whole blood", "high molecular weight DNA", "urine", "PBMC", "dry blood spot"],
           "examples": "DNA"
         },
         {
@@ -653,9 +653,9 @@
           "required": true,
           "description": "Tissue type of biosample taken from the participant that the analyte was extracted or processed from (for unknown can use tissue - UBERON:0000479), e.g. skin, liver, brain",
           "data_type": "enumeration",
-          "enumerations": ["UBERON:0000479", "UBERON:0003714", "UBERON:0001836", "UBERON:0001003", "UBERON:0002385", "UBERON:0000178", "UBERON:0002371", "UBERON:0006956", "UBERON:0001359", "UBERON:0001088", "UBERON:0019306", "CL: 0000034", "CL: 0000576", "CL: 0000542", "CL: 0000057", "UBERON:0005291", "CL: 0011020", "UBERON:0002037", "UBERON:0001133"],
+          "enumerations": ["UBERON:0000479", "UBERON:0003714", "UBERON:0001836", "UBERON:0001003", "UBERON:0002385", "UBERON:0000178", "UBERON:0002371", "UBERON:0006956", "UBERON:0001359", "UBERON:0001088", "UBERON:0019306", "CL: 0000034", "CL: 0000576", "CL: 0000542", "CL: 0000057", "UBERON:0005291", "CL: 0011020", "UBERON:0002037", "UBERON:0001133", "UBERON:0001969"],
           "examples": "UBERON:0000178",
-          "notes": "Contact the GREGoR Data Standards WG to expand the list of allowable UBERON codes. Currently allowed values are:\nUBERON:0000479 (tissue) \nUBERON:0003714 (neural tissue) \nUBERON:0001836 (saliva) \nUBERON:0001003 (skin epidermis) \nUBERON:0002385 (muscle tissue) \nUBERON:0000178 (whole blood) \nUBERON:0002371 (bone marrow) \nUBERON:0006956 (buccal mucosa)\nUBERON:0001359 (cerebrospinal fluid)\nUBERON:0001088 (urine)\nUBERON:0019306 (nose epithelium)\nCL: 0000034 (iPSC)\nCL: 0000576 (monocytes - PBMCs)\nCL: 0000542 (lymphocytes - LCLs)\nCL: 0000057 (fibroblasts)\nUBERON:0005291 (embryonic tissue)\nCL: 0011020 (iPSC NPC)\nUBERON:0002037 (cerebellum tissue)\nUBERON:0001133 (cardiac tissue)"
+          "notes": "Contact the GREGoR Data Standards WG to expand the list of allowable UBERON codes. Currently allowed values are:\nUBERON:0000479 (tissue) \nUBERON:0003714 (neural tissue) \nUBERON:0001836 (saliva) \nUBERON:0001003 (skin epidermis) \nUBERON:0002385 (muscle tissue) \nUBERON:0000178 (whole blood) \nUBERON:0002371 (bone marrow) \nUBERON:0006956 (buccal mucosa)\nUBERON:0001359 (cerebrospinal fluid)\nUBERON:0001088 (urine)\nUBERON:0019306 (nose epithelium)\nCL: 0000034 (iPSC)\nCL: 0000576 (monocytes - PBMCs)\nCL: 0000542 (lymphocytes - LCLs)\nCL: 0000057 (fibroblasts)\nUBERON:0005291 (embryonic tissue)\nCL: 0011020 (iPSC NPC)\nUBERON:0002037 (cerebellum tissue)\nUBERON:0001133 (cardiac tissue)\nUBERON:0001969 (blood plasma)"
         },
         {
           "column": "primary_biosample_id",
@@ -672,29 +672,45 @@
           "column": "tissue_affected_status",
           "description": "If applicable to disease (suspected mosaic), is the tissue from an affected source or an unaffected source?",
           "data_type": "enumeration",
-          "enumerations": ["Yes", "No"]
+          "enumerations": ["Yes", "No", "Unknown"]
+        },
+        {
+          "column": "is_metabolomics",
+          "data_type": "boolean",
+          "examples": false
         },
         {
           "column": "age_at_collection",
+          "required": "CONDITION (is_metabolomics = TRUE)",
           "description": "age or participant in years at biosample collection",
           "data_type": "float",
           "notes": "ages >89 are considered PHI."
         },
         {
           "column": "participant_drugs_intake",
+          "required": "CONDITION (is_metabolomics = TRUE)",
           "description": "The list of drugs patient is on, at the time of sample collection. This information is helpful during analysis of metabolomics and immune asssays. Free Text",
           "data_type": "string",
           "notes": "this is relevant when analyzing metabolomics data"
         },
         {
           "column": "participant_special_diet",
-          "description": "If the patient was fasting, when the sample was collected. this is relevant when analyzing metabolomics data. Free Text",
+          "required": "CONDITION (is_metabolomics = TRUE)",
+          "description": "text indicating any special diet the patient followed",
           "data_type": "string",
-          "examples": ["ketogenic", "gluten-free"]
+          "examples": ["ketogenic", "gluten-free", "protein-free diet", "no special diet"],
+          "notes": "if is_metabolomics = TRUE, must specify 'no special diet' instead of leaving this blank"
+        },
+        {
+          "column": "fasted_blood_sample",
+          "required": "CONDITION (is_metabolomics = TRUE)",
+          "description": "whether the sample was collected at 8-12 hours fasting",
+          "data_type": "boolean",
+          "examples": true
         },
         {
           "column": "hours_since_last_meal",
-          "description": "his is relevant when analyzing metabolomics data",
+          "description": "number of hours since patient's last meal",
           "data_type": "float",
           "notes": "this is relevant when analyzing metabolomics data"
         },
@@ -3076,6 +3092,510 @@
           "data_type": "enumeration",
           "enumerations": ["ALL", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"],
           "notes": "Use ALL for VCFs with autosomes + sex chromosomes"
+        }
+      ]
+    },
+    {
+      "table": "experiment_metabolomics",
+      "required": "CONDITIONAL (mass_spectra_metabolomics, mass_spectra_metabolomics_set, preprocessed_file_metabolomics, preprocessed_file_metabolomics_set, processed_file_metabolomics, processed_file_metabolomics_set, harmonized_file_metabolomics)",
+      "columns": [
+        {
+          "column": "experiment_metabolomics_id",
+          "primary_key": true,
+          "required": true,
+          "description": "identifier for experiment_metabolomics (primary key)",
+          "data_type": "string",
+          "examples": "MHC_nHILIC-B1a_GSS#",
+          "notes": "RCs make their own IDs, must begin with center abbreviation as defined in participant table; need to be globally unique in consortium; may be generated by prepending experiment_sample_id with center abbreviation"
+        },
+        {
+          "column": "analyte_id",
+          "required": "CONDITIONAL (metabolomics_sample_type = GREGoR_sample)",
+          "data_type": "string",
+          "references": "> analyte.analyte_id",
+          "notes": "only applicable if metabolomics_sample_type = GREGoR_sample"
+        },
+        {
+          "column": "experiment_sample_id",
+          "description": "identifier used in the data file",
+          "data_type": "string",
+          "examples": "GSS#",
+          "notes": "experiment_metabolomics_id without mode & batch info (because final processed datasets will merge data across modes). might be the same as analyte_id, but if we profile a sample in more than one batch experiment_sample_id could indicate technical replicates."
+        },
+        {
+          "column": "metabolomics_sample_type",
+          "required": true,
+          "description": "indicates whether experiment_metabolomics_id corresponds to study sample with analyte_id or an experimental control sample",
+          "data_type": "enumeration",
+          "enumerations": ["GREGoR_sample", "Human_sample", "Technical_replicate", "Dilution_sample", "Preparation_blank", "Solvent_blank", "Blank_sample", "MS2_sample"],
+          "examples": "GREGoR sample",
+          "notes": "GREGoR sample\nHuman sample\nTechnical replicate (QC samples)\nDilution sample (dln samples)\nPreparation blank \nSolvent blank\nBlank sample (if type is not prep or solvent, or is unknown)\nMS2 sample (when experiment_metabolomics_id contains 'MSMS')"
+        },
+        {
+          "column": "metabolomics_batch",
+          "required": true,
+          "description": "Batch number indicating the full sample prep batch (all samples with sample batch number will be acquired with same QC pool mixture)",
+          "data_type": "string",
+          "examples": "MHC_Batch1",
+          "notes": "important for future batch correction"
+        },
+        {
+          "column": "within_site_batch_name",
+          "required": true,
+          "description": "intra batch within metabolomics_batch",
+          "data_type": "string",
+          "examples": "GSS_nHILIC_B1a",
+          "notes": "important for future batch correction"
+        },
+        {
+          "column": "metabolomics_prep_method",
+          "required": true,
+          "description": "preparation protocol used",
+          "data_type": "string",
+          "examples": "MHC_biphasic_modification",
+          "notes": "unsure if there's common terminology for our preparation method / if how this should be included (my recommendation is to make an MHC specific enumeration like 'MHC_biphasic_modification' that will be described in MOP).. Frank: MHC's biphasic protocol is a slight modification to the Matyash lipid extraction method since we use MTBE:methanol:water in 10/3/2.5 ratio"
+        },
+        {
+          "column": "spike_in_standards_file",
+          "required": true,
+          "description": "path to file with isotopically labeled internal standards spiked into every sample",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "examples": "*_spike_in_standards.csv",
+          "notes": "different sheet of spike in standards per mode"
+        },
+        {
+          "column": "experiment_type",
+          "required": true,
+          "description": "experiment type",
+          "data_type": "enumeration",
+          "enumerations": ["untargeted", "targeted"],
+          "examples": "untargeted",
+          "notes": "*GSS is only doing untargeted for GREGoR"
+        },
+        {
+          "column": "experiment_method",
+          "required": true,
+          "description": "experiment method",
+          "data_type": "enumeration",
+          "enumerations": ["LC-MS", "GC-MS", "NMR"],
+          "examples": "LC-MS",
+          "notes": "*GSS is only doing LC-MS for GREGoR"
+        },
+        {
+          "column": "mode",
+          "required": true,
+          "description": "acquisition mode (indicating ionization mode and LC separation method)",
+          "data_type": "enumeration",
+          "enumerations": ["nHILIC", "pHILIC", "nRPLC", "pRPLC"],
+          "examples": "nHILIC",
+          "notes": "Could split up into separation column (HILIC or RPLC) and ionization mode (positive or negative)"
+        },
+        {
+          "column": "lc_separation_column",
+          "required": true,
+          "description": "liquid chromotography (LC) column used for separation",
+          "data_type": "enumeration",
+          "enumerations": ["HILIC", "RPLC"],
+          "examples": "HILIC"
+        },
+        {
+          "column": "ionization_mode",
+          "required": true,
+          "description": "mass-spec ionization mode",
+          "data_type": "enumeration",
+          "enumerations": ["positive", "negative"],
+          "examples": "negative"
+        },
+        {
+          "column": "mass_spec_instrument",
+          "required": true,
+          "description": "mass-spec instrument used",
+          "data_type": "enumeration",
+          "enumerations": "Orbitrap",
+          "examples": "Orbitrap"
+        },
+        {
+          "column": "preanalytical_time_months",
+          "description": "number of months between sample collection and injection",
+          "data_type": "float",
+          "notes": "** MHC would need to be provided sample collection dates to calculate this (and we would like to for interpretation purposes -- not necessary in short-term for processing). We should consider including this instead of date_data_generation (since date_data_generation and pre_analytical_days could be used to determine sample collection dates)\n\npreanalytical_time that is a relative (unitless) measure of time could end up being good enough, but I think time with units (days, weeks, months, or years) would be ideal, even if rounded to worse resolution to avoid PHI related risk (mostly because the actual amount of time may be relevant for interpreting specific measurements and harmonizing with other metabolomics datasets for larger reference population)"
+        }
+      ]
+    },
+    {
+      "table": "mass_spectra_metabolomics",
+      "required": "CONDITIONAL (mass_spectra_metabolomics_set, preprocessed_file_metabolomics, preprocessed_file_metabolomics_set, processed_file_metabolomics, processed_file_metabolomics_set, harmonized_file_metabolomics)",
+      "columns": [
+        {
+          "column": "mass_spectra_metabolomics_id",
+          "primary_key": true,
+          "required": true,
+          "data_type": "string",
+          "is_unique": true
+        },
+        {
+          "column": "experiment_metabolomics_id",
+          "required": true,
+          "description": "identifier for experiment",
+          "data_type": "string",
+          "references": "> experiment_metabolomics.experiment_metabolomics_id",
+          "examples": "MHC_nHILIC-B1a_GSS1",
+          "notes": "every batch will contain at least 6 experimental control (i.e. QC) samples (1+ blanks, 3+ dilution samples, 2+ technical replicates--usually more like 5-10+), each of which will have all the same metabolomics_files as each human sample. The QC samples will have all the same corresponding information in experiment_metabolomics as the other samples in their batch with the exception of (*** analyte_id *** which is currently required, experiment_metabolomics_id -- see note, and preanalytical_days which is not applicable to QC samples)\n\nThere is also ~2 MSMS .raw or .mzML files per mode per batch that should be uploaded. They will probably be named something like 'MHC_nHILIC-B1a_QC#_MSMS_NCE25'."
+        },
+        {
+          "column": "mass_spectra_file",
+          "required": true,
+          "description": "path to file with spectral data (.raw or .mzML)",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/MHC_nHILIC-B1a_GSS1.mzML"
+        },
+        {
+          "column": "md5sum",
+          "required": true,
+          "description": "md5 checksum for mass_spectra_file",
+          "data_type": "string",
+          "is_unique": true,
+          "examples": "129c28163df082"
+        },
+        {
+          "column": "is_fragmentation_spectra",
+          "required": true,
+          "description": "yes if one of the MSMS (i.e. MS2) spectra files for the batch",
+          "data_type": "boolean",
+          "examples": false,
+          "notes": "only TRUE for files including MSMS like 'MHC_nHILIC-B1a_QC#_MSMS_NCE25'"
+        },
+        {
+          "column": "mass_spectra_file_format",
+          "required": true,
+          "description": "Type of spectral file (raw or mzML; should be consistent with extension of mass_spectra_file)",
+          "data_type": "enumeration",
+          "enumerations": ["raw", "mzML"],
+          "examples": "mzML",
+          "notes": "I decided to add this because I think .raw files should be included in GREGoR / Anvil upload (the original .raw files are in profile format which is believed to be higher quality than centroid. most open-source preprocessing tools are not currently compatible with .raw files or profile format, but some have plans to change that & our Progenesis license is from 2017, so other people may have licenses for preprocessing software that could process our .raw files better). \n\nUploading .raw makes more sense to me than mzML since MSconvert is an open-source tool anyone can use to convert .raw -> .mzML themself. But mzML is what the metabolomics workbench will want uploaded. We could do .raw for GREGoR/Anvil & .mzML for metabolomics workbench upload, but compared to sequencing data, raw mass spec data isn't THAT big so we could just upload both.."
+        },
+        {
+          "column": "mass_spectra_file_type",
+          "required": true,
+          "description": "type of spectral data (profile or centroid)",
+          "data_type": "enumeration",
+          "enumerations": ["profile", "centroid"],
+          "examples": "centroid"
+        },
+        {
+          "column": "conversion_software",
+          "description": "method used to convert original output from instrument to corresponding version if applicable",
+          "data_type": "string",
+          "examples": "MSConvert",
+          "notes": "N/A for .raw files"
+        },
+        {
+          "column": "conversion_info_file",
+          "description": "path to .txt file with parameters or info about conversion if applicable",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/conversion_info.txt",
+          "notes": "N/A for .raw files"
+        }
+      ]
+    },
+    {
+      "table": "mass_spectra_metabolomics_set",
+      "required": "CONDITIONAL (preprocessed_file_metabolomics, preprocessed_file_metabolomics_set, processed_file_metabolomics, processed_file_metabolomics_set, harmonized_file_metabolomics)",
+      "columns": [
+        {
+          "column": "mass_spectra_metabolomics_set_id",
+          "primary_key": true,
+          "required": true,
+          "data_type": "string",
+          "references": "> experiment_metabolomics.within_site_batch_name"
+        },
+        {
+          "column": "mass_spectra_metabolomics_id",
+          "required": true,
+          "data_type": "string",
+          "references": "> mass_spectra_metabolomics.mass_spectra_metabolomics_id"
+        }
+      ]
+    },
+    {
+      "table": "preprocessed_file_metabolomics",
+      "required": "CONDITIONAL (preprocessed_file_metabolomics_set, processed_file_metabolomics, processed_file_metabolomics_set, harmonized_file_metabolomics)",
+      "columns": [
+        {
+          "column": "preprocessed_file_metabolomics_id",
+          "primary_key": true,
+          "required": true,
+          "data_type": "string",
+          "is_unique": true
+        },
+        {
+          "column": "mass_spectra_metabolomics_set_id",
+          "required": true,
+          "description": "same as experiment_metabolomics.within_site_batch_name",
+          "data_type": "string",
+          "references": "> mass_spectra_metabolomics_set.mass_spectra_metabolomics_set_id",
+          "examples": "MHC_Batch1"
+        },
+        {
+          "column": "batch_acquisition_info_file",
+          "required": true,
+          "description": "path to file with list of sample names, intra-batch, injection order # and/or time variables, and any other sample variables relevant to post-processing",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/MHC_nHILIC-B1_batchAcquisitionInfo.csv"
+        },
+        {
+          "column": "preprocessing_software",
+          "required": true,
+          "description": "name of preprocessing software",
+          "data_type": "enumeration",
+          "enumerations": ["Progenesis QI", "MassCube", "Asari"],
+          "examples": "Progenesis QI"
+        },
+        {
+          "column": "preprocessing_software_version",
+          "required": true,
+          "description": "version of preprocessing software",
+          "data_type": "string",
+          "examples": "1.2"
+        },
+        {
+          "column": "preprocessing_info_file",
+          "required": true,
+          "description": "path to file with info about preprocessing & parameters",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/MassCube_preprocessing_parameters.csv",
+          "notes": "Each tool has different levels of interpretability and parameters so a file with any relevant info is probably best. Open-source tools (e.g. masscube and asari) have parameters.csv or a project.json file and .out files from the job with most of that info too; Progenesis doesn't to my knowledge\n\nI recommend making this a requirement since preprocessing parameters are very important. We can manually generate a generic Progenesis file with the software version and settings we select or know about."
+        },
+        {
+          "column": "preprocessed_file",
+          "required": true,
+          "description": "path to .csv file with raw tabular intensity measurements",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/MHC_nHILIC-B1_Progenesis_adductsSeparated.csv"
+        },
+        {
+          "column": "md5sum",
+          "required": true,
+          "description": "md5 checksum for preprocessed_file",
+          "data_type": "string",
+          "is_unique": true,
+          "examples": "129c28163df082"
+        }
+      ]
+    },
+    {
+      "table": "preprocessed_file_metabolomics_set",
+      "required": "CONDITIONAL (processed_file_metabolomics, processed_file_metabolomics_set, harmonized_file_metabolomics)",
+      "columns": [
+        {
+          "column": "preprocessed_file_metabolomics_set_id",
+          "primary_key": true,
+          "required": true,
+          "data_type": "string",
+          "references": "> experiment_metabolomics.metabolomics_batch"
+        },
+        {
+          "column": "preprocessed_file_metabolomics_id",
+          "required": true,
+          "data_type": "string",
+          "references": "> preprocessed_file_metabolomics.preprocessed_file_metabolomics_id"
+        }
+      ]
+    },
+    {
+      "table": "processed_file_metabolomics",
+      "required": "CONDITIONAL (processed_file_metabolomics_set, harmonized_file_metabolomics)",
+      "columns": [
+        {
+          "column": "processed_file_metabolomics_id",
+          "primary_key": true,
+          "required": true,
+          "data_type": "string",
+          "is_unique": true,
+          "examples": "MHC_Batch1"
+        },
+        {
+          "column": "preprocessed_file_metabolomics_set_id",
+          "description": "same as experiment_metabolomics.metabolomics_batch",
+          "data_type": "string",
+          "references": "> preprocessed_file_metabolomics_set.preprocessed_file_metabolomics_set_id"
+        },
+        {
+          "column": "processed_file",
+          "required": true,
+          "description": "path to processed dataset",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/MHC_B1_foldChanges.csv"
+        },
+        {
+          "column": "md5sum",
+          "required": true,
+          "description": "md5 checksum for processed_file",
+          "data_type": "string",
+          "is_unique": true,
+          "examples": "129c28163df082"
+        },
+        {
+          "column": "relative_quantification_type",
+          "required": true,
+          "description": "type of relative quantification value in dataset",
+          "data_type": "enumeration",
+          "enumerations": ["raw intensity", "normalized intensity", "fold-change", "modified z-score", "z-score"],
+          "examples": "fold-change"
+        },
+        {
+          "column": "relative_quantification_reference",
+          "description": "brief description of reference sample(s) if relative_quantification_type is fold-change or z-score",
+          "data_type": "string",
+          "examples": "median normalized intensity (all study samples)"
+        },
+        {
+          "column": "postprocessing_protocol_file",
+          "required": true,
+          "description": "path to file with post-processing protocol specifics including feature-selection, normalization, and annotation",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/MHC_Batch1_postProcessingInfo.txt",
+          "notes": "similar to `analysis_details` in sequencing example. each mode might have slight differences but we can combine all relevant modes into one file document"
+        },
+        {
+          "column": "feature_selection_method",
+          "required": true,
+          "description": "brief description of any feature filtering criteria applied",
+          "data_type": "string",
+          "examples": "missingness and QC filters applied",
+          "notes": "other options: none, just missingness or QC filters"
+        },
+        {
+          "column": "normalization_method",
+          "required": true,
+          "description": "brief description of any normalization applied to remove confounded variation from intensity values",
+          "data_type": "string",
+          "examples": "conditional QC batch-average normalization",
+          "notes": "other options: none, SERRF"
+        },
+        {
+          "column": "annotation_method",
+          "required": true,
+          "description": "brief description of annotation method used",
+          "data_type": "string",
+          "examples": "in-house RT and MZ matching",
+          "notes": "other options: metID, masscube, combinations of tools"
+        },
+        {
+          "column": "sample_acquisition_info_file",
+          "required": true,
+          "description": "path to file with list of sample names and sample info relevant for interpretation (pre-analytical time, fasted status, drugs, diet?)",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/MHC_B1_sampleAcquisitionInfo.csv"
+        }
+      ]
+    },
+    {
+      "table": "processed_file_metabolomics_set",
+      "required": "CONDITIONAL (harmonized_file_metabolomics)",
+      "columns": [
+        {
+          "column": "processed_file_metabolomics_set_id",
+          "primary_key": true,
+          "required": true,
+          "data_type": "string"
+        },
+        {
+          "column": "processed_file_metabolomics_id",
+          "required": true,
+          "data_type": "string",
+          "references": "> processed_file_metabolomics.processed_file_metabolomics_id"
+        }
+      ]
+    },
+    {
+      "table": "harmonized_file_metabolomics",
+      "columns": [
+        {
+          "column": "harmonized_file_metabolomics_id",
+          "primary_key": true,
+          "required": true,
+          "data_type": "string",
+          "is_unique": true
+        },
+        {
+          "column": "processed_file_metabolomics_set_id",
+          "required": true,
+          "description": "same as experiment_metabolomics.metabolomics_batch",
+          "data_type": "string",
+          "references": "> processed_file_metabolomics_set.processed_file_metabolomics_set_id"
+        },
+        {
+          "column": "harmonized_file",
+          "required": true,
+          "description": "path to harmonized dataset",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/MHC_B1-B3_foldChanges.csv"
+        },
+        {
+          "column": "md5sum",
+          "required": true,
+          "description": "md5 checksum for harmonized_file",
+          "data_type": "string",
+          "is_unique": true,
+          "examples": "129c28163df082"
+        },
+        {
+          "column": "harmonized_quantification_type",
+          "required": true,
+          "description": "type of relative quantification value in dataset",
+          "data_type": "enumeration",
+          "enumerations": ["harmonized intensity", "fold-change", "modified z-score", "z-score"],
+          "examples": "fold-change"
+        },
+        {
+          "column": "harmonization_protocol_file",
+          "required": true,
+          "description": "path to file with harmonization protocol specifics",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac//MHC_Batch1-3_harmonizationInfo.txt",
+          "notes": "leaning towards a text file with protocol info over brief text description here"
+        },
+        {
+          "column": "feature_selection_method",
+          "required": true,
+          "description": "brief description of any feature filtering criteria applied",
+          "data_type": "string",
+          "examples": "missingness and QC filters applied",
+          "notes": "other options: none, just missingness or QC filters"
+        },
+        {
+          "column": "normalization_method",
+          "required": true,
+          "description": "brief description of any normalization applied to remove confounded variation from intensity values",
+          "data_type": "string",
+          "examples": "conditional QC batch-average normalization",
+          "notes": "other options: none, SERRF"
+        },
+        {
+          "column": "annotation_method",
+          "required": true,
+          "description": "brief description of annotation method used",
+          "data_type": "string",
+          "examples": "in-house RT and MZ matching",
+          "notes": "other options: metID, masscube, combinations of tools"
         }
       ]
     }
