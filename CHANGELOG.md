@@ -1,5 +1,28 @@
 # Change log
 
+## 1.8.2 
+
+|Table                              |Field                    |Change notes                                           |
+|:----------------------------------|:------------------------|:------------------------------------------------------|
+|analyte                            |analyte_type             |add enumerated value 'dry blood spot'                  |
+|analyte                            |primary_biosample        |add enumerated value 'UBERON:0001969' (blood plasma)   |
+|analyte                            |tissue_affected_status   |add enumerated value 'Unknown'                         |
+|analyte                            |is_metabolomics          |added as optional field                                |
+|analyte                            |age_at_collection        |added conditional requirement (is_metabolomics=TRUE)   |
+|analyte                            |participant_drugs_intake |added conditional requirement (is_metabolomics=TRUE)   |
+|analyte                            |participant_special_diet |added conditional requirement (is_metabolomics=TRUE)   |
+|analyte                            |fasted_blood_sample      |added boolean field (required if is_metabolomics=TRUE) |
+|analyte                            |hours_since_last_meal    |updated description                                    |
+|experiment_metabolomics            |all                      |table added                                            |
+|mass_spectra_metabolomics          |all                      |table added                                            |
+|mass_spectra_metabolomics_set      |all                      |table added                                            |
+|preprocessed_file_metabolomics     |all                      |table added                                            |
+|preprocessed_file_metabolomics_set |all                      |table added                                            |
+|processed_file_metabolomics        |all                      |table added                                            |
+|processed_file_metabolomics_set    |all                      |table added                                            |
+|harmonized_file_metabolomics       |all                      |table added                                            |
+
+
 ## 1.8.1 
 
 |Table               |Field              |Change notes                                                                        |
