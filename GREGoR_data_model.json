@@ -681,21 +681,21 @@
         },
         {
           "column": "age_at_collection",
-          "required": "CONDITION (is_metabolomics = TRUE)",
+          "required": "CONDITIONAL (is_metabolomics = TRUE)",
           "description": "age or participant in years at biosample collection",
           "data_type": "float",
           "notes": "ages >89 are considered PHI."
         },
         {
           "column": "participant_drugs_intake",
-          "required": "CONDITION (is_metabolomics = TRUE)",
+          "required": "CONDITIONAL (is_metabolomics = TRUE)",
           "description": "The list of drugs patient is on, at the time of sample collection. This information is helpful during analysis of metabolomics and immune asssays. Free Text",
           "data_type": "string",
           "notes": "this is relevant when analyzing metabolomics data"
         },
         {
           "column": "participant_special_diet",
-          "required": "CONDITION (is_metabolomics = TRUE)",
+          "required": "CONDITIONAL (is_metabolomics = TRUE)",
           "description": "text indicating any special diet the patient followed",
           "data_type": "string",
           "examples": ["ketogenic", "gluten-free", "protein-free diet", "no special diet"],
@@ -703,7 +703,7 @@
         },
         {
           "column": "fasted_blood_sample",
-          "required": "CONDITION (is_metabolomics = TRUE)",
+          "required": "CONDITIONAL (is_metabolomics = TRUE)",
           "description": "whether the sample was collected at 8-12 hours fasting",
           "data_type": "boolean",
           "examples": true
