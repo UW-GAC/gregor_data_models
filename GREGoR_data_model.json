@@ -3136,6 +3136,7 @@
           "required": true,
           "description": "Batch number indicating the full sample prep batch (all samples with sample batch number will be acquired with same QC pool mixture)",
           "data_type": "string",
+          "references": "> preprocessed_file_metabolomics_set.preprocessed_file_metabolomics_set_id",
           "examples": "MHC_Batch1",
           "notes": "important for future batch correction"
         },
@@ -3144,6 +3145,7 @@
           "required": true,
           "description": "intra batch within metabolomics_batch",
           "data_type": "string",
+          "references": "> mass_spectra_metabolomics_set.mass_spectra_metabolomics_set_id",
           "examples": "GSS_nHILIC_B1a",
           "notes": "important for future batch correction"
         },
@@ -3310,8 +3312,8 @@
           "column": "mass_spectra_metabolomics_set_id",
           "primary_key": true,
           "required": true,
-          "data_type": "string",
-          "references": "> experiment_metabolomics.within_site_batch_name"
+          "description": "within_site_batch_name",
+          "data_type": "string"
         },
         {
           "column": "mass_spectra_metabolomics_id",
@@ -3400,8 +3402,8 @@
           "column": "preprocessed_file_metabolomics_set_id",
           "primary_key": true,
           "required": true,
-          "data_type": "string",
-          "references": "> experiment_metabolomics.metabolomics_batch"
+          "description": "metabolomics_batch",
+          "data_type": "string"
         },
         {
           "column": "preprocessed_file_metabolomics_id",
