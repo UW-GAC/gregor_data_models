@@ -1113,6 +1113,7 @@
         },
         {
           "column": "prep_targets_detail",
+          "required": "CONDITIONAL (library_prep_type = custom)",
           "description": "depletion kit or list of depletion targets used",
           "data_type": "string",
           "multi_value_delimiter": "|",
