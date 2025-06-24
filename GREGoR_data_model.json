@@ -28,7 +28,7 @@
           "required": true,
           "description": "GREGoR Center to which the participant is originally associated",
           "data_type": "enumeration",
-          "enumerations": ["BCM", "BROAD", "CNH_I", "UCI", "UW_CRDR", "GSS", "UW_DCC"]
+          "enumerations": ["BCM", "BROAD", "CNH_I", "UCI", "UW_CRDR", "GSS", "UW_DCC", "ILMN-IHOPE"]
         },
         {
           "column": "consent_code",
