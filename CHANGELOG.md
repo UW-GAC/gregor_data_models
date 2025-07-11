@@ -1,6 +1,6 @@
 # Change log
 
-## 1.9.1
+## 1.9.1 
 
 |Table                              |Field                    |Change notes                                           |
 |:----------------------------------|:------------------------|:------------------------------------------------------|
@@ -21,7 +21,8 @@
 |processed_file_metabolomics        |all                      |table added                                            |
 |processed_file_metabolomics_set    |all                      |table added                                            |
 |harmonized_file_metabolomics       |all                      |table added                                            |
-=======
+
+
 ## 1.9 
 
 |Table |Field |Change notes                                                        |
