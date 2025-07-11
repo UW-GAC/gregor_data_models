@@ -1,5 +1,26 @@
 # Change log
 
+## 1.9 
+
+|Table |Field |Change notes                                                        |
+|:-----|:-----|:-------------------------------------------------------------------|
+|NA    |NA    |incrementing major version number for next Consortium Upload Cycle. |
+
+
+## 1.8.3 
+
+|Table       |Field         |Change notes                    |
+|:-----------|:-------------|:-------------------------------|
+|participant |gregor_center |add enumerated value ILMN-IHOPE |
+
+
+## 1.8.2 
+
+|Table                     |Field               |Change notes                                                 |
+|:-------------------------|:-------------------|:------------------------------------------------------------|
+|experiment_rna_short_read |prep_targets_detail |added conditional requirement (library_prep_type = 'custom') |
+
+
 ## 1.8.1 
 
 |Table               |Field              |Change notes                                                                        |
