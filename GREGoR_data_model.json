@@ -116,7 +116,7 @@
         },
         {
           "column": "sex_detail",
-          "description": "Optional free-text field to describe known discrepancies between 'sex' value (female=>XX, male=>XY) and actual sex chromosome karyotype",
+          "description": "Optional free-text field to describe known discrepancies between 'sex' value (female=>XX, male=>XY) and actual sex chromosome karyotype or other relevant details",
           "data_type": "string",
           "examples": ["XXY expected", "XY expected [for someone assigned female at birth with XY DSD]"]
         },
