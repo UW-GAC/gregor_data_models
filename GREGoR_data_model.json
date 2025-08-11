@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.9",
+  "version": "1.9.1",
   "tables": [
     {
       "table": "participant",
@@ -116,7 +116,7 @@
         },
         {
           "column": "sex_detail",
-          "description": "Optional free-text field to describe known discrepancies between 'sex' value (female=>XX, male=>XY) and actual sex chromosome karyotype",
+          "description": "Optional free-text field to describe known discrepancies between 'sex' value (female=>XX, male=>XY) and actual sex chromosome karyotype or other relevant details",
           "data_type": "string",
           "examples": ["XXY expected", "XY expected [for someone assigned female at birth with XY DSD]"]
         },
@@ -343,10 +343,10 @@
           "column": "variant_type",
           "required": true,
           "data_type": "enumeration",
-          "enumerations": ["SNV/INDEL", "SV", "RE", "SNV", "INDEL", "CNV", "MEI", "STR"],
+          "enumerations": ["SNV", "INDEL", "SV", "RE", "CNV", "MEI", "STR"],
           "multi_value_delimiter": "|",
           "examples": "SNV|CNV",
-          "notes": "SNV/INDEL: single nucelotide variants or short insertion/deletions (<50bp)\nRE: repeat elements\nSV: structural variants, including copy number variants and mobile element insertions"
+          "notes": "SNV: single nucelotide variants\nINDEL: short insertion/deletions (<50bp)\nSV: structural variants\nRE: repeat elements\nCNV: copy number variants\nMEI: mobile element insertions\nSTR: short tandem repeats"
         },
         {
           "column": "sv_type",

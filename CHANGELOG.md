@@ -1,5 +1,13 @@
 # Change log
 
+## 1.9.1 
+
+|Table                     |Field           |Change notes                                                    |
+|:-------------------------|:---------------|:---------------------------------------------------------------|
+|genetic_findings          |variant_type    |removed SNV/INDEL as enumerated value; use SNV or INDEL instead |
+|participant               |sex_detail      |updated description                                             |
+
+
 ## 1.9 
 
 |Table |Field |Change notes                                                        |
