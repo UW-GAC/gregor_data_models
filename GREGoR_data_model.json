@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "tables": [
     {
       "table": "participant",
@@ -1844,7 +1844,7 @@
           "required": true,
           "description": "Library prep kit used",
           "data_type": "enumeration",
-          "enumerations": ["SMRTbell prep kit 3.0", "SMRTbell prep kit - Revio 1.0", "HiFI express template prep kit 2.0"],
+          "enumerations": ["SMRTbell prep kit 3.0", "SMRTbell prep kit - Revio 1.0", "HiFI express template prep kit 2.0", "Kinnex Full-Length RNA kit", "MAS-Seq for 10x Single Cell 3’ kit"],
           "examples": "SMRTbell prep kit 3.0",
           "notes": "Can be missing if RC receives external data"
         },
@@ -1901,7 +1901,7 @@
         {
           "column": "barcode_kit",
           "description": "Barcode kit used",
-          "data_type": "string",
+          "data_type": "enumeration",
           "enumerations": ["SMRTbell barcoded adapter plate 3.0", "Barcoded M13 primer plate", "Barcoded overhang adapter kit - 8A/8B"],
           "examples": "SMRTbell barcoded adapter plate 3.0"
         },
