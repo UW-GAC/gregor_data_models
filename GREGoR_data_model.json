@@ -1902,7 +1902,7 @@
           "column": "barcode_kit",
           "description": "Barcode kit used",
           "data_type": "enumeration",
-          "enumerations": ["SMRTbell barcoded adapter plate 3.0", "Barcoded M13 primer plate", "Barcoded overhang adapter kit - 8A/8B"],
+          "enumerations": ["SMRTbell barcoded adapter plate 3.0", "Barcoded M13 primer plate", "Barcoded overhang adapter kit - 8A/8B", "SMRTbell adapter index plate 96A"],
           "examples": "SMRTbell barcoded adapter plate 3.0"
         },
         {
