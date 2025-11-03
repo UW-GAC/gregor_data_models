@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.9.2",
+  "version": "1.10",
   "tables": [
     {
       "table": "participant",
@@ -110,7 +110,7 @@
         {
           "column": "sex",
           "required": true,
-          "description": "Biological sex assigned at birth (aligned with All of Us). If individual has a known DSD / not expected sex chromosome karyotype, this can be noted in the phenotype information section.",
+          "description": "Biological sex assigned at birth (aligned with All of Us). If individual has a known DSD / not expected sex chromosome karyotype, this can be noted in the sex_detail field.",
           "data_type": "enumeration",
           "enumerations": ["Female", "Male", "Unknown"]
         },
@@ -1721,6 +1721,12 @@
           "data_type": "boolean",
           "examples": true,
           "notes": "See https://fiberseq.github.io/index.html for details on methods and Fiber-seq BAM specific tags"
+        },
+        {
+          "column": "read_length_n50",
+          "description": "N50 is the shortest read length that, when all reads are sorted by length from longest to shortest, covers 50% of the total sequence data (longer is better). Value in kilobases",
+          "data_type": "float",
+          "examples": "15"
         }
       ]
     },
@@ -2157,6 +2163,12 @@
           "data_type": "boolean",
           "examples": true,
           "notes": "See https://fiberseq.github.io/index.html for details on methods and Fiber-seq BAM specific tags"
+        },
+        {
+          "column": "read_length_n50",
+          "description": "N50 is the shortest read length that, when all reads are sorted by length from longest to shortest, covers 50% of the total sequence data (longer is better). Value in kilobases",
+          "data_type": "float",
+          "examples": "15"
         }
       ]
     },
