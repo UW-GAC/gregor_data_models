@@ -1,11 +1,19 @@
 # Change log
 
+## 1.9.2 
+
+|Table              |Field                       |Change notes                                                                                |
+|:------------------|:---------------------------|:-------------------------------------------------------------------------------------------|
+|experiment_pac_bio |seq_library_prep_kit_method |add enumerated values 'Kinnex Full-Length RNA kit' and 'MAS-Seq for 10x Single Cell 3’ kit' |
+|experiment_pac_bio |barcode_kit                 |change type to enumerated; add value 'SMRTbell adapter index plate 96A'                     |
+
+
 ## 1.9.1 
 
-|Table                     |Field           |Change notes                                                    |
-|:-------------------------|:---------------|:---------------------------------------------------------------|
-|genetic_findings          |variant_type    |removed SNV/INDEL as enumerated value; use SNV or INDEL instead |
-|participant               |sex_detail      |updated description                                             |
+|Table            |Field        |Change notes                                                    |
+|:----------------|:------------|:---------------------------------------------------------------|
+|genetic_findings |variant_type |removed SNV/INDEL as enumerated value; use SNV or INDEL instead |
+|participant      |sex_detail   |updated description                                             |
 
 
 ## 1.9 
