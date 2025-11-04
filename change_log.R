@@ -14,7 +14,13 @@ log <- read_sheet(url, sheet="Change Log", col_types="cccc") %>%
 
 con <- file("CHANGELOG.md", "w")
 writeLines("# Change log\n", con)
-versions <- sort(unique(log$Version), decreasing = TRUE)
+versions <- log %>%
+    separate_wider_delim(Version, delim=".", names=c("major_version", "minor_version", "incremental_version"), too_few="align_start", cols_remove=FALSE) %>%
+    mutate(across(ends_with("_version"), as.integer)) %>%
+    arrange(desc(major_version), desc(minor_version), desc(incremental_version)) %>%
+    distinct(Version) %>%
+    unlist(use.names=FALSE)
+    
 for (v in versions) {
     writeLines(paste("##", v, "\n"), con)
     log %>%

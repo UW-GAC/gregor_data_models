@@ -1,5 +1,14 @@
 # Change log
 
+## 1.10 
+
+|Table            |Field           |Change notes            |
+|:----------------|:---------------|:-----------------------|
+|participant      |sex             |updated description     |
+|aligned_pac_bio  |read_length_n50 |added as optional field |
+|aligned_nanopore |read_length_n50 |added as optional field |
+
+
 ## 1.9.2 
 
 |Table              |Field                       |Change notes                                                                                |
@@ -245,15 +254,6 @@
 |aligned_rna_short_read         |all   |DCC added 'Is Unique' column to data model document to support validation - no impact to data submitters. |
 |aligned_nanopore               |all   |DCC added 'Is Unique' column to data model document to support validation - no impact to data submitters. |
 |called_variants_nanopore       |all   |DCC added 'Is Unique' column to data model document to support validation - no impact to data submitters. |
-
-
-## 1.10 
-
-|Table            |Field           |Change notes            |
-|:----------------|:---------------|:-----------------------|
-|participant      |sex             |updated description     |
-|aligned_pac_bio  |read_length_n50 |added as optional field |
-|aligned_nanopore |read_length_n50 |added as optional field |
 
 
 ## 1.1 
