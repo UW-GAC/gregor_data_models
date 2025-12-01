@@ -1,5 +1,12 @@
 # Change log
 
+## 1.10.1 
+
+|Table            |Field               |Change notes                      |
+|:----------------|:-------------------|:---------------------------------|
+|genetic_findings |method_of_discovery |add enumerated value 'Gene panel' |
+
+
 ## 1.10 
 
 |Table            |Field           |Change notes            |

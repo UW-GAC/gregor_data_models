@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.10",
+  "version": "1.10.1",
   "tables": [
     {
       "table": "participant",
@@ -594,7 +594,7 @@
           "column": "method_of_discovery",
           "description": "The method/assay(s) used to identify the candidate",
           "data_type": "enumeration",
-          "enumerations": ["SR-ES", "SR-GS", "LR-GS", "SNP array", "Optical mapping", "Karyotype", "SR RNA-seq", "LR RNA-seq", "SR-ES-reanalysis", "SR-GS-reanalysis", "LR-GS-reanalysis", "SNP array-reanalysis", "Optical mapping-reanalysis", "Karyotype-reanalysis", "SR RNA-seq-reanalysis", "LR RNA-seq-reanalysis"],
+          "enumerations": ["SR-ES", "SR-GS", "LR-GS", "SNP array", "Optical mapping", "Karyotype", "SR RNA-seq", "LR RNA-seq", "SR-ES-reanalysis", "SR-GS-reanalysis", "LR-GS-reanalysis", "SNP array-reanalysis", "Optical mapping-reanalysis", "Karyotype-reanalysis", "SR RNA-seq-reanalysis", "LR RNA-seq-reanalysis", "Gene panel"],
           "multi_value_delimiter": "|",
           "examples": "SR-GS",
           "notes": "Field to be used to capture method of discovery if experiment not currently supported by data model. (eg. >experiment_table_name.id_in_table)"
