@@ -1086,7 +1086,7 @@
         },
         {
           "column": "analyte_id",
-          "required": true,
+          "required": "CONDITIONAL (rna_sample_type = GREGoR_sample)",
           "data_type": "string",
           "references": "> analyte.analyte_id"
         },
@@ -1095,6 +1095,13 @@
           "description": "identifier used in the data file (e.g. the SM tag in a BAM header, column headers for genotype fields in a VCF file)",
           "data_type": "string",
           "examples": "12339D-SA"
+        },
+        {
+          "column": "rna_sample_type",
+          "description": "indicates whether experiment_rna_short_read_id corresponds to study sample with analyte_id or an isogenic cell line",
+          "data_type": "enumeration",
+          "enumerations": ["GREGoR_sample", "isogenic_cell_line"],
+          "examples": "GREGoR_sample"
         },
         {
           "column": "seq_library_prep_kit_method",
