@@ -1,5 +1,12 @@
 # Change log
 
+## 1.11 
+
+|Table              |Field                       |Change notes                   |
+|:------------------|:---------------------------|:------------------------------|
+|experiment_pac_bio |seq_library_prep_kit_method |add enumerated value 'Unknown' |
+
+
 ## 1.10.1 
 
 |Table                     |Field               |Change notes                                                      |
