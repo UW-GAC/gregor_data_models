@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.10",
+  "version": "1.10.1",
   "tables": [
     {
       "table": "participant",
@@ -594,7 +594,7 @@
           "column": "method_of_discovery",
           "description": "The method/assay(s) used to identify the candidate",
           "data_type": "enumeration",
-          "enumerations": ["SR-ES", "SR-GS", "LR-GS", "SNP array", "Optical mapping", "Karyotype", "SR RNA-seq", "LR RNA-seq", "SR-ES-reanalysis", "SR-GS-reanalysis", "LR-GS-reanalysis", "SNP array-reanalysis", "Optical mapping-reanalysis", "Karyotype-reanalysis", "SR RNA-seq-reanalysis", "LR RNA-seq-reanalysis"],
+          "enumerations": ["SR-ES", "SR-GS", "LR-GS", "SNP array", "Optical mapping", "Karyotype", "SR RNA-seq", "LR RNA-seq", "SR-ES-reanalysis", "SR-GS-reanalysis", "LR-GS-reanalysis", "SNP array-reanalysis", "Optical mapping-reanalysis", "Karyotype-reanalysis", "SR RNA-seq-reanalysis", "LR RNA-seq-reanalysis", "Gene panel"],
           "multi_value_delimiter": "|",
           "examples": "SR-GS",
           "notes": "Field to be used to capture method of discovery if experiment not currently supported by data model. (eg. >experiment_table_name.id_in_table)"
@@ -1086,7 +1086,7 @@
         },
         {
           "column": "analyte_id",
-          "required": true,
+          "required": "CONDITIONAL (rna_sample_type = GREGoR_sample)",
           "data_type": "string",
           "references": "> analyte.analyte_id"
         },
@@ -1095,6 +1095,13 @@
           "description": "identifier used in the data file (e.g. the SM tag in a BAM header, column headers for genotype fields in a VCF file)",
           "data_type": "string",
           "examples": "12339D-SA"
+        },
+        {
+          "column": "rna_sample_type",
+          "description": "indicates whether experiment_rna_short_read_id corresponds to study sample with analyte_id or an isogenic cell line",
+          "data_type": "enumeration",
+          "enumerations": ["GREGoR_sample", "isogenic_cell_line"],
+          "examples": "GREGoR_sample"
         },
         {
           "column": "seq_library_prep_kit_method",

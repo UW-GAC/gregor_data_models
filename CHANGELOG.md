@@ -1,5 +1,14 @@
 # Change log
 
+## 1.10.1 
+
+|Table                     |Field               |Change notes                                                      |
+|:-------------------------|:-------------------|:-----------------------------------------------------------------|
+|genetic_findings          |method_of_discovery |add enumerated value 'Gene panel'                                 |
+|experiment_rna_short_read |rna_sample_type     |added as optional field                                           |
+|experiment_rna_short_read |analyte_id          |make requirement conditional on rna_sample_type = 'GREGoR_sample' |
+
+
 ## 1.10 
 
 |Table            |Field           |Change notes            |
