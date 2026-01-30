@@ -2923,7 +2923,7 @@
     },
     {
       "table": "aligned_assembly_optical_mapping",
-      "required": "CONDITIONAL (optical_mapping_set, called_variants_optical_mapping)",
+      "required": "CONDITIONAL (aligned_optical_mapping, called_variants_optical_mapping)",
       "columns": [
         {
           "column": "aligned_assembly_optical_mapping_id",
@@ -3032,11 +3032,11 @@
       ]
     },
     {
-      "table": "optical_mapping_set",
-      "required": "CONDITIONAL (called_variants_optical_mapping)",
+      "table": "aligned_optical_mapping",
+      "required": "CONDITIONAL (aligned_optical_mapping_set, called_variants_optical_mapping)",
       "columns": [
         {
-          "column": "optical_mapping_set_id",
+          "column": "aligned_optical_mapping_id",
           "primary_key": true,
           "required": true,
           "description": "identifier for a set of experiments (primary key)",
@@ -3060,6 +3060,26 @@
       ]
     },
     {
+      "table": "aligned_optical_mapping_set",
+      "required": "CONDITIONAL (called_variants_optical_mapping)",
+      "columns": [
+        {
+          "column": "aligned_optical_mapping_set_id",
+          "primary_key": true,
+          "required": true,
+          "description": "identifier for a set of experiments (primary key)",
+          "data_type": "string",
+          "notes": "RCs make their own IDs (these must begin with center-specific prefix). \naligned_dna_short_read_set_id links the aligned_dna_short_read table to the called_variants_dna_short_read table. For centers that are only uploading single sample files, the aligned_short_read_set_id and aligned_short_read_id values can be identical. For centers uploading multi-sample files, they will need to come up with a value for aligned_short_read_set_id that makes sense to them for indicating the sample group for a multi-sample callset, and use that same value in called_variants_short_read."
+        },
+        {
+          "column": "aligned_optical_mapping_id",
+          "required": true,
+          "data_type": "string",
+          "references": "> aligned_optical_mapping.aligned_optical_mapping_id"
+        }
+      ]
+    },
+    {
       "table": "called_variants_optical_mapping",
       "columns": [
         {
@@ -3071,11 +3091,11 @@
           "is_unique": true
         },
         {
-          "column": "optical_mapping_set_id",
+          "column": "aligned_optical_mapping_set_id",
           "required": true,
           "description": "identifier for set",
           "data_type": "string",
-          "references": "> optical_mapping_set.optical_mapping_set_id"
+          "references": "> aligned_optical_mapping_set.aligned_optical_mapping_set_id"
         },
         {
           "column": "optical_mapping_vcf_file",
