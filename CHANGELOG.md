@@ -2,9 +2,13 @@
 
 ## 1.11 
 
-|Table              |Field                       |Change notes                   |
-|:------------------|:---------------------------|:------------------------------|
-|experiment_pac_bio |seq_library_prep_kit_method |add enumerated value 'Unknown' |
+|Table                       |Field                       |Change notes                                                            |
+|:---------------------------|:---------------------------|:-----------------------------------------------------------------------|
+|experiment_pac_bio          |seq_library_prep_kit_method |add enumerated value 'Unknown'                                          |
+|optical_mapping_set         |NA                          |removed table                                                           |
+|aligned_optical_mapping     |NA                          |added table                                                             |
+|aligned_optical_mapping_set |NA                          |added table                                                             |
+|experiment_rna_short_read   |analyte_id                  |make requirement conditional on rna_sample_type != 'isogenic_cell_line' |
 
 
 ## 1.10.1 
