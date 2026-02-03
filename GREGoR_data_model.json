@@ -1096,7 +1096,7 @@
         },
         {
           "column": "analyte_id",
-          "required": "CONDITIONAL (rna_sample_type = GREGoR_sample)",
+          "required": "CONDITIONAL (rna_sample_type != isogenic_cell_line)",
           "data_type": "string",
           "references": "> analyte.analyte_id"
         },
