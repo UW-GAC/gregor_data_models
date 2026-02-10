@@ -9,6 +9,10 @@
 |aligned_optical_mapping     |NA                          |added table                                                             |
 |aligned_optical_mapping_set |NA                          |added table                                                             |
 |experiment_rna_short_read   |analyte_id                  |make requirement conditional on rna_sample_type != 'isogenic_cell_line' |
+|experiment_iclr             |NA                          |added table                                                             |
+|aligned_iclr                |NA                          |added table                                                             |
+|aligned_iclr_set            |NA                          |added table                                                             |
+|called_variants_iclr        |NA                          |added table                                                             |
 
 
 ## 1.10.1 
