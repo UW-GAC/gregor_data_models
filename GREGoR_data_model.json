@@ -3175,7 +3175,7 @@
           "column": "seq_library_prep_kit_method",
           "required": true,
           "description": "Library prep kit used",
-          "data_type": "enumeration",
+          "data_type": "string",
           "examples": "Illumina Complete Long Read Prep, Human",
           "notes": "Can be missing if RC receives external data"
         },
@@ -3218,7 +3218,7 @@
         {
           "column": "sequencing_platform",
           "description": "sequencing platform used for the experiment",
-          "data_type": "enumeration",
+          "data_type": "string",
           "examples": ["HiSeq2000", "HiSeq2500", "HiSeqX", "NovaSeq"],
           "notes": "Can be missing if RC receives external data"
         },
