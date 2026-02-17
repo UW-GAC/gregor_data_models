@@ -1,5 +1,21 @@
 # Change log
 
+## 1.11 
+
+|Table                       |Field                       |Change notes                                                            |
+|:---------------------------|:---------------------------|:-----------------------------------------------------------------------|
+|experiment_pac_bio          |seq_library_prep_kit_method |add enumerated value 'Unknown'                                          |
+|optical_mapping_set         |NA                          |removed table                                                           |
+|aligned_optical_mapping     |NA                          |added table                                                             |
+|aligned_optical_mapping_set |NA                          |added table                                                             |
+|experiment_rna_short_read   |analyte_id                  |make requirement conditional on rna_sample_type != 'isogenic_cell_line' |
+|experiment_iclr             |NA                          |added table                                                             |
+|aligned_iclr                |NA                          |added table                                                             |
+|aligned_iclr_set            |NA                          |added table                                                             |
+|called_variants_iclr        |NA                          |added table                                                             |
+|experiment_rna_short_read   |experiment_type             |added enumerated value 'long read'                                      |
+
+
 ## 1.10.1 
 
 |Table                     |Field               |Change notes                                                      |

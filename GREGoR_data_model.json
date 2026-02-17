@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.10.1",
+  "version": "1.11",
   "tables": [
     {
       "table": "participant",
@@ -248,7 +248,7 @@
         {
           "column": "phenotype_id",
           "primary_key": true,
-          "description": "primary key",
+          "description": "Identifier for phenotype (primary key), automatically generated as part of data deposition",
           "data_type": "string",
           "references": "from: participant_id, term_id, presence",
           "notes": "This ID generated when loading into AnVIL data table and is not included in the uploaded .tsv file"
@@ -264,18 +264,21 @@
         {
           "column": "term_id",
           "required": true,
+          "description": "The phenotype code, including prefix, from a defined ontology. The specific ontology used is named in the ontology field.",
           "data_type": "string",
           "examples": ["HP:0001627", "MONDO:0003847"]
         },
         {
           "column": "presence",
           "required": true,
+          "description": "Indicate whether the indicated phenotype is present in this participant.",
           "data_type": "enumeration",
           "enumerations": ["Present", "Absent", "Unknown"]
         },
         {
           "column": "ontology",
           "required": true,
+          "description": "Which ontology does the term_id field entry come from?",
           "data_type": "enumeration",
           "enumerations": ["HPO", "MONDO", "OMIM", "ORPHANET", "SNOMED", "ICD10"],
           "notes": "HPO (requirement that phenotype must be described in HPO)\nMONDO (optional)\nOMIM (opt)\nORPHANET (opt)\nSNOMED (opt)\nICD10 (opt)"
@@ -288,12 +291,14 @@
         },
         {
           "column": "onset_age_range",
+          "description": "The onset age range for the phenotype. Allowable values are subterms of 'Onset' HP:0003674.",
           "data_type": "enumeration",
           "enumerations": ["HP:0003581", "HP:0030674", "HP:0011463", "HP:0003577", "HP:0025708", "HP:0011460", "HP:0011461", "HP:0003593", "HP:0025709", "HP:0003621", "HP:0034199", "HP:0003584", "HP:0025710", "HP:0003596", "HP:0003623", "HP:0410280", "HP:4000040", "HP:0034198", "HP:0034197", "HP:0011462"],
           "notes": "values are subterm of 'Onset' HP:0003674 - specifically,\nHP:0003581 | Adult onset\nHP:0030674 | Antenatal onset\nHP:0011463 | Childhood onset\nHP:0003577 | Congenital onset\nHP:0025708 | Early young adult onset\nHP:0011460 | Embryonal onset\nHP:0011461 | Fetal onset\nHP:0003593 | Infantile onset\nHP:0025709 | Intermediate young adult onset\nHP:0003621 | Juvenile onset\nHP:0034199 | Late first trimester onset\nHP:0003584 | Late onset\nHP:0025710 | Late young adult onset\nHP:0003596 | Middle age onset\nHP:0003623 | Neonatal onset\nHP:0410280 | Pediatric onset\nHP:4000040 | Puerpural onset\nHP:0034198 | Second trimester onset\nHP:0034197 | Third trimester onset\nHP:0011462 | Young adult onset"
         },
         {
           "column": "additional_modifiers",
+          "description": "Human Phenotype Ontology (HPO) modifiers used to detail phenotypic aspects of the phenotype named with the term_id field (like age of onset or severity).",
           "data_type": "enumeration",
           "enumerations": ["HP:0025292", "HP:0011009", "HP:0025308", "HP:0025307", "HP:0025306", "HP:0003581", "HP:0011420", "HP:0003831", "HP:0025285", "HP:0032525", "HP:0025286", "HP:0025254", "HP:0032526", "HP:0025257", "HP:0032503", "HP:0025256", "HP:0032522", "HP:0025255", "HP:0030674", "HP:0033820", "HP:4000052", "HP:0025287", "HP:0012832", "HP:0012827", "HP:0033815", "HP:0030645", "HP:0033816", "HP:0032535", "HP:0011463", "HP:0011010", "HP:0031797", "HP:0045088", "HP:4000051", "HP:4000048", "HP:4000047", "HP:0003577", "HP:0011421", "HP:0033763", "HP:0003819", "HP:0100613", "HP:0001522", "HP:0033765", "HP:0033764", "HP:0025294", "HP:0020034", "HP:4000053", "HP:0012839", "HP:0045089", "HP:0025293", "HP:0025302", "HP:0025282", "HP:0025708", "HP:0011460", "HP:0025303", "HP:0032365", "HP:0032502", "HP:0032501", "HP:0025315", "HP:0032534", "HP:0032542", "HP:0032500", "HP:0011461", "HP:0031914", "HP:0030650", "HP:4000042", "HP:0012837", "HP:4000043", "HP:0025295", "HP:0003829", "HP:0003593", "HP:0003587", "HP:0025709", "HP:0032539", "HP:0032540", "HP:0003621", "HP:0034199", "HP:0003584", "HP:0025710", "HP:0025275", "HP:0012831", "HP:0012835", "HP:0012838", "HP:0025291", "HP:0003596", "HP:0030648", "HP:0025279", "HP:0012825", "HP:0033817", "HP:0045090", "HP:0005268", "HP:0012826", "HP:0025296", "HP:0040006", "HP:0030651", "HP:0003811", "HP:0003623", "HP:0025301", "HP:0003680", "HP:4000046", "HP:0003674", "HP:4000050", "HP:0003679", "HP:0025280", "HP:0030647", "HP:0033814", "HP:0410280", "HP:0030649", "HP:0033813", "HP:0033819", "HP:0025304", "HP:0030646", "HP:0003812", "HP:0031450", "HP:0012830", "HP:0032544", "HP:0034241", "HP:0012829", "HP:0003676", "HP:0025297", "HP:0012840", "HP:4000040", "HP:0025305", "HP:0003678", "HP:0031796", "HP:0031375", "HP:0033818", "HP:0012834", "HP:0034198", "HP:4000049", "HP:0033349", "HP:0012828", "HP:0012824", "HP:0025281", "HP:0025284", "HP:0003677", "HP:0012836", "HP:4000045", "HP:0031915", "HP:0003826", "HP:0011011", "HP:0011008", "HP:0025283", "HP:0034197", "HP:0025153", "HP:4000044", "HP:0025204", "HP:0033185", "HP:0033032", "HP:0500261", "HP:0025205", "HP:0025208", "HP:0033789", "HP:0025206", "HP:0025207", "HP:0025334", "HP:0025211", "HP:0025227", "HP:0025377", "HP:0025212", "HP:0034060", "HP:0025215", "HP:0033793", "HP:0025209", "HP:0025213", "HP:0025210", "HP:0500260", "HP:0025214", "HP:0025216", "HP:0025217", "HP:0025218", "HP:0033184", "HP:0031167", "HP:0025220", "HP:0034195", "HP:0031135", "HP:0025221", "HP:0025222", "HP:0025223", "HP:0025224", "HP:0025225", "HP:0025226", "HP:0025228", "HP:0025219", "HP:0025229", "HP:0033198", "HP:0012833", "HP:0025290", "HP:0003828", "HP:0003682", "HP:0410401", "HP:0011462", "MONDO:0021125", "MONDO:0021135", "MONDO:0021139", "MONDO:0021149", "MONDO:0045034", "MONDO:0045040", "MONDO:0100355", "MONDO:0700004", "MONDO:0100369", "MONDO:0700061", "MONDO:0024488", "MONDO:0021126", "MONDO:0021136", "MONDO:0021137", "MONDO:0021140", "MONDO:0021141", "MONDO:0021151", "MONDO:0021152", "MONDO:0045036", "MONDO:0045035", "MONDO:0022202", "MONDO:0045042", "MONDO:0100356", "MONDO:0100357", "MONDO:0700005", "MONDO:0700006", "MONDO:0100427", "MONDO:0100426", "MONDO:0700063", "MONDO:0700062", "MONDO:0024489", "MONDO:0021128", "MONDO:0021127", "MONDO:0024497", "MONDO:0024495", "MONDO:0024490", "MONDO:0024496"],
           "multi_value_delimiter": "|",
@@ -843,6 +848,7 @@
         {
           "column": "experiment_type",
           "required": true,
+          "description": "targeted, whole-genome, or exome short read DNA?",
           "data_type": "enumeration",
           "enumerations": ["targeted", "genome", "exome"],
           "examples": "targeted",
@@ -940,17 +946,20 @@
         {
           "column": "reference_assembly",
           "required": true,
+          "description": "Which reference assembly was used for alignment?",
           "data_type": "enumeration",
           "enumerations": ["GRCh38", "GRCh37", "NCBI36", "NCBI35", "NCBI34"],
           "examples": "GRCh38"
         },
         {
           "column": "reference_assembly_uri",
+          "description": "URI (link) to download the specific reference assembly used",
           "data_type": "string",
           "examples": "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_33/GRCh38.primary_assembly.genome.fa.gz"
         },
         {
           "column": "reference_assembly_details",
+          "description": "Describe any details about the specific reference assembly used (e.g. primary, chrY-masked)",
           "data_type": "string",
           "examples": "primary, chrY-masked"
         },
@@ -997,6 +1006,7 @@
         {
           "column": "aligned_dna_short_read_id",
           "required": true,
+          "description": "the aligned_dna_short_read_id of a short read file included in the variant callset. Should correspond to the id on the aligned_dna_short_read table.",
           "data_type": "string",
           "references": "> aligned_dna_short_read.aligned_dna_short_read_id",
           "notes": "the identifier for a single-sample aligned_dna_short_read included in the read_set (one per row)"
@@ -1086,7 +1096,7 @@
         },
         {
           "column": "analyte_id",
-          "required": "CONDITIONAL (rna_sample_type = GREGoR_sample)",
+          "required": "CONDITIONAL (rna_sample_type != isogenic_cell_line)",
           "data_type": "string",
           "references": "> analyte.analyte_id"
         },
@@ -1129,8 +1139,9 @@
         {
           "column": "experiment_type",
           "required": true,
+          "description": "single-end or paired-end? targeted or untargeted RNA-seq experiment?",
           "data_type": "enumeration",
-          "enumerations": ["single-end", "paired-end", "targeted", "untargeted"],
+          "enumerations": ["single-end", "paired-end", "targeted", "untargeted", "long read"],
           "multi_value_delimiter": "|",
           "examples": "paired-end|targeted"
         },
@@ -1179,6 +1190,7 @@
         },
         {
           "column": "estimated_library_size",
+          "description": "Calculated size factors for the sample, which are relative scaling factors to account for library size differences. Such factors may be calculated with functions such as estimateSizeFactors() in the R bioconductor package.",
           "data_type": "float",
           "examples": "364"
         },
@@ -1241,17 +1253,20 @@
         {
           "column": "reference_assembly",
           "required": true,
+          "description": "Which reference assembly was used for alignment?",
           "data_type": "enumeration",
           "enumerations": ["GRCh38", "GRCh37", "NCBI36", "NCBI35", "NCBI34"],
           "examples": "GRCh38"
         },
         {
           "column": "reference_assembly_uri",
+          "description": "URI (link) to download the specific reference assembly used",
           "data_type": "string",
           "examples": "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_33/GRCh38.primary_assembly.genome.fa.gz"
         },
         {
           "column": "reference_assembly_details",
+          "description": "Describe any details about the specific reference assembly used (e.g. primary, chrY-masked)",
           "data_type": "string",
           "examples": "primary, chrY-masked"
         },
@@ -1264,6 +1279,7 @@
         },
         {
           "column": "gene_annotation_details",
+          "description": "Details of specific GENCODE options used for annotation",
           "data_type": "enumeration",
           "enumerations": ["gencode_comprehensive_chr", "gencode_comprehensive_all", "gencode_comprehensive_pri", "gencode_basic_chr", "gencode_basic_all", "gencode_basic_pri", "lncRNA_annotation", "polyA_feature_annotation", "consensus_pseudogenes", "predicted_tRNA_genes"],
           "examples": ["examples corresponding to GENCODE options", "gencode_comprehensive_chr", "gencode_comprehensive_all", "gencode_comprehensive_pri"]
@@ -1321,46 +1337,56 @@
         },
         {
           "column": "alignment_QC_output_file",
+          "description": "path of (log) file with all parameters for alignment software",
           "data_type": "string",
-          "is_bucket_path": true
+          "is_bucket_path": true,
+          "examples": "/path/to/QC.log"
         },
         {
           "column": "percent_rRNA",
+          "description": "The proportion of sequenced reads that map to ribosomal RNA. A high proportion reflects contamination, with goals typically under 10% for good depletion, though it can range from 1-50% depending on the method (e.g., poly(A) selection vs. depletion kits) .",
           "data_type": "float",
           "examples": "20"
         },
         {
           "column": "percent_mRNA",
+          "description": "The proportion of sequenced reads that map to messenger RNA, typically 1-5% of total cellular RNA, but this varies; mRNA enrichment methods (like polyA selection) target this small fraction for 'cleaner,' focused data on coding genes, while total RNA-seq captures more non-coding RNAs (ncRNAs), yielding a broader but noisier profile requiring deeper sequencing and often showing a low percentage of reads mapping to annotated mRNA due to rRNA contamination and vast ncRNA content.",
           "data_type": "float",
           "examples": "75"
         },
         {
           "column": "percent_mtRNA",
+          "description": "The proportion of sequenced reads that map to mitochondrial RNA. A crucial quality control metric, especially for single-cell (scRNA-seq). A high mtDNA% (often >10% in human) typically signals poor-quality cells, damaged samples, or apoptosis, though thresholds vary by tissue (e.g., heart muscle is naturally high) and researchers adjust filters to avoid excluding valid cell types, with some studies suggesting mtDNA% as a stable internal normalization standard",
           "data_type": "float",
           "examples": "4"
         },
         {
           "column": "percent_Globin",
+          "description": "The proportion of sequencing reads that map to globin genes (like HBA, HBB) due to their abundance in red blood cells, which can overwhelm other transcripts and skew results.",
           "data_type": "float",
           "examples": "1"
         },
         {
           "column": "percent_UMI",
+          "description": "The percentage of UMIs mapping to mitochondrial genes, a key metric indicating cell health; high percentages (e.g., >10-15%) suggest dying or damaged cells, while low numbers of total UMIs can signal poor quality or low RNA content, with thresholds varying by tissue and experiment.",
           "data_type": "float",
           "examples": "0"
         },
         {
           "column": "5prime3prime_bias",
+          "description": "The ratio of the 5’ bias and the 3’ bias (5' bias is the ratio between mean coverage at the 5’ region (first 100bp) and the whole transcript, and 3' bias is the ratio between mean coverage at the 3’ region (last 100bp) and the whole transcript.)",
           "data_type": "float",
           "examples": "1.09"
         },
         {
           "column": "percent_GC",
+          "description": "The proportion of Guanine (G) and Cytosine (C) bases in the RNA sequences, calculated as (Count(G) + Count(C)) / Total Bases * 100% - a crucial quality control metric because varying GC content can cause biases in library preparation (like PCR amplification) and sequencing, leading to under- or over-representation of certain transcripts, which needs correction for accurate gene expression analysis",
           "data_type": "float",
           "examples": "66"
         },
         {
           "column": "percent_chrX_Y",
+          "description": "The percentage of reads mapping to chromosomes X and Y in an RNA-seq experiment; highly variable and depends entirely on the biological sex and sex chromosome constitution of the sample, the specific cell type or tissue analyzed, and the library preparation method used. Useful QC metric to identify sample swaps or other technical errors.",
           "data_type": "float",
           "examples": "12"
         }
@@ -1857,7 +1883,7 @@
           "required": true,
           "description": "Library prep kit used",
           "data_type": "enumeration",
-          "enumerations": ["SMRTbell prep kit 3.0", "SMRTbell prep kit - Revio 1.0", "HiFI express template prep kit 2.0", "Kinnex Full-Length RNA kit", "MAS-Seq for 10x Single Cell 3' kit"],
+          "enumerations": ["SMRTbell prep kit 3.0", "SMRTbell prep kit - Revio 1.0", "HiFI express template prep kit 2.0", "Kinnex Full-Length RNA kit", "MAS-Seq for 10x Single Cell 3' kit", "Unknown"],
           "examples": "SMRTbell prep kit 3.0",
           "notes": "Can be missing if RC receives external data"
         },
@@ -2897,7 +2923,7 @@
     },
     {
       "table": "aligned_assembly_optical_mapping",
-      "required": "CONDITIONAL (optical_mapping_set, called_variants_optical_mapping)",
+      "required": "CONDITIONAL (aligned_optical_mapping, called_variants_optical_mapping)",
       "columns": [
         {
           "column": "aligned_assembly_optical_mapping_id",
@@ -3006,11 +3032,11 @@
       ]
     },
     {
-      "table": "optical_mapping_set",
-      "required": "CONDITIONAL (called_variants_optical_mapping)",
+      "table": "aligned_optical_mapping",
+      "required": "CONDITIONAL (aligned_optical_mapping_set, called_variants_optical_mapping)",
       "columns": [
         {
-          "column": "optical_mapping_set_id",
+          "column": "aligned_optical_mapping_id",
           "primary_key": true,
           "required": true,
           "description": "identifier for a set of experiments (primary key)",
@@ -3034,6 +3060,26 @@
       ]
     },
     {
+      "table": "aligned_optical_mapping_set",
+      "required": "CONDITIONAL (called_variants_optical_mapping)",
+      "columns": [
+        {
+          "column": "aligned_optical_mapping_set_id",
+          "primary_key": true,
+          "required": true,
+          "description": "identifier for a set of experiments (primary key)",
+          "data_type": "string",
+          "notes": "RCs make their own IDs (these must begin with center-specific prefix). \naligned_dna_short_read_set_id links the aligned_dna_short_read table to the called_variants_dna_short_read table. For centers that are only uploading single sample files, the aligned_short_read_set_id and aligned_short_read_id values can be identical. For centers uploading multi-sample files, they will need to come up with a value for aligned_short_read_set_id that makes sense to them for indicating the sample group for a multi-sample callset, and use that same value in called_variants_short_read."
+        },
+        {
+          "column": "aligned_optical_mapping_id",
+          "required": true,
+          "data_type": "string",
+          "references": "> aligned_optical_mapping.aligned_optical_mapping_id"
+        }
+      ]
+    },
+    {
       "table": "called_variants_optical_mapping",
       "columns": [
         {
@@ -3045,11 +3091,11 @@
           "is_unique": true
         },
         {
-          "column": "optical_mapping_set_id",
+          "column": "aligned_optical_mapping_set_id",
           "required": true,
           "description": "identifier for set",
           "data_type": "string",
-          "references": "> optical_mapping_set.optical_mapping_set_id"
+          "references": "> aligned_optical_mapping_set.aligned_optical_mapping_set_id"
         },
         {
           "column": "optical_mapping_vcf_file",
@@ -3084,6 +3130,278 @@
           "data_type": "string",
           "multi_value_delimiter": "|",
           "examples": "Solve3.8"
+        },
+        {
+          "column": "analysis_details",
+          "description": "brief description of the analysis pipeline used for producing the file; perhaps a link to something like a WDL file or github repository",
+          "data_type": "string"
+        },
+        {
+          "column": "chrom",
+          "description": "chromosome of the variants in the VCF file",
+          "data_type": "enumeration",
+          "enumerations": ["ALL", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"],
+          "notes": "Use ALL for VCFs with autosomes + sex chromosomes"
+        }
+      ]
+    },
+    {
+      "table": "experiment_iclr",
+      "required": "CONDITIONAL (aligned_iclr, aligned_iclr_set, called_variants_iclr)",
+      "columns": [
+        {
+          "column": "experiment_iclr_id",
+          "primary_key": true,
+          "required": true,
+          "description": "identifier for experiment_iclr (primary key)",
+          "data_type": "string",
+          "examples": ["Broad_E1", "Broad_E2", "GSS201938-01-021-SG-1"],
+          "notes": "RCs make their own IDs, must begin with center abbreviation as defined in participant table; need to be globally unique in consortium; may be generated by prepending experiment_sample_id with center abbreviation"
+        },
+        {
+          "column": "analyte_id",
+          "required": true,
+          "data_type": "string",
+          "references": "> analyte.analyte_id"
+        },
+        {
+          "column": "experiment_sample_id",
+          "description": "identifier used in the data file (e.g. the SM tag in a BAM header, column headers for genotype fields in a VCF file)",
+          "data_type": "string",
+          "examples": "12339D-SA",
+          "notes": "may be the same as experiment_iclr_id if the file does contain sample identifiers\nshould be present if downstream file contains a sample_id (e.g. BAM, VCF)\nsome centers have one id for the sample (tube) and a diff ID for the sample as named in the VCF; experiment_sample_id = ID in the VCF file; analyte_id = ID for the tube/aliquot/whatever"
+        },
+        {
+          "column": "seq_library_prep_kit_method",
+          "required": true,
+          "description": "Library prep kit used",
+          "data_type": "string",
+          "examples": "Illumina Complete Long Read Prep, Human",
+          "notes": "Can be missing if RC receives external data"
+        },
+        {
+          "column": "read_length",
+          "description": "sequenced read length (bp); GREGoR RCs do paired end sequencing, so is the example of 100bp indicates 2x100bp.",
+          "data_type": "integer",
+          "examples": "100",
+          "notes": "Can be missing if RC receives external data; all RCs are doing paired-end reads."
+        },
+        {
+          "column": "experiment_type",
+          "required": true,
+          "data_type": "enumeration",
+          "enumerations": ["targeted", "genome"],
+          "examples": "targeted",
+          "notes": "While the most common use of ONT is whole-genome sequencing, targeted sequencing is possible and may be of interest to the consortium."
+        },
+        {
+          "column": "targeted_regions_method",
+          "description": "Capture method used.",
+          "data_type": "string",
+          "examples": "Adaptive Sampling"
+        },
+        {
+          "column": "targeted_region_bed_file",
+          "description": "name and path of bed file uploaded to workspace",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/LR_experiment.bed",
+          "notes": "Can be missing if RC receives external data"
+        },
+        {
+          "column": "date_data_generation",
+          "description": "Date of data generation (First sequencing date)",
+          "data_type": "date",
+          "examples": "2022-06-29",
+          "notes": "Can be missing if RC receives external data; ISO 8601 date format"
+        },
+        {
+          "column": "sequencing_platform",
+          "description": "sequencing platform used for the experiment",
+          "data_type": "string",
+          "examples": ["HiSeq2000", "HiSeq2500", "HiSeqX", "NovaSeq"],
+          "notes": "Can be missing if RC receives external data"
+        },
+        {
+          "column": "sequencing_event_details",
+          "description": "describe if there are any sequencing-specific issues that would be important to note",
+          "data_type": "string"
+        },
+        {
+          "column": "unmarked_experiment_id",
+          "required": true,
+          "description": "ICLR uses fastqs from a standard Illumina WGS sample that is combined with ICLR data",
+          "data_type": "string",
+          "references": "> experiment_dna_short_read.experiment_dna_short_read_id"
+        }
+      ]
+    },
+    {
+      "table": "aligned_iclr",
+      "required": "CONDITIONAL (aligned_iclr_set, called_variants_iclr)",
+      "columns": [
+        {
+          "column": "aligned_iclr_id",
+          "primary_key": true,
+          "required": true,
+          "description": "identifier for aligned_iclr (primary key)",
+          "data_type": "string",
+          "is_unique": true,
+          "examples": "BCM_H7YG5DSX2-3-IDUDI0014-1",
+          "notes": "experiment_iclr_id + alignment indicator"
+        },
+        {
+          "column": "experiment_iclr_id",
+          "required": true,
+          "description": "identifier for experiment",
+          "data_type": "string",
+          "references": "> experiment_iclr.experiment_iclr_id"
+        },
+        {
+          "column": "aligned_iclr_file",
+          "required": true,
+          "description": "name and path of file with aligned reads",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.cram"
+        },
+        {
+          "column": "aligned_iclr_index_file",
+          "required": true,
+          "description": "name and path of index file corresponding to aligned reads file",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
+          "examples": "gs://fc-eb352699-d849-483f-aefe-9d35ce2b21ac/Broad_COL_FAM1_1_D1.crai"
+        },
+        {
+          "column": "md5sum",
+          "required": true,
+          "description": "md5 checksum for file",
+          "data_type": "string",
+          "is_unique": true,
+          "examples": "129c28163df082"
+        },
+        {
+          "column": "reference_assembly",
+          "required": true,
+          "data_type": "enumeration",
+          "enumerations": ["GRCh38", "GRCh37", "NCBI36", "NCBI35", "NCBI34"],
+          "examples": "GRCh38"
+        },
+        {
+          "column": "reference_assembly_uri",
+          "data_type": "string",
+          "examples": "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_33/GRCh38.primary_assembly.genome.fa.gz"
+        },
+        {
+          "column": "reference_assembly_details",
+          "data_type": "string",
+          "examples": "primary, chrY-masked"
+        },
+        {
+          "column": "alignment_software",
+          "required": true,
+          "description": "Software including version number",
+          "data_type": "string",
+          "examples": "DRAGEN ICLR WGS 2.0.6",
+          "notes": "Can be unknown if RC receives external data"
+        },
+        {
+          "column": "mean_coverage",
+          "description": "For WGS, mean coverage is calculated as total aligned bases divided by length of the genome. For WES, mean coverage is calculated as total bases within capture regions divided by length of the capture regions. The capture regions are defined in the BED file for the sample (linked in the experiment_dna_iclr table targeted_region_bed_file field).",
+          "data_type": "float",
+          "examples": "100",
+          "notes": "Can be unknown if RC receives external data"
+        },
+        {
+          "column": "analysis_details",
+          "description": "brief description of the analysis pipeline used for producing the file; perhaps a DOI or link to something like a WDL file or github repository",
+          "data_type": "string",
+          "examples": "DOI:10.5281/zenodo.4469317"
+        },
+        {
+          "column": "quality_issues",
+          "description": "describe if there are any QC issues that would be important to note",
+          "data_type": "string"
+        }
+      ]
+    },
+    {
+      "table": "aligned_iclr_set",
+      "required": "CONDITIONAL (called_variants_iclr)",
+      "columns": [
+        {
+          "column": "aligned_iclr_set_id",
+          "primary_key": true,
+          "required": true,
+          "description": "identifier for a set of experiments (primary key)",
+          "data_type": "string",
+          "notes": "RCs make their own IDs (these must begin with center-specific prefix). \naligned_iclr_set_id links the aligned_iclr table to the called_variants_iclr table. For centers that are only uploading single sample files, the aligned_iclr_id and aligned_iclr_id values can be identical. For centers uploading multi-sample files, they will need to come up with a value for aligned_iclr_id that makes sense to them for indicating the sample group for a multi-sample callset, and use that same value in called_variants_iclr."
+        },
+        {
+          "column": "aligned_iclr_id",
+          "required": true,
+          "data_type": "string",
+          "references": "> aligned_iclr.aligned_iclr_id",
+          "notes": "the identifier for a single-sample aligned_iclr included in the read_set (one per row)"
+        }
+      ]
+    },
+    {
+      "table": "called_variants_iclr",
+      "columns": [
+        {
+          "column": "called_variants_iclr_id",
+          "primary_key": true,
+          "description": "unique key for table (anvil requirement)",
+          "data_type": "string",
+          "references": "from:md5sum",
+          "is_unique": true
+        },
+        {
+          "column": "aligned_iclr_set_id",
+          "required": true,
+          "description": "identifier for experiment set",
+          "data_type": "string",
+          "references": "> aligned_iclr_set.aligned_iclr_set_id"
+        },
+        {
+          "column": "called_variants_dna_file",
+          "required": true,
+          "description": "name and path of the file with variant calls",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
+          "examples": ["gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.SV.vcf", "gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.SNV.gvcf", "gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/COL_FAM1_1_D1.EH.vcf"]
+        },
+        {
+          "column": "md5sum",
+          "required": true,
+          "description": "md5 checksum for file",
+          "data_type": "string",
+          "is_unique": true,
+          "examples": "129c28163df082",
+          "notes": "md5sum computed prior to upload (used to verify file integrity)"
+        },
+        {
+          "column": "caller_software",
+          "required": true,
+          "description": "variant calling software used including version number",
+          "data_type": "string",
+          "multi_value_delimiter": "|",
+          "examples": ["gatk4.1.2", "expansionhunter-denovo-0.2b", "manta-3.1"]
+        },
+        {
+          "column": "variant_types",
+          "required": true,
+          "description": "types of variants called",
+          "data_type": "enumeration",
+          "enumerations": ["SNV", "INDEL", "SV", "CNV", "RE", "MEI", "STR"],
+          "multi_value_delimiter": "|",
+          "examples": ["RE = Repeat Expansion", "MEI = Mobile Element Insertion"],
+          "notes": "can add more values as the need arises\nif there are two VCFs for SNV and Indels, there would be two different lines in this table; if combined in one VCF, a |-delimited entry"
         },
         {
           "column": "analysis_details",
