@@ -1,5 +1,12 @@
 # Change log
 
+## 1.12.1 
+
+|Table                   |Field |Change notes |
+|:-----------------------|:-----|:------------|
+|outrider_rna_short_read |NA    |added table  |
+
+
 ## 1.12 
 
 |Table                          |Field         |Change notes                            |
