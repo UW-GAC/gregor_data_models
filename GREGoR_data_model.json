@@ -1,7 +1,7 @@
 {
   "name": "GREGoR Data Model",
   "description": "Data model for the GREGoR consortium",
-  "version": "1.12",
+  "version": "1.12.1",
   "tables": [
     {
       "table": "participant",
@@ -1488,6 +1488,59 @@
           "description": "indicate if counts are from a single RC (TRUE) or from a harmonized/merged dataset (FALSE)",
           "data_type": "boolean",
           "examples": true
+        }
+      ]
+    },
+    {
+      "table": "outrider_rna_short_read",
+      "columns": [
+        {
+          "column": "outrider_rna_short_read_id",
+          "primary_key": true,
+          "description": "unique key for table (anvil requirement)",
+          "data_type": "string",
+          "references": "from:md5sum",
+          "is_unique": true
+        },
+        {
+          "column": "aligned_rna_short_read_set_id",
+          "required": true,
+          "description": "identifier for experiment set",
+          "data_type": "string",
+          "references": "> aligned_rna_short_read_set.aligned_rna_short_read_set_id"
+        },
+        {
+          "column": "outrider_file",
+          "required": true,
+          "description": "name and path of the outrider result tables",
+          "data_type": "string",
+          "is_bucket_path": true,
+          "is_unique": true,
+          "examples": ["gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/outrider_result_table.csv", "gs://fc-fed09429-e563-44a7-aaeb-776c8336ba02/outrider_result_table.tsv"]
+        },
+        {
+          "column": "md5sum",
+          "required": true,
+          "description": "md5 checksum for file",
+          "data_type": "string",
+          "is_unique": true,
+          "examples": "129c28163df082",
+          "notes": "md5sum computed prior to upload (used to verify file integrity)"
+        },
+        {
+          "column": "expression_outlier_detection_software",
+          "required": true,
+          "description": "expression outlier detection software used including version number",
+          "data_type": "string",
+          "multi_value_delimiter": "|",
+          "examples": "OUTRIDER 1.16.2"
+        },
+        {
+          "column": "number_of_samples",
+          "required": true,
+          "description": "the total number of samples in the OUTRIDER batch",
+          "data_type": "integer",
+          "examples": "67"
         }
       ]
     },
