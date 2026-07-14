@@ -2362,7 +2362,7 @@
         },
         {
           "column": "analyte_id",
-          "required": true,
+          "required": "CONDITIONAL (atac_sample_type != isogenic_cell_line)",
           "data_type": "string",
           "references": "> analyte.analyte_id"
         },
@@ -2372,6 +2372,13 @@
           "data_type": "string",
           "examples": "12339D-SA",
           "notes": "may be the same as experiment_short_read_id if the file does contain sample identifiers\nshould be present if downstream file contains a sample_id (e.g. BAM, VCF)\nsome centers have one id for the sample (tube) and a diff ID for the sample as named in the VCF; experiment_sample_id = ID in the VCF file; analyte_id = ID for the tube/aliquot/whatever"
+        },
+        {
+          "column": "atac_sample_type",
+          "description": "indicates whether experiment_atac_short_read_id corresponds to study sample with analyte_id or an isogenic cell line",
+          "data_type": "enumeration",
+          "enumerations": ["GREGoR_sample", "isogenic_cell_line"],
+          "examples": "GREGoR_sample"
         },
         {
           "column": "seq_library_prep_kit_method",

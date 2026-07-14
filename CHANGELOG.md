@@ -1,5 +1,18 @@
 # Change log
 
+## 1.13.0 
+
+|Table                      |Field            |Change notes                                                             |
+|:--------------------------|:----------------|:------------------------------------------------------------------------|
+|experiment_chiatac         |NA               |added table                                                              |
+|aligned_chiatac            |NA               |added table                                                              |
+|called_peaks_chiatac       |NA               |added table                                                              |
+|interaction_loops_chiatac  |NA               |added table                                                              |
+|contact_map_chiatac        |NA               |added table                                                              |
+|experiment_atac_short_read |atac_sample_type |added as optional field                                                  |
+|experiment_atac_short_read |analyte_id       |make requirement conditional on atac_sample_type != 'isogenic_cell_line' |
+
+
 ## 1.12.1 
 
 |Table                   |Field |Change notes |
