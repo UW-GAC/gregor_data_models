@@ -805,6 +805,31 @@
       ]
     },
     {
+      "table": "isogenic_cell_line",
+      "columns": [
+        {
+          "column": "experiment_id",
+          "required": true,
+          "description": "table_name.experiment_id_in_table",
+          "data_type": "string",
+          "examples": "experiment_dna_short_read.GSS201938-01-021-SG-1"
+        },
+        {
+          "column": "table_name",
+          "required": true,
+          "data_type": "enumeration",
+          "enumerations": ["experiment_rna_short_read", "experiment_atac_short_read"],
+          "examples": "experiment_rna_short_read"
+        },
+        {
+          "column": "id_in_table",
+          "required": true,
+          "data_type": "string",
+          "examples": "GSS201938-01-021-SG-1"
+        }
+      ]
+    },
+    {
       "table": "experiment_dna_short_read",
       "required": "CONDITIONAL (aligned_dna_short_read, aligned_dna_short_read_set, called_variants_dna_short_read)",
       "columns": [
