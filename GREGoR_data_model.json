@@ -808,11 +808,11 @@
       "table": "isogenic_cell_line",
       "columns": [
         {
-          "column": "experiment_id",
+          "column": "isogenic_cell_line_id",
           "required": true,
           "description": "table_name.experiment_id_in_table",
           "data_type": "string",
-          "examples": "experiment_dna_short_read.GSS201938-01-021-SG-1"
+          "examples": "experiment_rna_short_read.GSS201938-01-021-SG-1"
         },
         {
           "column": "table_name",
