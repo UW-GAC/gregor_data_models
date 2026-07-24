@@ -809,6 +809,7 @@
       "columns": [
         {
           "column": "isogenic_cell_line_id",
+          "primary_key": true,
           "required": true,
           "description": "table_name.experiment_id_in_table",
           "data_type": "string",
