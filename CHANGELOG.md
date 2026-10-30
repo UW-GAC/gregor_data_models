@@ -11,6 +11,7 @@
 |contact_map_chiatac        |NA               |added table                                                              |
 |experiment_atac_short_read |atac_sample_type |added as optional field                                                  |
 |experiment_atac_short_read |analyte_id       |make requirement conditional on atac_sample_type != 'isogenic_cell_line' |
+|isogenic_cell_line         |NA               |added table                                                              |
 
 
 ## 1.12.1 
