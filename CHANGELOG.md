@@ -1,5 +1,17 @@
 # Change log
 
+## 1.13.1 
+
+|Table                           |Field             |Change notes                                         |
+|:-------------------------------|:-----------------|:----------------------------------------------------|
+|analyte                         |age_at_collection |made conditionally required if has_proteomics = TRUE |
+|analyte                         |has_proteomics    |added as optional field                              |
+|experiment_olink_proteomics     |NA                |added table                                          |
+|experiment_olink_proteomics_set |NA                |added table                                          |
+|raw_olink_proteomics            |NA                |added table                                          |
+|processed_olink_proteomics      |NA                |added table                                          |
+
+
 ## 1.13.0 
 
 |Table                      |Field            |Change notes                                                             |
