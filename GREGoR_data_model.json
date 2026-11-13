@@ -4041,7 +4041,8 @@
       "table": "processed_olink_proteomics",
       "columns": [
         {
-          "column": "processed_file_proteomics_id",
+          "column": "processed_olink_proteomics_id",
+          "primary_key": true,
           "required": true,
           "data_type": "string",
           "is_unique": true,
